@@ -9,6 +9,6 @@ Site estático publicado de graça pelo GitHub Pages: https://helyanaraujo.githu
   A chave pública só consegue gravar cliques; ler os números exige a senha do painel.
 - `rastreio.js` — envia cada visita e clique (botão, origem, celular/computador, código aleatório do aparelho).
   Nenhum dado pessoal é guardado.
-- `premium-*.html` — os modelos de layout avaliados.
+
 
 Dica: para saber de onde veio a visita, use `?origem=stories`, `?origem=cartao` etc. no fim do link.
