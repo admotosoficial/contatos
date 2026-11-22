@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="Peças e acessórios para motos em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="theme-color" content="#061238">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para motos. Fale com a loja pelo WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap">
+<style>
+/* Concessionária oficial: showroom de montadora. Topo azul-noite com o símbolo em marca d'água,
+   letreiro branco e um fio vermelho; fichas de loja claras com linhas finas; uma família (Archivo, com eixo de largura). */
+:root {
+  --noite: #061238; --noite-2: #0B1C52; --azul: #002C8F; --azul-luz: #8FB0FF;
+  --vermelho: #E92525; --verde: #1FAF5A; --verde-btn: #0E7D41; --verde-btn-2: #0B6A37;
+  --papel: #FFFFFF; --nevoa: #F3F5F9; --tinta: #0A1230; --suave: #565E78; --fio: #DDE2EC; --fio-escuro: rgba(255, 255, 255, .14);
+  --f: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --gl: max(20px, env(safe-area-inset-left, 0px)); --gr: max(20px, env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { -webkit-text-size-adjust: 100%; background: var(--noite); }
+body {
+  background: var(--papel); color: var(--tinta); font: 400 16px/1.5 var(--f);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+svg { display: block; }
+.miolo { width: 100%; max-width: 1120px; margin: 0 auto; padding-left: var(--gl); padding-right: var(--gr); }
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; border-radius: 6px; }
+.topo :focus-visible, .rodape :focus-visible { outline-color: var(--azul-luz); }
+
+/* ---------- TOPO ---------- */
+.topo {
+  position: relative; overflow: hidden; color: #fff; isolation: isolate;
+  background:
+    radial-gradient(120% 80% at 85% 0%, rgba(40, 84, 200, .35), transparent 60%),
+    linear-gradient(180deg, var(--noite) 0%, var(--noite-2) 100%);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.marca-dagua {
+  position: absolute; z-index: -1; pointer-events: none;
+  width: 560px; height: auto; right: -170px; top: 34px;
+  filter: brightness(0) invert(1); opacity: .065;
+}
+.topo::after { /* fio vermelho no pé do topo */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg, var(--vermelho) 0 38%, rgba(233, 37, 37, .35) 70%, transparent);
+  transform-origin: left center;
+}
+.barra { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--fio-escuro); }
+.marca { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.selo { flex: none; width: 40px; height: 40px; border-radius: 10px; background: #fff; display: grid; place-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25); }
+.selo img { width: 28px; height: 28px; }
+.letreiro { width: 150px; height: auto; }
+.icone-btn { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--fio-escuro); color: #fff; transition: background .2s var(--ease), border-color .2s var(--ease); }
+.icone-btn:hover { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .3); }
+.icone-btn svg { width: 19px; height: 19px; }
+
+.vitrine { padding-top: 30px; padding-bottom: 34px; display: grid; gap: 26px; }
+.sobre { display: grid; gap: 12px; }
+.sobrelinha { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .72); font-stretch: 112%; }
+.sobrelinha::before { content: ""; width: 28px; height: 2px; background: var(--vermelho); flex: none; }
+h1 { margin: 0; font-weight: 600; font-size: clamp(32px, 8.6vw, 54px); line-height: 1.06; letter-spacing: -.022em; text-wrap: balance; }
+.apoio { margin: 0; color: rgba(255, 255, 255, .74); font-size: 16px; max-width: 38ch; text-wrap: pretty; }
+
+.zaps { display: grid; gap: 10px; }
+.zap {
+  position: relative; overflow: hidden; display: grid; grid-template-columns: 46px 1fr 20px; align-items: center; gap: 14px;
+  min-height: 78px; padding: 14px 16px 14px 14px; border-radius: 14px; background: #fff; color: var(--tinta);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset, 0 12px 30px -12px rgba(0, 0, 0, .55);
+  transition: transform .18s var(--ease), box-shadow .25s var(--ease);
+}
+.zap:hover { box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset, 0 18px 40px -14px rgba(0, 0, 0, .7); }
+.zap:active { transform: scale(.985); }
+.zap-ico { width: 46px; height: 46px; border-radius: 50%; background: var(--verde); color: #fff; display: grid; place-items: center; }
+.zap-ico svg { width: 25px; height: 25px; }
+.zap-txt { display: grid; gap: 1px; min-width: 0; }
+.zap-rot { font-size: 11.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #0E7D41; }
+.zap-loja { font-size: 19px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.zap-num { font-size: 13.5px; color: var(--suave); font-variant-numeric: tabular-nums; }
+.zap .seta { color: var(--azul); width: 20px; height: 20px; transition: transform .2s var(--ease); }
+.zap:hover .seta { transform: translateX(3px); }
+.zap::after { /* brilho que passa uma vez */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(0, 44, 143, .07) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+
+/* ---------- LOJAS ---------- */
+.secao { padding-top: 44px; padding-bottom: 44px; }
+.cabeca { display: grid; gap: 8px; margin-bottom: 22px; }
+.cabeca .sobrelinha { color: var(--suave); }
+h2 { margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.018em; line-height: 1.15; }
+.fichas { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--tinta); }
+.ficha { padding: 22px 0 24px; border-bottom: 1px solid var(--fio); display: grid; gap: 14px; }
+.ficha-cab { display: grid; gap: 12px; justify-items: start; }
+.ficha-meta { display: flex; align-items: center; gap: 14px; }
+.ficha-num { font-size: 12px; font-weight: 600; color: var(--vermelho); letter-spacing: .12em; font-variant-numeric: tabular-nums; }
+.etiqueta { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--azul);
+  border: 1px solid currentColor; border-radius: 999px; padding: 3px 10px 3px 11px; line-height: 1.4; }
+.etiqueta.filial { color: var(--suave); }
+.cidade { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-stretch: 118%;
+  line-height: 1.2; color: var(--tinta); }
+.dados { display: grid; gap: 6px; margin: 0; color: var(--suave); font-size: 15px; }
+.dados div { display: flex; align-items: center; gap: 9px; }
+.dados svg { flex: none; width: 16px; height: 16px; color: var(--azul); }
+.dados .num { font-variant-numeric: tabular-nums; }
+.acoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
+.acao {
+  display: grid; justify-items: center; align-content: center; gap: 6px; min-height: 66px; padding: 10px 6px;
+  border: 1px solid var(--fio); border-radius: 12px; background: var(--papel); color: var(--tinta);
+  font-size: 13px; font-weight: 600; text-align: center; line-height: 1.2;
+  transition: border-color .2s var(--ease), background .2s var(--ease), transform .15s var(--ease);
+}
+.acao svg { width: 20px; height: 20px; color: var(--azul); }
+.acao:hover { border-color: #AEB8CF; background: var(--nevoa); }
+.acao:active { transform: scale(.97); }
+.acao.wpp { background: var(--verde-btn); border-color: var(--verde-btn); color: #fff; }
+.acao.wpp svg { color: #fff; width: 21px; height: 21px; }
+.acao.wpp:hover { background: var(--verde-btn-2); border-color: var(--verde-btn-2); }
+
+/* ---------- ATENDIMENTO ---------- */
+.atend { background: var(--nevoa); border-top: 1px solid var(--fio); }
+.lista { list-style: none; margin: 0; padding: 0; background: var(--papel); border: 1px solid var(--fio); border-radius: 16px; overflow: hidden; }
+.lista li + li { border-top: 1px solid var(--fio); }
+.linha { width: 100%; display: grid; grid-template-columns: 42px 1fr 18px; align-items: center; gap: 14px; padding: 16px 16px; text-align: left;
+  transition: background .2s var(--ease); }
+.linha:hover { background: #FAFBFD; }
+.linha:active { background: var(--nevoa); }
+.linha-ico { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--fio); display: grid; place-items: center; color: var(--azul); }
+.linha-ico svg { width: 19px; height: 19px; }
+.linha-txt { display: grid; min-width: 0; }
+.linha-tit { font-weight: 600; font-size: 16px; }
+.linha-sub { color: var(--suave); font-size: 14px; overflow-wrap: anywhere; }
+.linha .seta { color: #9AA3BA; width: 18px; height: 18px; }
+
+/* ---------- RODAPÉ ---------- */
+.rodape { background: var(--noite); color: rgba(255, 255, 255, .7); font-size: 14px;
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
+.rodape .miolo { padding-top: 32px; display: grid; gap: 18px; }
+.rodape .marca .letreiro { width: 120px; }
+.rodape .selo { width: 34px; height: 34px; border-radius: 9px; box-shadow: none; }
+.rodape .selo img { width: 23px; height: 23px; }
+.rodape p { margin: 0; }
+.rod-lojas { display: grid; gap: 4px; padding-top: 16px; border-top: 1px solid var(--fio-escuro); }
+.rod-lojas b { color: #fff; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 12.5px; font-stretch: 112%; }
+.rod-fim { font-size: 12.5px; color: rgba(255, 255, 255, .5); }
+
+/* ---------- AVISO ---------- */
+.aviso { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); z-index: 10;
+  transform: translate(-50%, 20px); opacity: 0; visibility: hidden; pointer-events: none;
+  background: var(--noite); color: #fff; font-weight: 600; font-size: 14.5px; padding: 12px 18px 12px 16px; border-radius: 999px;
+  display: flex; align-items: center; gap: 9px; box-shadow: 0 14px 34px -10px rgba(6, 18, 56, .55); white-space: nowrap;
+  transition: transform .3s var(--ease), opacity .3s var(--ease), visibility 0s linear .3s; }
+.aviso.ver { transform: translate(-50%, 0); opacity: 1; visibility: visible; transition: transform .3s var(--ease), opacity .3s var(--ease); }
+.aviso svg { width: 18px; height: 18px; color: var(--verde); }
+
+/* ---------- COMPUTADOR ---------- */
+@media (min-width: 640px) {
+  .zaps { grid-template-columns: 1fr 1fr; }
+  .letreiro { width: 170px; }
+}
+@media (min-width: 960px) {
+  .marca-dagua { width: 760px; right: -60px; top: -40px; opacity: .06; }
+  .vitrine { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 56px; padding-top: 72px; padding-bottom: 76px; }
+  .zaps { grid-template-columns: 1fr; gap: 12px; }
+  .zap { min-height: 88px; padding: 16px 22px 16px 18px; }
+  .zap-loja { font-size: 21px; }
+  .secao { padding-top: 72px; padding-bottom: 72px; }
+  .cabeca { margin-bottom: 30px; }
+  h2 { font-size: 34px; }
+  .ficha { grid-template-columns: 1.15fr 1fr 1.25fr; align-items: center; gap: 32px; padding: 30px 0; }
+  .acoes { margin-top: 0; }
+  .lista { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .lista li + li { border-top: 0; border-left: 1px solid var(--fio); }
+  .linha { padding: 22px 22px; height: 100%; }
+  .rodape .miolo { grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; padding-top: 36px; }
+  .rod-lojas { border-top: 0; padding-top: 0; border-left: 1px solid var(--fio-escuro); padding-left: 32px; }
+}
+
+/* ---------- MOVIMENTO ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .marca-dagua { animation: dagua 1.6s var(--ease) both; }
+  .topo::after { animation: fio 1.1s .35s var(--ease) both; }
+  .sobre > *, .zap { animation: sobe .7s var(--ease) both; }
+  .sobre > :nth-child(2) { animation-delay: .06s; }
+  .sobre > :nth-child(3) { animation-delay: .12s; }
+  .zap:nth-child(1) { animation-delay: .18s; }
+  .zap:nth-child(2) { animation-delay: .26s; }
+  .zap::after { animation: brilho 1.1s 1s var(--ease) both; }
+}
+@keyframes sobe { from { opacity: 0; transform: translateY(14px); } }
+@keyframes fio { from { transform: scaleX(0); } }
+@keyframes dagua { from { opacity: 0; transform: translateX(40px) scale(1.04); } }
+@keyframes brilho { to { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <img class="marca-dagua" src="favicon.svg" alt="" aria-hidden="true">
+  <div class="miolo barra">
+    <div class="marca">
+      <span class="selo"><img src="favicon.svg" alt=""></span>
+      <img class="letreiro" src="letreiro-branco.svg" alt="AD Motos" width="150" height="31">
+    </div>
+    <button class="icone-btn" type="button" data-id="compartilhar" aria-label="Compartilhar esta página">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+    </button>
+  </div>
+  <div class="miolo vitrine">
+    <div class="sobre">
+      <span class="sobrelinha" id="regiao">Bahia</span>
+      <h1>Peças e acessórios para motos</h1>
+      <p class="apoio">Fale direto com a loja pelo WhatsApp. Escolha a mais perto de você.</p>
+    </div>
+    <nav class="zaps" id="zaps" aria-label="WhatsApp das lojas"></nav>
+  </div>
+</header>
+
+<main>
+  <section class="secao" aria-labelledby="t-lojas">
+    <div class="miolo">
+      <div class="cabeca">
+        <span class="sobrelinha">Nossas lojas</span>
+        <h2 id="t-lojas">Endereços e contatos</h2>
+      </div>
+      <ul class="fichas" id="lojas"></ul>
+    </div>
+  </section>
+
+  <section class="secao atend" aria-labelledby="t-atend">
+    <div class="miolo">
+      <div class="cabeca">
+        <span class="sobrelinha">Atendimento</span>
+        <h2 id="t-atend">Fique com a AD Motos</h2>
+      </div>
+      <ul class="lista" id="atend"></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="miolo">
+    <div class="marca">
+      <span class="selo"><img src="favicon.svg" alt=""></span>
+      <img class="letreiro" src="letreiro-branco.svg" alt="AD Motos" width="120" height="25">
+    </div>
+    <div class="rod-lojas" id="rod-lojas"></div>
+    <p class="rod-fim" id="rod-fim">AD Motos</p>
+  </div>
+</footer>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  const LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
+  const $ = id => document.getElementById(id);
+  const pega = (loja, tipo) => loja.links.find(l => l.tipo === tipo);
+  const chave = l => (l && l.id ? l.id.split("-").slice(1).join("-") : "");
+  const ICO_COPIA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+  const ICO_FONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>';
+  const ICO_CONTATO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M2.5 20a7.5 7.5 0 0 1 15 0"/><path d="M19 8v6M16 11h6"/></svg>';
+  const ICO_PARTILHA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+  const ICO_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  const ICO_EXTRA = { email: ICO.email, site: ICO.site, insta: ICO.insta, mapa: ICO.mapa, zap: ICO.zap };
+
+  // Região (UF) a partir dos endereços: "Várzea da Roça - BA" -> "BA"
+  const ufs = [...new Set(LOJAS.map(l => (l.endereco.match(/-\s*([A-Z]{2})\s*$/) || [])[1]).filter(Boolean))];
+  if (ufs.length === 1 && ufs[0] === "BA") $("regiao").textContent = LOJAS.length + " lojas na Bahia";
+  else $("regiao").textContent = LOJAS.length + " lojas";
+
+  // Botões grandes de WhatsApp (primeira tela)
+  $("zaps").innerHTML = LOJAS.map(loja => {
+    const z = pega(loja, "zap"); if (!z) return "";
+    return `<a class="zap" href="${esc(z.url)}" data-id="${esc(z.id)}"${alvo(z.url)}
+        aria-label="WhatsApp ${esc(loja.nome)}, ${esc(loja.detalhe)}${z.sub ? ", " + esc(z.sub) : ""}">
+      <span class="zap-ico">${ICO.zap}</span>
+      <span class="zap-txt">
+        <span class="zap-rot">WhatsApp · ${esc(loja.detalhe)}</span>
+        <span class="zap-loja">${esc(loja.nome)}</span>
+        ${z.sub ? `<span class="zap-num">${esc(z.sub)}</span>` : ""}
+      </span>
+      ${SETA}
+    </a>`;
+  }).join("");
+
+  // Fichas das lojas
+  $("lojas").innerHTML = LOJAS.map((loja, i) => {
+    const z = pega(loja, "zap"), m = pega(loja, "mapa"), k = chave(z || m);
+    const filial = !/matriz/i.test(loja.detalhe);
+    const acoes = [
+      m ? `<a class="acao" href="${esc(m.url)}" data-id="${esc(m.id)}"${alvo(m.url)} aria-label="Como chegar em ${esc(loja.nome)}">${ICO.mapa}<span>${esc(m.titulo || "Como chegar")}</span></a>` : "",
+      z && z.sub ? `<button class="acao" type="button" data-id="copiar-${esc(k)}" data-num="${esc(z.sub)}" aria-label="Copiar número de ${esc(loja.nome)}">${ICO_COPIA}<span>Copiar número</span></button>` : "",
+      z ? `<a class="acao wpp" href="${esc(z.url)}" data-id="${esc(z.id)}"${alvo(z.url)} aria-label="WhatsApp de ${esc(loja.nome)}">${ICO.zap}<span>WhatsApp</span></a>` : "",
+    ].join("");
+    return `<li class="ficha">
+      <div class="ficha-cab">
+        <div class="ficha-meta">
+          <span class="ficha-num" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
+          <span class="etiqueta${filial ? " filial" : ""}">${esc(loja.detalhe)}</span>
+        </div>
+        <h3 class="cidade">${esc(loja.nome)}</h3>
+      </div>
+      <dl class="dados">
+        <div><dt class="so-leitor">Endereço</dt>${ICO.pino}<dd style="margin:0">${esc(loja.endereco)}</dd></div>
+        ${z && z.sub ? `<div><dt class="so-leitor">WhatsApp</dt>${ICO_FONE}<dd class="num" style="margin:0">${esc(z.sub)}</dd></div>` : ""}
+      </dl>
+      <div class="acoes">${acoes}</div>
+    </li>`;
+  }).join("");
+
+  // Atendimento: salvar contato, e-mail e outros de OUTROS, compartilhar
+  const linha = (inner) => `<li>${inner}</li>`;
+  const corpo = (ico, tit, sub) => `<span class="linha-ico">${ico}</span>
+    <span class="linha-txt"><span class="linha-tit">${tit}</span>${sub ? `<span class="linha-sub">${sub}</span>` : ""}</span>${SETA}`;
+  $("atend").innerHTML = [
+    linha(`<a class="linha" href="admotos.vcf" data-id="salvar-contato" download>${corpo(ICO_CONTATO, "Salvar contato", "Adicione a AD Motos à sua agenda")}</a>`),
+    ...OUTROS.map(o => linha(`<a class="linha" href="${esc(o.url)}" data-id="${esc(o.id)}"${alvo(o.url)}>${corpo(ICO_EXTRA[o.tipo] || ICO.site, esc(o.titulo), esc(o.sub || ""))}</a>`)),
+    linha(`<button class="linha" type="button" data-id="compartilhar">${corpo(ICO_PARTILHA, "Compartilhar", "Envie esta página para um amigo")}</button>`),
+  ].join("");
+
+  // Rodapé institucional
+  $("rod-lojas").innerHTML = `<p>Peças e acessórios para motos</p>` + LOJAS.map(l =>
+    `<p><b>${esc(l.nome)}</b> · ${esc(l.detalhe)}</p>`).join("");
+  $("rod-fim").textContent = "© " + new Date().getFullYear() + " AD Motos";
+
+  // Aviso curto
+  let tempo;
+  function avisar(txt) {
+    const a = $("aviso");
+    a.innerHTML = ICO_OK + "<span>" + esc(txt) + "</span>";
+    a.classList.add("ver");
+    clearTimeout(tempo); tempo = setTimeout(() => a.classList.remove("ver"), 2200);
+  }
+  function copiar(txt) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(txt);
+    return new Promise((ok, erro) => {
+      const t = document.createElement("textarea");
+      t.value = txt; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { document.execCommand("copy") ? ok() : erro(); } catch (e) { erro(e); }
+      t.remove();
+    });
+  }
+  const urlPagina = () => /^https?:/.test(location.protocol) ? location.href.split("#")[0] : "https://helyanaraujo.github.io/admotos-links/";
+
+  document.addEventListener("click", ev => {
+    const el = ev.target.closest("button[data-id]");
+    if (!el) return;
+    const id = el.dataset.id;
+    if (id.startsWith("copiar-")) {
+      copiar(el.dataset.num).then(() => avisar("Número copiado"), () => avisar("WhatsApp: " + el.dataset.num));
+    } else if (id === "compartilhar") {
+      const dados = { title: "AD Motos", text: "Peças e acessórios para motos", url: urlPagina() };
+      if (navigator.share) navigator.share(dados).catch(() => {});
+      else copiar(dados.url).then(() => avisar("Link copiado"), () => avisar(dados.url));
+    }
+  });
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>

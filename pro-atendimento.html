@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="theme-color" content="#F2F5FA">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente no WhatsApp.">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Profissional · Central de atendimento: tela inicial de app de atendimento.
+   Lista de ações agrupadas por loja, cartões brancos com divisores finos,
+   azul da marca nos ícones, verde no WhatsApp, vermelho só como acento. */
+:root {
+  --azul: #002C8F; --azul-2: #0A3BB0; --azul-tinta: #E9EFFB; --azul-tinta-2: #DCE5F8;
+  --vermelho: #E92525;
+  --verde: #1FAF5A; --verde-2: #179A4E; --verde-tinta: #E5F6EC;
+  --fundo: #F2F5FA; --cartao: #FFFFFF;
+  --texto: #0B1B3F; --texto-2: #4E5B78; --texto-3: #6B7792;
+  --linha: #E6EAF2; --toque: #F3F6FC;
+  --f: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --raio: 18px;
+  --sombra: 0 1px 2px rgba(11, 27, 63, .05), 0 6px 20px -8px rgba(11, 27, 63, .10);
+  color-scheme: light;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+html { background: var(--fundo); }
+body {
+  min-height: 100vh; min-height: 100dvh; background: var(--fundo); color: var(--texto);
+  font: 16px/1.45 var(--f); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  font-feature-settings: "cv11", "ss01";
+}
+/* Leve brilho azul no topo, para não ficar chapado */
+body::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 340px; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(120% 100% at 10% 0%, rgba(0, 44, 143, .07), transparent 60%),
+    radial-gradient(80% 80% at 100% 0%, rgba(47, 107, 255, .06), transparent 60%);
+}
+img { display: block; }
+
+.pagina {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 520px; margin: 0 auto;
+  padding:
+    calc(18px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(28px + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
+}
+
+/* ---------- Topo ---------- */
+.topo { display: flex; align-items: center; gap: 12px; padding: 4px 4px 0; }
+.simbolo {
+  width: 48px; height: 48px; flex: none; border-radius: 14px; background: #fff;
+  display: grid; place-items: center;
+  box-shadow: 0 1px 2px rgba(11,27,63,.06), 0 4px 14px -4px rgba(0,44,143,.18);
+  border: 1px solid rgba(0,44,143,.06);
+}
+.simbolo img { width: 32px; height: auto; }
+.marca { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.marca img { height: 17px; width: auto; align-self: flex-start; }
+.marca span { font-size: 13px; font-weight: 500; color: var(--texto-3); letter-spacing: .01em; line-height: 1; }
+
+.ola { padding: 30px 4px 8px; }
+.ola h1 {
+  margin: 0; font-size: 30px; line-height: 1.12; font-weight: 800; letter-spacing: -.025em; color: var(--texto);
+}
+.ola h1 .oi { display: block; color: var(--azul); }
+.ola p { margin: 10px 0 0; font-size: 16px; color: var(--texto-2); max-width: 30em; }
+
+/* ---------- Grupos ---------- */
+.grupo { margin-top: 26px; }
+.grupo-cab { display: flex; align-items: center; gap: 10px; padding: 0 6px 10px; }
+.grupo-cab::before {
+  content: ""; width: 4px; height: 18px; border-radius: 2px; background: var(--vermelho); flex: none;
+}
+.grupo-cab h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.selo {
+  font-size: 12px; font-weight: 600; line-height: 1; padding: 5px 9px 5px; border-radius: 999px;
+  color: var(--azul); background: var(--azul-tinta); letter-spacing: .01em;
+}
+.grupo-cab .discreto { color: var(--texto-3); font-size: 13px; font-weight: 500; margin-left: auto; }
+
+.lista {
+  list-style: none; margin: 0; padding: 0; background: var(--cartao); border-radius: var(--raio);
+  box-shadow: var(--sombra); border: 1px solid rgba(11,27,63,.05); overflow: hidden;
+}
+.lista li { position: relative; }
+.lista li + li::before {
+  content: ""; position: absolute; top: 0; left: 76px; right: 0; height: 1px; background: var(--linha);
+}
+
+.acao {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 74px;
+  padding: 14px 14px 14px 16px; margin: 0; border: 0; background: transparent; text-align: left;
+  font: inherit; color: inherit; text-decoration: none; cursor: pointer;
+  transition: background-color .18s ease;
+}
+.acao:hover { background: #F8FAFE; }
+.acao:active { background: var(--toque); }
+.acao:focus-visible { outline: 3px solid var(--azul-2); outline-offset: -3px; border-radius: var(--raio); }
+.lista li:first-child .acao { border-radius: var(--raio) var(--raio) 0 0; }
+.lista li:last-child .acao { border-radius: 0 0 var(--raio) var(--raio); }
+.lista li:only-child .acao { border-radius: var(--raio); }
+
+.ic {
+  width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center;
+  background: var(--azul-tinta); color: var(--azul);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1), background-color .2s ease, color .2s ease;
+}
+.ic svg { width: 24px; height: 24px; }
+.acao:active .ic { transform: scale(.92); }
+.ic.zap { background: var(--verde); color: #fff; box-shadow: 0 4px 12px -4px rgba(31,175,90,.6); }
+.ic.zap svg { width: 26px; height: 26px; }
+.ic.ok { background: var(--verde-tinta); color: var(--verde-2); }
+
+.txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.titulo { font-size: 17px; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; color: var(--texto); }
+.sub { font-size: 14.5px; color: var(--texto-2); line-height: 1.35; transition: color .2s ease; }
+.sub.num { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--texto); letter-spacing: .005em; font-size: 15.5px; }
+.sub.ok { color: var(--verde-2); font-weight: 600; }
+
+.seta { flex: none; color: #A3ADC2; transition: transform .2s ease, color .2s ease; }
+.acao:hover .seta { transform: translateX(2px); color: var(--azul); }
+.acao.e-zap .seta { color: var(--verde); }
+
+/* WhatsApp: linha principal do grupo, um pouco mais alta */
+.acao.e-zap { min-height: 82px; }
+.acao.e-zap .titulo { font-size: 17.5px; font-weight: 700; }
+
+/* Enquanto abre outro app (o rastreio espera até 600 ms) */
+.acao.abrindo .seta { animation: vai .6s ease-in-out infinite alternate; }
+@keyframes vai { to { transform: translateX(4px); } }
+
+/* ---------- Rodapé ---------- */
+.rodape { margin-top: 36px; padding: 0 6px; text-align: center; }
+.rodape img { width: 132px; height: auto; margin: 0 auto; opacity: .95; }
+.rodape p { margin: 12px 0 0; font-size: 13px; color: var(--texto-3); }
+
+/* ---------- Aviso ---------- */
+.aviso {
+  position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom)); z-index: 10;
+  transform: translate(-50%, 16px); opacity: 0; visibility: hidden;
+  display: flex; align-items: center; gap: 10px; width: max-content; max-width: calc(100% - 32px);
+  padding: 12px 18px 12px 14px; border-radius: 14px; background: #0B1B3F; color: #fff;
+  font-size: 15px; font-weight: 600; box-shadow: 0 10px 30px -8px rgba(11,27,63,.45);
+  transition: opacity .2s ease, transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s linear .25s;
+}
+.aviso.mostra { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
+.aviso svg { width: 20px; height: 20px; color: #4ADE80; flex: none; }
+.aviso.erro svg { color: #FFB4B4; }
+
+/* ---------- Entrada (curta; a página já nasce legível) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .topo, .ola, .grupo, .rodape { animation: sobe .5s cubic-bezier(.2,.8,.2,1) both; }
+  .ola { animation-delay: .05s; }
+  .grupo:nth-of-type(1) { animation-delay: .1s; }
+  .grupo:nth-of-type(2) { animation-delay: .16s; }
+  .grupo:nth-of-type(3) { animation-delay: .22s; }
+  .rodape { animation-delay: .28s; }
+  /* Momento especial: o ícone do WhatsApp "chama" uma vez */
+  .ic.zap { position: relative; }
+  .ic.zap::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    box-shadow: 0 0 0 0 rgba(31,175,90,.5); animation: chama 1.4s ease-out .7s 2;
+  }
+}
+@keyframes sobe { from { opacity: .01; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes chama { to { box-shadow: 0 0 0 12px rgba(31,175,90,0); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Computador ---------- */
+@media (min-width: 720px) {
+  body::before { height: 460px; }
+  .pagina { padding-top: 56px; }
+  .ola { padding-top: 40px; }
+  .ola h1 { font-size: 36px; }
+  .grupo { margin-top: 30px; }
+}
+@media (max-width: 350px) {
+  .ola h1 { font-size: 26px; }
+  .acao { gap: 12px; padding-left: 12px; }
+  .lista li + li::before { left: 70px; }
+  .titulo { font-size: 16px; }
+}
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main class="pagina">
+  <header class="topo">
+    <div class="simbolo"><img src="favicon.svg" alt="" width="32" height="31"></div>
+    <div class="marca">
+      <img src="letreiro-azul.svg" alt="AD Motos" width="86" height="17">
+      <span>Central de atendimento</span>
+    </div>
+  </header>
+
+  <section class="ola" aria-labelledby="ola-titulo">
+    <h1 id="ola-titulo"><span class="oi">Olá!</span> Como podemos ajudar?</h1>
+    <p>Peças e acessórios para a sua moto. Escolha a loja e fale com a gente pelo WhatsApp.</p>
+  </section>
+
+  <div id="grupos"></div>
+
+  <footer class="rodape">
+    <img src="logo.svg" alt="AD Motos" width="132" height="41">
+    <p>Várzea da Roça e Senhor do Bonfim · Bahia</p>
+  </footer>
+</main>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  const IC = {
+    copiar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></svg>',
+    contato: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="8" r="3.6"/><path d="M3 20c.6-3.6 3.2-5.6 6.5-5.6s5.9 2 6.5 5.6"/><path d="M19 8v6M16 11h6"/></svg>',
+    compartilhar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 7.5 4.5-4.5 4.5 4.5"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg>',
+    alerta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg>',
+    ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  };
+  const ABRINDO = { zap: "Abrindo o WhatsApp…", mapa: "Abrindo o mapa…", email: "Abrindo o e-mail…" };
+
+  function linha(o) {
+    // o: { tag, id, href, extra, tipo, icone, icClasse, titulo, sub, subClasse }
+    const tag = o.tag || "a";
+    const attrs = tag === "a"
+      ? ' href="' + esc(o.href) + '"' + (o.extra || "")
+      : ' type="button"' + (o.extra || "");
+    return '<li><' + tag + ' class="acao' + (o.tipo === "zap" ? " e-zap" : "") + '" data-id="' + esc(o.id) + '"' +
+      (o.tipo ? ' data-tipo="' + esc(o.tipo) + '"' : "") + attrs + '>' +
+      '<span class="ic ' + (o.icClasse || "") + '">' + o.icone + '</span>' +
+      '<span class="txt"><span class="titulo">' + esc(o.titulo) + '</span>' +
+      (o.sub ? '<span class="sub ' + (o.subClasse || "") + '">' + esc(o.sub) + '</span>' : "") + '</span>' +
+      SETA + '</' + tag + '></li>';
+  }
+
+  const chave = nome => /bonfim/i.test(nome) ? "bonfim" : "varzea";
+  let html = "";
+  (window.LOJAS || []).forEach(loja => {
+    const zap = loja.links.find(l => l.tipo === "zap");
+    const mapa = loja.links.find(l => l.tipo === "mapa");
+    const k = chave(loja.nome);
+    const idCab = "loja-" + k;
+    let itens = "";
+    if (zap) itens += linha({ id: zap.id, href: zap.url, tipo: "zap", icone: ICO.zap, icClasse: "zap",
+      titulo: "Falar no WhatsApp", sub: zap.sub, subClasse: "num" });
+    if (mapa) itens += linha({ id: mapa.id, href: mapa.url, tipo: "mapa", icone: ICO.mapa,
+      titulo: "Como chegar", sub: loja.endereco.split("·")[0].trim() + " · Abre no mapa" });
+    if (zap && zap.sub) itens += linha({ tag: "button", id: "copiar-" + k,
+      extra: ' data-numero="' + esc(zap.sub) + '" aria-label="Copiar número da loja de ' + esc(loja.nome) + ': ' + esc(zap.sub) + '"',
+      icone: IC.copiar, titulo: "Copiar número", sub: "Para ligar ou mandar para alguém" });
+    html += '<section class="grupo" aria-labelledby="' + idCab + '">' +
+      '<div class="grupo-cab"><h2 id="' + idCab + '">' + esc(loja.nome) +
+      '<span class="so-leitor"> (' + esc(loja.detalhe) + ')</span></h2>' +
+      '<span class="selo" aria-hidden="true">' + esc(loja.detalhe) + '</span></div>' +
+      '<ul class="lista">' + itens + '</ul></section>';
+  });
+
+  let outros = linha({ id: "salvar-contato", href: "admotos.vcf", extra: " download", icone: IC.contato,
+    titulo: "Salvar contato", sub: "Guarde na agenda do celular" });
+  (window.OUTROS || []).forEach(l => {
+    outros += linha({ id: l.id, href: l.url, tipo: l.tipo, icone: ICO[l.tipo] || ICO.site, titulo: l.titulo, sub: l.sub });
+  });
+  outros += linha({ tag: "button", id: "compartilhar", icone: IC.compartilhar,
+    titulo: "Compartilhar", sub: "Envie esta página para alguém" });
+  html += '<section class="grupo" aria-labelledby="outros-cab"><div class="grupo-cab"><h2 id="outros-cab">Outros</h2></div>' +
+    '<ul class="lista">' + outros + '</ul></section>';
+  document.getElementById("grupos").innerHTML = html;
+
+  // ---------- Aviso ----------
+  const aviso = document.getElementById("aviso");
+  let tAviso;
+  function avisar(msg, erro) {
+    aviso.innerHTML = (erro ? IC.alerta : IC.ok) + '<span></span>';
+    aviso.classList.toggle("erro", !!erro);
+    aviso.lastChild.textContent = msg;
+    aviso.classList.add("mostra");
+    clearTimeout(tAviso); tAviso = setTimeout(() => aviso.classList.remove("mostra"), 2400);
+  }
+
+  function copiar(texto) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto);
+    return new Promise((ok, falha) => {
+      const t = document.createElement("textarea");
+      t.value = texto; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { document.execCommand("copy") ? ok() : falha(); } catch (e) { falha(e); }
+      t.remove();
+    });
+  }
+
+  // Confirmação dentro da própria linha (ícone vira ✓ e o texto muda por 2 s)
+  function confirmarNaLinha(btn, msg) {
+    const ic = btn.querySelector(".ic"), sub = btn.querySelector(".sub");
+    if (!btn.dataset.icOrig) { btn.dataset.icOrig = ic.innerHTML; btn.dataset.subOrig = sub.textContent; }
+    ic.innerHTML = IC.ok; ic.classList.add("ok"); sub.textContent = msg; sub.classList.add("ok");
+    clearTimeout(btn._t);
+    btn._t = setTimeout(() => {
+      ic.innerHTML = btn.dataset.icOrig; ic.classList.remove("ok");
+      sub.textContent = btn.dataset.subOrig; sub.classList.remove("ok");
+    }, 2200);
+  }
+
+  document.getElementById("grupos").addEventListener("click", ev => {
+    const el = ev.target.closest(".acao");
+    if (!el) return;
+    const id = el.dataset.id;
+    if (id && id.startsWith("copiar-")) {
+      const num = el.dataset.numero;
+      copiar(num).then(() => { confirmarNaLinha(el, "Número copiado!"); avisar("Número copiado: " + num); },
+                       () => avisar("Não deu para copiar. Anote: " + num, true));
+      return;
+    }
+    if (id === "compartilhar") {
+      const url = location.href.split("#")[0];
+      const dados = { title: "AD Motos", text: "AD Motos · Peças e acessórios para a sua moto", url };
+      if (navigator.share) { navigator.share(dados).catch(() => {}); return; }
+      copiar(url).then(() => { confirmarNaLinha(el, "Link copiado!"); avisar("Link copiado"); },
+                       () => avisar("Não deu para copiar o link", true));
+      return;
+    }
+    if (id === "salvar-contato") { avisar("Baixando o contato da AD Motos"); return; }
+    // Link que sai da página: mostra que está abrindo enquanto o clique é registrado
+    const tipo = el.dataset.tipo;
+    if (el.tagName === "A" && ABRINDO[tipo] && !(ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button)) {
+      const sub = el.querySelector(".sub");
+      if (sub && !el.dataset.subOrig) el.dataset.subOrig = sub.textContent;
+      if (sub) sub.textContent = ABRINDO[tipo];
+      el.classList.add("abrindo");
+      clearTimeout(el._t); el._t = setTimeout(() => restaurar(el), 4000);
+    }
+  });
+
+  function restaurar(el) {
+    el.classList.remove("abrindo");
+    const sub = el.querySelector(".sub");
+    if (sub && el.dataset.subOrig) sub.textContent = el.dataset.subOrig;
+  }
+  // Ao voltar do WhatsApp/mapa (página guardada na memória do navegador)
+  window.addEventListener("pageshow", () => document.querySelectorAll(".acao.abrindo").forEach(restaurar));
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>
