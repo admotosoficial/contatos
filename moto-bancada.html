@@ -153,8 +153,17 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
   .painel{height:236px}
   main{max-width:488px}
 }
-/* ANIMAÇÃO PENDENTE DE APROVAÇÃO: entrada das etiquetas, balanço ao toque e balanço leve das ferramentas
-   ficam desligados até o dono aprovar o visual estático. */
+/* ---------- animação: um balanço suave na entrada; etiqueta balança (~3°) ao tocar ---------- */
+@keyframes balanco{0%{transform:rotate(0)}16%{transform:rotate(2.2deg)}36%{transform:rotate(-1.5deg)}56%{transform:rotate(.8deg)}76%{transform:rotate(-.3deg)}100%{transform:rotate(0)}}
+@keyframes assenta{0%{transform:rotate(1.8deg)}30%{transform:rotate(-1.1deg)}55%{transform:rotate(.55deg)}78%{transform:rotate(-.2deg)}100%{transform:rotate(0)}}
+@keyframes toque{0%{transform:rotate(0)}14%{transform:rotate(3deg)}34%{transform:rotate(-2deg)}54%{transform:rotate(1.1deg)}74%{transform:rotate(-.45deg)}100%{transform:rotate(0)}}
+.bal{transform-box:view-box;animation:balanco 2s cubic-bezier(.37,0,.32,1) var(--d,0s) 1 both}
+.cartaz{transform-origin:98px -38px;animation:balanco 2s cubic-bezier(.37,0,.32,1) .1s 1 both}
+.tag{transform-origin:50% -12px;animation:assenta 1.6s cubic-bezier(.37,0,.32,1) var(--d,0s) 1 both}
+.tag.toque{animation:toque 1.2s cubic-bezier(.33,0,.3,1) 0s 1 both}
+@media (prefers-reduced-motion:reduce){
+  .bal,.cartaz,.tag,.tag.toque{animation:none!important}
+}
 </style>
 </head>
 <body>
@@ -212,35 +221,35 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
       </defs>
 
       <!-- barbantes do cartaz -->
-      <path d="M195 12 114 57M195 12 276 57" stroke="#DCE4F6" stroke-width="1.3" fill="none"/>
+      <g class="bal" style="transform-origin:195px 12px;--d:.1s"><path d="M195 12 114 57M195 12 276 57" stroke="#DCE4F6" stroke-width="1.3" fill="none"/></g>
 
       <!-- celular: lado esquerdo -->
-      <g filter="url(#sh)"><use href="#chave" transform="translate(27 36) scale(.85)"/></g>
-      <g filter="url(#sh)"><use href="#vela" transform="translate(75 36)"/></g>
-      <g filter="url(#sh)"><use href="#disco" transform="translate(51 185) scale(.9)"/></g>
+      <g filter="url(#sh)"><g class="bal" style="transform-origin:27px 36px;--d:0.22s"><use href="#chave" transform="translate(27 36) scale(.85)"/></g></g>
+      <g filter="url(#sh)"><g class="bal" style="transform-origin:75px 36px;--d:0.29s"><use href="#vela" transform="translate(75 36)"/></g></g>
+      <g filter="url(#sh)"><g class="bal" style="transform-origin:51px 180px;--d:0.36s"><use href="#disco" transform="translate(51 185) scale(.9)"/></g></g>
       <!-- celular: lado direito -->
-      <g filter="url(#sh)"><use href="#capacete" transform="translate(339 12)"/></g>
+      <g filter="url(#sh)"><g class="bal" style="transform-origin:339px 12px;--d:0.43s"><use href="#capacete" transform="translate(339 12)"/></g></g>
       <g filter="url(#sh)"><use href="#corrente" transform="translate(339 132)"/></g>
 
       <!-- computador: fileira de cima alinhada (y 36), fileira de baixo (y 132/156) -->
       <g filter="url(#sh)">
-        <use href="#coroa" transform="translate(-45 41)"/>
-        <use href="#vela" transform="translate(-117 36)"/>
-        <use href="#vela" transform="translate(-165 36)"/>
-        <use href="#vela" transform="translate(-213 36)"/>
-        <use href="#chave" transform="translate(-285 36) scale(.85)"/>
-        <use href="#chave" transform="translate(-333 36) scale(.72)"/>
-        <use href="#capacete" transform="translate(-69 132)"/>
+        <g class="bal" style="transform-origin:-45px 36px;--d:0.50s"><use href="#coroa" transform="translate(-45 41)"/></g>
+        <g class="bal" style="transform-origin:-117px 36px;--d:0.57s"><use href="#vela" transform="translate(-117 36)"/></g>
+        <g class="bal" style="transform-origin:-165px 36px;--d:0.15s"><use href="#vela" transform="translate(-165 36)"/></g>
+        <g class="bal" style="transform-origin:-213px 36px;--d:0.22s"><use href="#vela" transform="translate(-213 36)"/></g>
+        <g class="bal" style="transform-origin:-285px 36px;--d:0.29s"><use href="#chave" transform="translate(-285 36) scale(.85)"/></g>
+        <g class="bal" style="transform-origin:-333px 36px;--d:0.36s"><use href="#chave" transform="translate(-333 36) scale(.72)"/></g>
+        <g class="bal" style="transform-origin:-69px 132px;--d:0.43s"><use href="#capacete" transform="translate(-69 132)"/></g>
         <use href="#corrente" transform="translate(-165 132)"/>
       </g>
       <g filter="url(#sh)">
-        <use href="#coroa" transform="translate(435 41)"/>
-        <use href="#vela" transform="translate(507 36)"/>
-        <use href="#vela" transform="translate(555 36)"/>
-        <use href="#vela" transform="translate(603 36)"/>
-        <use href="#chave" transform="translate(675 36) scale(.85)"/>
-        <use href="#chave" transform="translate(723 36) scale(.72)"/>
-        <use href="#disco" transform="translate(459 161) scale(1.05)"/>
+        <g class="bal" style="transform-origin:435px 36px;--d:0.50s"><use href="#coroa" transform="translate(435 41)"/></g>
+        <g class="bal" style="transform-origin:507px 36px;--d:0.57s"><use href="#vela" transform="translate(507 36)"/></g>
+        <g class="bal" style="transform-origin:555px 36px;--d:0.15s"><use href="#vela" transform="translate(555 36)"/></g>
+        <g class="bal" style="transform-origin:603px 36px;--d:0.22s"><use href="#vela" transform="translate(603 36)"/></g>
+        <g class="bal" style="transform-origin:675px 36px;--d:0.29s"><use href="#chave" transform="translate(675 36) scale(.85)"/></g>
+        <g class="bal" style="transform-origin:723px 36px;--d:0.36s"><use href="#chave" transform="translate(723 36) scale(.72)"/></g>
+        <g class="bal" style="transform-origin:459px 156px;--d:0.43s"><use href="#disco" transform="translate(459 161) scale(1.05)"/></g>
         <use href="#corrente" transform="translate(555 132)"/>
       </g>
 
@@ -335,7 +344,7 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
     var outros = l.links.filter(function (k) { return k !== zap && k !== mapa; });
     var matriz = /matriz/i.test(l.detalhe || "");
     h += '<article class="loja" aria-labelledby="loja-' + i + '">' + gancho() +
-      '<div class="tag">' +
+      '<div class="tag" style="--d:' + (0.25 + i * 0.15).toFixed(2) + 's">' +
         '<div class="topo-tag"><span class="selo' + (matriz ? '' : ' f') + '">' + E(l.detalhe || "") + '</span>' +
         '<img class="marca" src="letreiro-azul.svg" alt="" width="50" height="10"></div>' +
         '<h2 class="cidade" id="loja-' + i + '">' + E(l.nome) + '</h2>' +
@@ -365,8 +374,10 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
   document.getElementById("lojas").innerHTML = h;
 
   // ---- mais opções ----
+  var nMini = 0;
   function mini(tag, attrs, ico, tit, sub) {
-    return '<div class="mini">' + gancho() + '<' + tag + ' class="tag" ' + attrs + '><span class="m-ico">' + ico + '</span>' +
+    var d = (0.6 + 0.1 * nMini++).toFixed(2);
+    return '<div class="mini">' + gancho() + '<' + tag + ' class="tag" style="--d:' + d + 's" ' + attrs + '><span class="m-ico">' + ico + '</span>' +
       '<span class="m-tit">' + tit + '</span>' + (sub ? '<span class="m-sub">' + sub + '</span>' : '') + '</' + tag + '></div>';
   }
   var x = mini("a", 'href="admotos.vcf" data-id="salvar-contato" download', IC.contato, "Salvar contato", "Na agenda do celular");
@@ -395,7 +406,10 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
       try { document.execCommand("copy") ? ok() : erro(); } catch (e) { erro(e); } document.body.removeChild(t);
     });
   }
+  var calmo = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)");
   document.addEventListener("click", function (ev) {
+    var tg = ev.target.closest(".tag");
+    if (tg && !(calmo && calmo.matches)) { tg.classList.remove("toque"); void tg.offsetWidth; tg.classList.add("toque"); }
     var b = ev.target.closest("[data-copiar]");
     if (b) { copiar(b.getAttribute("data-copiar")).then(function () { avisar("Número copiado"); }, function () { avisar("Não deu para copiar"); }); return; }
     if (ev.target.closest('[data-id="compartilhar"]')) {
