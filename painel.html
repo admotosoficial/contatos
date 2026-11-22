@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Painel de Cliques AD Motos</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#002C8F">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
+<style>
+/* Layout: barra branca com o logo; faixa azul com título e período; resumo em 4 números; gráficos; botões; origem/aparelho/hora. */
+:root {
+  --azul: #002C8F;
+  --azul-claro: #8FA8E6;
+  --vermelho: #E92525;
+  --fundo: #F4F6FB;
+  --cartao: #ffffff;
+  --texto: #10183A;
+  --suave: #5A6380;
+  --linha: #E1E6F2;
+  --erro: #C81A1A;
+  --f: "Ubuntu", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { background: var(--fundo); color: var(--texto); font: 15px/1.45 var(--f); -webkit-font-smoothing: antialiased; }
+.miolo { max-width: 980px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.barra { background: #fff; border-bottom: 1px solid var(--linha); padding-top: calc(env(safe-area-inset-top, 0px) + 12px); padding-bottom: 12px; }
+.barra img { display: block; height: 40px; width: auto; }
+.topo { background: var(--azul); color: #fff; padding-block: 20px; position: relative; overflow: hidden; }
+.topo::after { content: ""; position: absolute; right: -80px; top: -120px; width: 360px; height: 260px; border-radius: 50%;
+  border: 38px solid rgba(255,255,255,.07); border-left-color: transparent; border-bottom-color: transparent; transform: rotate(-20deg); }
+.topo .miolo { display: flex; gap: 12px 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; position: relative; z-index: 1; }
+h1 { margin: 0; font: 700 24px/1.1 var(--f); }
+h1 small { display: block; font: 400 14px var(--f); color: #C8D3F2; margin-top: 4px; }
+.periodos { display: flex; gap: 6px; flex-wrap: wrap; }
+.periodos button { font: 500 14px var(--f); color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.periodos button[aria-pressed="true"] { background: var(--vermelho); border-color: var(--vermelho); }
+button:focus-visible, input:focus-visible { outline: 3px solid #FFC2C2; outline-offset: 2px; }
+
+main { padding-block: 20px 48px; display: grid; gap: 16px; }
+.aviso { background: #FFF6D6; color: #5B4300; border: 1px solid #EED78C; border-radius: 12px; padding: 10px 14px; font-size: 14px; margin: 0; }
+.bloco { background: var(--cartao); border: 1px solid var(--linha); border-radius: 16px; padding: 16px; min-width: 0; }
+.bloco h2 { margin: 0 0 12px; font: 700 17px/1.2 var(--f); color: var(--azul); }
+.bloco h2 span { font: 400 13px var(--f); color: var(--suave); margin-left: 6px; }
+
+.numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 720px) { .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.num { background: var(--cartao); border: 1px solid var(--linha); border-radius: 16px; padding: 14px 16px; }
+.num b { display: block; font: 700 30px/1 var(--f); color: var(--azul); font-variant-numeric: tabular-nums; }
+.num.destaque { background: var(--vermelho); border-color: var(--vermelho); }
+.num.destaque b, .num.destaque span { color: #fff; }
+.num span { display: block; color: var(--suave); font-size: 13px; margin-top: 6px; }
+
+.grafico { position: relative; min-height: 120px; }
+.grafico svg { display: block; width: 100%; height: auto; overflow: visible; }
+.grafico text { fill: var(--suave); font: 11px var(--f); }
+.dica { position: absolute; pointer-events: none; background: var(--texto); color: #fff; font-size: 13px;
+  padding: 6px 9px; border-radius: 8px; white-space: nowrap; transform: translate(-50%, -110%); }
+
+.duas { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 16px; }
+@media (max-width: 760px) { .duas { grid-template-columns: minmax(0, 1fr); } }
+
+.lista-botoes { display: grid; gap: 12px; }
+.lb { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; }
+.lb .nome { font-weight: 500; overflow-wrap: anywhere; }
+.lb .nome small { font-weight: 400; color: var(--suave); }
+.lb .qtd { font-variant-numeric: tabular-nums; font-weight: 700; }
+.lb .qtd small { color: var(--suave); font-weight: 400; }
+.lb .trilho { grid-column: 1 / -1; height: 8px; background: var(--linha); border-radius: 4px; overflow: hidden; }
+.lb .trilho i { display: block; height: 100%; background: var(--azul); border-radius: 0 4px 4px 0; }
+
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 4px; border-bottom: 1px solid var(--linha); }
+th { color: var(--suave); font-weight: 400; font-size: 13px; }
+td.n, th.n { text-align: right; }
+.vazio { color: var(--suave); font-size: 14px; margin: 0; }
+details summary { cursor: pointer; color: var(--suave); font-size: 14px; margin-top: 10px; }
+.rolagem { overflow-x: auto; }
+
+.entrar { max-width: 380px; margin: 40px auto; display: grid; gap: 12px; }
+.entrar label { font-weight: 500; }
+.entrar input[type=password] { font: 16px var(--f); padding: 12px; border: 1px solid var(--linha); border-radius: 12px;
+  background: var(--cartao); color: var(--texto); width: 100%; }
+.entrar .linha { display: flex; gap: 8px; align-items: center; font-size: 14px; color: var(--suave); }
+.entrar button { font: 700 16px var(--f); padding: 13px; border: 0; border-radius: 12px; background: var(--vermelho); color: #fff; cursor: pointer; }
+.erro { color: var(--erro); font-size: 14px; margin: 0; }
+.sair { background: none; border: 0; color: var(--suave); text-decoration: underline; cursor: pointer; font: 14px var(--f); padding: 0; }
+</style>
+</head>
+<body>
+<div class="barra"><div class="miolo"><img src="logo.svg" alt="AD Motos · Atacado e Varejo" width="132" height="40"></div></div>
+<header class="topo">
+  <div class="miolo">
+    <h1>Painel de cliques<small id="sub">Quem visitou a página da bio e em que clicou</small></h1>
+    <div class="periodos" id="periodos" role="group" aria-label="Período">
+      <button type="button" data-p="hoje">Hoje</button>
+      <button type="button" data-p="7" aria-pressed="true">7 dias</button>
+      <button type="button" data-p="30">30 dias</button>
+      <button type="button" data-p="mes">Este mês</button>
+      <button type="button" data-p="90">90 dias</button>
+    </div>
+  </div>
+</header>
+
+<form class="entrar miolo" id="entrar" hidden>
+  <label for="senha">Senha do painel</label>
+  <input type="password" id="senha" autocomplete="current-password" required>
+  <div class="linha"><input type="checkbox" id="lembrar" checked><label for="lembrar" style="font-weight:400">Lembrar neste aparelho</label></div>
+  <button type="submit">Entrar</button>
+  <p class="erro" id="erro" hidden></p>
+</form>
+
+<main class="miolo" id="painel">
+  <p class="aviso" id="aviso" hidden></p>
+  <section class="numeros" aria-label="Resumo">
+    <div class="num"><b id="k-visitas">–</b><span>Visitas na página</span></div>
+    <div class="num"><b id="k-pessoas">–</b><span>Pessoas diferentes</span></div>
+    <div class="num destaque"><b id="k-cliques">–</b><span>Cliques nos botões</span></div>
+    <div class="num"><b id="k-taxa">–</b><span>Das pessoas, quantas clicaram</span></div>
+  </section>
+
+  <section class="bloco">
+    <h2>Visitas por dia <span id="periodo-txt"></span></h2>
+    <div class="grafico" id="g-dia"></div>
+    <details><summary>Ver números por dia</summary><div class="rolagem"><table id="t-dia"></table></div></details>
+  </section>
+
+  <div class="duas">
+    <section class="bloco">
+      <h2>Cliques por botão</h2>
+      <div class="lista-botoes" id="botoes"></div>
+    </section>
+    <section class="bloco">
+      <h2>De onde vieram</h2>
+      <table id="t-origem"></table>
+      <h2 style="margin-top:18px">Aparelho</h2>
+      <table id="t-aparelho"></table>
+    </section>
+  </div>
+
+  <section class="bloco">
+    <h2>Horário das visitas <span>hora da Bahia</span></h2>
+    <div class="grafico" id="g-hora"></div>
+  </section>
+  <p style="text-align:center;margin:0"><button class="sair" id="sair" type="button">Sair deste aparelho</button></p>
+</main>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script>
+const CFG = window.LINKS_CONFIG || {};
+const LIGADO = !!(CFG.supabaseUrl && CFG.supabaseKey);
+const NOMES = {};
+(window.LOJAS || []).forEach(l => l.links.forEach(k => { NOMES[k.id] = { titulo: k.tipo === "zap" ? "WhatsApp" : k.titulo, loja: l.nome }; }));
+(window.OUTROS || []).forEach(k => { NOMES[k.id] = { titulo: k.titulo, loja: "" }; });
+Object.assign(NOMES, {
+  "salvar-contato": { titulo: "Salvar contato", loja: "" },
+  "compartilhar": { titulo: "Compartilhar", loja: "" },
+  "abrir-escolha": { titulo: "Abriu a escolha de loja", loja: "" },
+  "copiar-varzea": { titulo: "Copiou o número", loja: "Várzea da Roça" },
+  "copiar-bonfim": { titulo: "Copiou o número", loja: "Senhor do Bonfim" },
+});
+const fmt = n => Number(n || 0).toLocaleString("pt-BR");
+const $ = id => document.getElementById(id);
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+// ---------- período (datas no fuso da Bahia) ----------
+function hojeBahia() {
+  const p = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Bahia", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+  return new Date(p + "T12:00:00");
+}
+const iso = d => d.toISOString().slice(0, 10);
+const br = s => s.slice(8, 10) + "/" + s.slice(5, 7);
+let periodo = "7";
+function intervalo() {
+  const fim = hojeBahia(); const ini = new Date(fim);
+  if (periodo === "hoje") {}
+  else if (periodo === "mes") ini.setDate(1);
+  else ini.setDate(ini.getDate() - (Number(periodo) - 1));
+  return [iso(ini), iso(fim)];
+}
+
+// ---------- dados ----------
+let senha = "";
+try { senha = localStorage.getItem("adm_painel") || ""; } catch (e) {}
+
+async function buscar(desde, ate) {
+  const r = await fetch(CFG.supabaseUrl.replace(/\/$/, "") + "/rest/v1/rpc/painel_cliques", {
+    method: "POST",
+    headers: { "apikey": CFG.supabaseKey, "Content-Type": "application/json" },
+    body: JSON.stringify({ senha, desde, ate })
+  });
+  const j = await r.json().catch(() => null);
+  if (!r.ok) { const e = new Error((j && j.message) || ("Erro " + r.status)); e.senha = j && /senha/i.test(j.message || ""); throw e; }
+  return j;
+}
+
+function exemplo(desde, ate) {
+  // Só para mostrar o formato do painel enquanto a contagem não está ligada.
+  const dias = []; let d = new Date(desde + "T12:00:00"); const f = new Date(ate + "T12:00:00"); let i = 0;
+  while (d <= f) { const v = [42, 38, 55, 61, 47, 29, 18, 51, 44, 58, 63, 40, 31, 22][i % 14]; dias.push({ dia: iso(d), visitas: v, cliques: Math.round(v * .62) }); d.setDate(d.getDate() + 1); i++; }
+  const vis = dias.reduce((a, x) => a + x.visitas, 0), cli = dias.reduce((a, x) => a + x.cliques, 0);
+  return { visitas: vis, pessoas: Math.round(vis * .71), cliques: cli, pessoas_que_clicaram: Math.round(vis * .71 * .55), por_dia: dias,
+    por_botao: [["zap-varzea", .46], ["zap-bonfim", .31], ["mapa-varzea", .11], ["mapa-bonfim", .08], ["email", .04]]
+      .map(([b, p]) => ({ botao: b, cliques: Math.round(cli * p), pessoas: Math.round(cli * p * .8) })),
+    por_origem: [{ origem: "instagram", visitas: Math.round(vis * .88) }, { origem: "direto", visitas: Math.round(vis * .09) }, { origem: "facebook", visitas: Math.round(vis * .03) }],
+    por_dispositivo: [{ dispositivo: "celular", visitas: Math.round(vis * .94) }, { dispositivo: "computador", visitas: Math.round(vis * .06) }],
+    por_hora: Array.from({ length: 24 }, (_, h) => ({ hora: h, visitas: Math.round(vis * Math.max(0, Math.sin((h - 6) / 16 * Math.PI)) / 10) })) };
+}
+
+// ---------- gráfico de barras (uma série) ----------
+function barras(el, pontos, rotulo, dica) {
+  const W = Math.max(300, Math.round(el.clientWidth || 900)), H = W < 600 ? 180 : 220, m = { t: 10, r: 8, b: 26, l: 34 };
+  const max = Math.max(1, ...pontos.map(p => p.v));
+  const passo = Math.pow(10, Math.floor(Math.log10(max))); let topo = Math.ceil(max / passo) * passo;
+  if (topo / passo <= 2) topo = Math.ceil(max / (passo / 2)) * (passo / 2);
+  const y = v => m.t + (H - m.t - m.b) * (1 - v / topo);
+  const larg = (W - m.l - m.r) / Math.max(1, pontos.length);
+  const bw = Math.max(2, Math.min(larg - 2, 48));
+  const marcas = [0, topo / 2, topo];
+  const cada = Math.ceil(pontos.length / Math.max(4, Math.floor((W - 40) / 46)));
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(rotulo)}">`;
+  marcas.forEach(t => { s += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(t)}" y2="${y(t)}" stroke="var(--linha)" stroke-width="1"/><text x="${m.l - 6}" y="${y(t) + 4}" text-anchor="end">${fmt(t)}</text>`; });
+  pontos.forEach((p, i) => {
+    const x = m.l + i * larg + (larg - bw) / 2, h = Math.max(0, y(0) - y(p.v));
+    const r = Math.min(4, bw / 2, h);
+    if (h > 0) s += `<path d="M${x},${y(0)} V${y(p.v) + r} Q${x},${y(p.v)} ${x + r},${y(p.v)} H${x + bw - r} Q${x + bw},${y(p.v)} ${x + bw},${y(p.v) + r} V${y(0)} Z" fill="var(--azul)"/>`;
+    s += `<rect x="${m.l + i * larg}" y="${m.t}" width="${larg}" height="${H - m.t - m.b}" fill="transparent" data-i="${i}"/>`;
+    if (i % cada === 0) s += `<text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${esc(p.rot)}</text>`;
+  });
+  s += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(0)}" y2="${y(0)}" stroke="var(--suave)" stroke-width="1"/></svg><div class="dica" hidden></div>`;
+  el.innerHTML = s;
+  const tip = el.querySelector(".dica"), svg = el.querySelector("svg");
+  svg.addEventListener("pointermove", ev => {
+    const alvo = ev.target.closest("rect[data-i]"); if (!alvo) { tip.hidden = true; return; }
+    const p = pontos[+alvo.dataset.i]; const caixa = el.getBoundingClientRect();
+    tip.innerHTML = dica(p); tip.hidden = false;
+    tip.style.left = Math.min(caixa.width - 70, Math.max(70, ev.clientX - caixa.left)) + "px";
+    tip.style.top = (ev.clientY - caixa.top) + "px";
+  });
+  svg.addEventListener("pointerleave", () => { tip.hidden = true; });
+}
+
+function tabela(el, cab, linhas) {
+  if (!linhas.length) { el.innerHTML = `<tr><td class="vazio">Nenhuma visita no período.</td></tr>`; return; }
+  el.innerHTML = `<thead><tr>${cab.map((c, i) => `<th class="${i ? "n" : ""}">${c}</th>`).join("")}</tr></thead><tbody>` +
+    linhas.map(l => `<tr>${l.map((c, i) => `<td class="${i ? "n" : ""}">${i ? fmt(c) : esc(c)}</td>`).join("")}</tr>`).join("") + "</tbody>";
+}
+
+// ---------- montar ----------
+function mostrar(d, desde, ate) {
+  ultimo = [d, desde, ate];
+  $("k-visitas").textContent = fmt(d.visitas);
+  $("k-pessoas").textContent = fmt(d.pessoas);
+  $("k-cliques").textContent = fmt(d.cliques);
+  $("k-taxa").textContent = d.pessoas ? Math.round(100 * d.pessoas_que_clicaram / d.pessoas) + "%" : "–";
+  $("periodo-txt").textContent = desde === ate ? br(desde) : br(desde) + " a " + br(ate);
+
+  // completa os dias sem visita com zero (ausência de visita é zero de verdade aqui)
+  const mapa = Object.fromEntries((d.por_dia || []).map(x => [x.dia, x]));
+  const dias = []; for (let t = new Date(desde + "T12:00:00"); t <= new Date(ate + "T12:00:00"); t.setDate(t.getDate() + 1)) {
+    const k = iso(t); dias.push({ dia: k, visitas: mapa[k]?.visitas || 0, cliques: mapa[k]?.cliques || 0 }); }
+  barras($("g-dia"), dias.map(x => ({ v: x.visitas, rot: br(x.dia), x })), "Visitas por dia",
+    p => `<b>${br(p.x.dia)}</b> · ${fmt(p.x.visitas)} visitas · ${fmt(p.x.cliques)} cliques`);
+  tabela($("t-dia"), ["Dia", "Visitas", "Cliques"], dias.slice().reverse().map(x => [br(x.dia), x.visitas, x.cliques]));
+
+  const pb = d.por_botao || []; const maxb = Math.max(1, ...pb.map(b => b.cliques));
+  $("botoes").innerHTML = pb.length ? pb.map(b => {
+    const n = NOMES[b.botao] || { titulo: b.botao, loja: "" };
+    return `<div class="lb"><span class="nome">${esc(n.titulo)} <small>${esc(n.loja)}</small></span>
+      <span class="qtd">${fmt(b.cliques)} <small>· ${fmt(b.pessoas)} pessoas</small></span>
+      <span class="trilho"><i style="width:${(100 * b.cliques / maxb).toFixed(1)}%"></i></span></div>`; }).join("")
+    : `<p class="vazio">Nenhum clique no período.</p>`;
+
+  const nomeOrigem = { instagram: "Instagram", facebook: "Facebook", direto: "Link direto / outros" };
+  tabela($("t-origem"), ["Origem", "Visitas"], (d.por_origem || []).map(o => [nomeOrigem[o.origem] || o.origem, o.visitas]));
+  tabela($("t-aparelho"), ["Aparelho", "Visitas"], (d.por_dispositivo || []).map(o => [o.dispositivo === "celular" ? "Celular" : o.dispositivo === "computador" ? "Computador" : o.dispositivo, o.visitas]));
+
+  const ph = Object.fromEntries((d.por_hora || []).map(h => [h.hora, h.visitas]));
+  barras($("g-hora"), Array.from({ length: 24 }, (_, h) => ({ v: ph[h] || 0, rot: h + "h", h })), "Visitas por hora",
+    p => `<b>${p.h}h às ${p.h + 1}h</b> · ${fmt(p.v)} visitas`);
+}
+
+async function carregar() {
+  const [desde, ate] = intervalo();
+  if (!LIGADO) {
+    $("aviso").hidden = false;
+    $("aviso").textContent = "Dados de EXEMPLO. A contagem de cliques ainda não foi ligada (falta configurar o Supabase em config.js).";
+    mostrar(exemplo(desde, ate), desde, ate); return;
+  }
+  if (!senha) { pedirSenha(); return; }
+  try {
+    const d = await buscar(desde, ate);
+    $("entrar").hidden = true; $("painel").hidden = false; $("periodos").hidden = false;
+    mostrar(d, desde, ate);
+  } catch (e) {
+    if (e.senha) { try { localStorage.removeItem("adm_painel"); } catch (x) {} senha = ""; pedirSenha("Senha incorreta."); }
+    else { $("aviso").hidden = false; $("aviso").textContent = "Não consegui buscar os números agora (" + e.message + "). Tente de novo em alguns minutos."; }
+  }
+}
+function pedirSenha(msg) {
+  $("painel").hidden = true; $("periodos").hidden = true; $("entrar").hidden = false;
+  $("erro").hidden = !msg; $("erro").textContent = msg || ""; $("senha").focus();
+}
+$("entrar").addEventListener("submit", ev => {
+  ev.preventDefault(); senha = $("senha").value;
+  if ($("lembrar").checked) { try { localStorage.setItem("adm_painel", senha); } catch (e) {} }
+  carregar();
+});
+$("sair").addEventListener("click", () => { try { localStorage.removeItem("adm_painel"); } catch (e) {} senha = ""; pedirSenha(); });
+$("periodos").addEventListener("click", ev => {
+  const b = ev.target.closest("button[data-p]"); if (!b) return;
+  periodo = b.dataset.p;
+  $("periodos").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  carregar();
+});
+let ultimo = null;
+let redim; addEventListener("resize", () => { clearTimeout(redim); redim = setTimeout(() => ultimo && mostrar(...ultimo), 200); });
+carregar();
+</script>
+</body>
+</html>

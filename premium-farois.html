@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente pelo WhatsApp.">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<meta name="theme-color" content="#030B26">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+/* Conceito: "Faróis na estrada à noite". A estrada (canvas) converge para o ícone da marca,
+   que fica no ponto de fuga — a AD Motos é o destino. Vidro fosco com borda de luz:
+   azul-farol em cima, vermelho-lanterna embaixo. */
+:root {
+  --azul: #002C8F;
+  --noite: #030B26;
+  --noite-2: #06123A;
+  --vermelho: #E92525;
+  --verde: #1FAF5A;
+  --verde-2: #13924A;
+  --branco: #fff;
+  --texto: #F3F6FF;
+  --suave: #B4C2EA;
+  --apagado: #8496CC;
+  --linha: rgba(255, 255, 255, .09);
+  --foco: #9EC2FF;
+  --f: "Archivo", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --mola: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { background: #020820; -webkit-text-size-adjust: 100%; }
+body {
+  min-height: 100vh; min-height: 100dvh;
+  background: #020820; color: var(--texto);
+  font: 400 16px/1.45 var(--f); font-stretch: 100%;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; position: relative;
+}
+button, a { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+a { text-decoration: none; }
+:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
+img { display: block; }
+
+/* ===== Céu: brilhos de luz + granulação ===== */
+.ceu, .grao { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.ceu {
+  background:
+    radial-gradient(1100px 560px at 50% -80px, rgba(0, 52, 170, .75) 0%, rgba(0, 44, 143, .28) 42%, transparent 70%),
+    radial-gradient(420px 380px at calc(100% + 40px) 620px, rgba(233, 37, 37, .17), transparent 70%),
+    radial-gradient(520px 420px at -60px 1080px, rgba(20, 70, 210, .24), transparent 72%),
+    radial-gradient(380px 300px at calc(100% + 30px) 1600px, rgba(233, 37, 37, .10), transparent 70%),
+    linear-gradient(180deg, #041034 0px, var(--noite) 700px, #020820 100%);
+}
+.grao {
+  opacity: .09; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+#estrada {
+  position: absolute; left: 0; top: 0; width: 100%; height: 620px; z-index: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 98%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 98%);
+}
+
+/* ===== Página ===== */
+.pagina {
+  position: relative; z-index: 1; max-width: 448px; margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 40px) max(16px, env(safe-area-inset-right, 0px))
+           calc(env(safe-area-inset-bottom, 0px) + 28px) max(16px, env(safe-area-inset-left, 0px));
+  display: grid; gap: 14px;
+}
+
+/* ===== Identidade ===== */
+.topo { display: grid; justify-items: center; text-align: center; padding-bottom: 14px; }
+.app {
+  position: relative; width: 92px; height: 92px; border-radius: 27px; background: #fff;
+  display: grid; place-items: center; overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, .6),
+    0 0 0 7px rgba(120, 160, 255, .07),
+    0 18px 40px -10px rgba(0, 8, 40, .9),
+    0 0 70px rgba(90, 140, 255, .45);
+}
+.app img { width: 64px; height: 64px; }
+.app::after { /* reflexo de farol que passa pelo ícone */
+  content: ""; position: absolute; inset: -40%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .0) 44%, rgba(255, 255, 255, .85) 50%, rgba(255, 255, 255, 0) 56%, transparent 60%);
+  transform: translateX(-80%); pointer-events: none;
+}
+.letreiro { width: 214px; height: auto; margin-top: 26px; filter: drop-shadow(0 4px 18px rgba(0, 10, 50, .8)); }
+.frase {
+  margin: 16px 0 0; font-size: 19px; line-height: 1.25; font-weight: 500; color: var(--texto);
+  letter-spacing: -.005em; text-wrap: balance; text-shadow: 0 2px 14px rgba(2, 8, 30, .9);
+}
+.cidades {
+  margin: 12px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 10px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .14em; text-transform: uppercase; color: var(--suave);
+  text-shadow: 0 2px 10px rgba(2, 8, 30, .9);
+}
+.cidades i { width: 4px; height: 4px; border-radius: 50%; background: var(--vermelho); box-shadow: 0 0 8px 2px rgba(233, 37, 37, .7); }
+
+/* ===== Botão principal ===== */
+.cta {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; gap: 14px; min-height: 80px; padding: 12px 18px 12px 14px;
+  border-radius: 24px; color: #061A4F;
+  background: linear-gradient(180deg, #FFFFFF 0%, #EAF0FF 100%);
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 44, 143, .12),
+    0 1px 0 rgba(255, 255, 255, .4),
+    0 22px 50px -16px rgba(110, 160, 255, .55),
+    0 0 0 1px rgba(255, 255, 255, .7);
+  transition: transform .18s var(--mola), box-shadow .25s ease;
+  cursor: pointer; user-select: none;
+}
+.cta::after { /* faixa de luz */
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgba(160, 195, 255, .55) 48%, transparent 62%);
+  transform: translateX(-110%);
+}
+.cta:hover { box-shadow: inset 0 -2px 0 rgba(0, 44, 143, .12), 0 26px 60px -14px rgba(130, 175, 255, .75), 0 0 0 1px #fff; }
+.cta:active { transform: scale(.975); }
+.cta-ico {
+  flex: none; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; color: #fff;
+  background: linear-gradient(160deg, #2CCB6B, var(--verde-2));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 8px 18px -6px rgba(19, 146, 74, .8);
+}
+.cta-ico svg { width: 30px; height: 30px; }
+.cta-txt { display: grid; min-width: 0; line-height: 1.15; text-align: left; }
+.cta-txt strong { font-size: 21px; font-weight: 800; font-stretch: 92%; letter-spacing: -.01em; }
+.cta-txt small { font-size: 14px; color: #3D4C78; margin-top: 3px; font-weight: 500; }
+.cta .seta { margin-left: auto; flex: none; width: 22px; height: 22px; color: var(--azul); }
+
+/* ===== Vidro ===== */
+.vidro {
+  position: relative; isolation: isolate; border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .085), rgba(255, 255, 255, .035));
+  -webkit-backdrop-filter: blur(20px) saturate(150%); backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 30px 60px -30px rgba(0, 0, 0, .8);
+}
+.vidro::before { /* borda de luz fina: farol em cima, lanterna embaixo */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: 2;
+  background: linear-gradient(165deg, rgba(170, 200, 255, .6), rgba(255, 255, 255, .1) 30%, rgba(255, 255, 255, .05) 62%, rgba(233, 37, 37, .45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.vidro::after { /* luz que acompanha o dedo/ponteiro */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, -40%), rgba(120, 165, 255, .14), transparent 60%);
+  opacity: 0; transition: opacity .35s ease;
+}
+.vidro.aceso::after { opacity: 1; }
+
+.rotulo {
+  display: flex; align-items: center; gap: 12px; margin: 14px 4px 0;
+  font-size: 12px; font-weight: 700; font-stretch: 115%; letter-spacing: .2em; text-transform: uppercase; color: var(--apagado);
+}
+.rotulo::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(150, 175, 240, .35), transparent); }
+
+/* ===== Lojas ===== */
+#lista-lojas { display: grid; gap: 14px; }
+.loja { padding: 20px 16px 16px; display: grid; gap: 10px; }
+.loja-cab { padding: 0 4px 6px; }
+.selo {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; font-stretch: 118%; letter-spacing: .2em; text-transform: uppercase; color: #FFB4B4;
+}
+.selo i { width: 7px; height: 7px; border-radius: 50%; background: var(--vermelho); box-shadow: 0 0 10px 2px rgba(233, 37, 37, .75); }
+.loja h3 {
+  margin: 6px 0 0; font-size: 30px; line-height: 1; font-weight: 800; font-stretch: 72%;
+  letter-spacing: .005em; text-transform: uppercase; color: #fff;
+}
+.end { margin: 8px 0 0; display: flex; align-items: center; gap: 7px; color: var(--suave); font-size: 14.5px; }
+.end svg { flex: none; color: #FF8A8A; }
+
+.linha { display: grid; grid-template-columns: minmax(0, 1fr) 56px; gap: 8px; }
+.linha .item { gap: 12px; padding-right: 12px; }
+.linha .item .seta { display: none; }
+.item {
+  display: flex; align-items: center; gap: 13px; min-height: 64px; padding: 10px 14px 10px 10px; min-width: 0;
+  border-radius: 18px; background: rgba(255, 255, 255, .055); border: 1px solid var(--linha);
+  transition: background-color .2s ease, border-color .2s ease, transform .16s var(--mola);
+}
+.item:hover { background: rgba(255, 255, 255, .09); border-color: rgba(255, 255, 255, .16); }
+.item:active { transform: scale(.98); }
+.disco {
+  flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+  background: rgba(255, 255, 255, .08); color: #DCE6FF;
+}
+.disco svg { width: 22px; height: 22px; }
+.disco.verde { background: linear-gradient(160deg, #2CCB6B, var(--verde-2)); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 6px 16px -6px rgba(31, 175, 90, .8); }
+.disco.verde svg { width: 25px; height: 25px; }
+.item .t { display: grid; min-width: 0; line-height: 1.2; }
+.item .t strong { font-size: 16.5px; font-weight: 650; font-stretch: 92%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item .t small { font-size: 14px; color: var(--suave); margin-top: 2px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item .seta { margin-left: auto; flex: none; color: var(--apagado); transition: transform .2s var(--mola); }
+.item:hover .seta { transform: translateX(3px); color: #fff; }
+
+.copiar {
+  display: grid; place-items: center; border-radius: 18px; cursor: pointer;
+  background: rgba(255, 255, 255, .055); border: 1px solid var(--linha); color: #DCE6FF;
+  transition: background-color .2s ease, transform .16s var(--mola), color .2s ease;
+}
+.copiar:hover { background: rgba(255, 255, 255, .1); }
+.copiar:active { transform: scale(.94); }
+.copiar svg { width: 22px; height: 22px; }
+.copiar .ok { display: none; }
+.copiar.feito { color: #6BE59B; }
+.copiar.feito .ok { display: block; }
+.copiar.feito .cp { display: none; }
+
+/* ===== Ações ===== */
+.acoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.acao {
+  display: grid; justify-items: center; align-content: center; gap: 9px; min-height: 96px; padding: 14px 6px 12px;
+  border: 0; border-radius: 22px; cursor: pointer; text-align: center;
+  transition: transform .16s var(--mola);
+}
+.acao:active { transform: scale(.96); }
+.acao .disco { width: 42px; height: 42px; border-radius: 50%; }
+.acao span.r { font-size: 14px; font-weight: 600; line-height: 1.15; }
+
+.rodape { margin-top: 18px; display: grid; justify-items: center; gap: 8px; text-align: center; color: var(--apagado); font-size: 13px; }
+.rodape img { width: 92px; height: auto; opacity: .55; }
+
+/* ===== Folha de escolha ===== */
+.folha {
+  margin: auto auto 0; padding: 0; border: 0; width: 100%; max-width: 480px; max-height: 92dvh;
+  background: transparent; color: var(--texto); overflow: visible;
+}
+.folha::backdrop { background: rgba(1, 5, 20, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.folha-corpo {
+  border-radius: 30px 30px 0 0; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 18px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: linear-gradient(180deg, rgba(20, 38, 100, .92), rgba(6, 14, 44, .96));
+  display: grid; gap: 10px;
+}
+.folha-corpo.vidro::before { background: linear-gradient(180deg, rgba(170, 200, 255, .55), rgba(255, 255, 255, .06) 40%, transparent); }
+.alca { justify-self: center; width: 42px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, .28); margin-bottom: 8px; }
+.folha h2 { margin: 0 4px; font-size: 25px; line-height: 1.1; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .01em; }
+.folha p { margin: 0 4px 6px; color: var(--suave); font-size: 15px; }
+.opcao { min-height: 76px; border-radius: 20px; }
+.opcao .t strong { font-size: 18px; }
+.fechar {
+  margin-top: 4px; min-height: 54px; border-radius: 18px; border: 1px solid var(--linha); cursor: pointer;
+  background: rgba(255, 255, 255, .04); font-weight: 600; font-size: 16px; color: var(--suave);
+}
+.fechar:hover { color: #fff; background: rgba(255, 255, 255, .08); }
+@media (min-width: 640px) {
+  .folha { margin: auto; }
+  .folha-corpo { border-radius: 30px; padding: 22px 20px 20px; }
+  .alca { display: none; }
+}
+
+/* ===== Aviso ===== */
+.aviso {
+  position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); z-index: 50;
+  display: flex; align-items: center; gap: 10px; padding: 12px 18px 12px 14px; border-radius: 999px;
+  background: rgba(14, 26, 70, .92); color: #fff; font-weight: 600; font-size: 15px;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 0 0 1px rgba(170, 200, 255, .25), 0 18px 40px -12px rgba(0, 0, 0, .8);
+  transform: translate(-50%, 140%); opacity: 0; transition: transform .35s var(--mola), opacity .25s ease;
+  pointer-events: none; white-space: nowrap;
+}
+.aviso svg { width: 20px; height: 20px; color: #6BE59B; flex: none; }
+.aviso.ver { transform: translate(-50%, 0); opacity: 1; }
+
+/* ===== Movimento (só quando a pessoa aceita animação) ===== */
+@media (prefers-reduced-motion: no-preference) {
+  .entra { animation: subir .8s var(--mola) both; animation-delay: calc(var(--i, 0) * 80ms + 80ms); }
+  .app { animation: pousar 1s var(--mola) both; }
+  .app::after { animation: reflexo 1.3s ease-in-out .85s both; }
+  .cta::after { animation: faixa 1.6s ease-in-out 1.25s both; }
+  .cta:hover::after { animation: faixa 1.1s ease-in-out both; }
+  .folha[open] .folha-corpo { animation: folha-sobe .48s var(--mola) both; }
+  .folha[open]::backdrop { animation: aparece .3s ease both; }
+  .folha.saindo .folha-corpo { animation: folha-desce .26s ease-in both; }
+  .folha.saindo::backdrop { animation: some .26s ease-in both; }
+}
+@keyframes subir { from { opacity: 0; transform: translateY(16px); } }
+@keyframes pousar { from { opacity: 0; transform: translateY(10px) scale(.86); } }
+@keyframes reflexo { from { transform: translateX(-80%); } to { transform: translateX(80%); } }
+@keyframes faixa { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
+@keyframes folha-sobe { from { transform: translateY(100%); } }
+@keyframes folha-desce { to { transform: translateY(100%); } }
+@keyframes aparece { from { opacity: 0; } }
+@keyframes some { to { opacity: 0; } }
+@media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .folha[open] .folha-corpo { animation: folha-surge .4s var(--mola) both; }
+  .folha.saindo .folha-corpo { animation: some .22s ease-in both; }
+}
+@keyframes folha-surge { from { opacity: 0; transform: translateY(24px) scale(.97); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+@media (min-width: 900px) {
+  #estrada { height: 720px; }
+  .pagina { padding-top: 64px; }
+}
+</style>
+</head>
+<body>
+<div class="ceu" aria-hidden="true"></div>
+<canvas id="estrada" aria-hidden="true"></canvas>
+<div class="grao" aria-hidden="true"></div>
+
+<main class="pagina">
+  <header class="topo">
+    <div class="app" id="app"><img src="favicon.svg" alt="" width="64" height="64"></div>
+    <h1 style="margin:0"><img class="letreiro entra" style="--i:1" src="letreiro-branco.svg" alt="AD Motos" width="214" height="44"></h1>
+    <p class="frase entra" style="--i:2">Peças e acessórios para a sua moto</p>
+    <p class="cidades entra" style="--i:3" id="cidades"></p>
+  </header>
+
+  <a class="cta entra" style="--i:4" href="#lojas" data-id="abrir-escolha" role="button" aria-haspopup="dialog" aria-controls="escolha" id="abrir">
+    <span class="cta-ico" id="cta-ico"></span>
+    <span class="cta-txt"><strong>Falar no WhatsApp</strong><small>Escolha a loja e chame a gente</small></span>
+    <span id="cta-seta"></span>
+  </a>
+
+  <section id="lojas" aria-labelledby="t-lojas" style="display:grid;gap:14px">
+    <h2 class="rotulo entra" style="--i:5" id="t-lojas">Nossas lojas</h2>
+    <div id="lista-lojas"></div>
+  </section>
+
+  <section aria-labelledby="t-mais" style="display:grid;gap:14px">
+    <h2 class="rotulo entra" style="--i:8" id="t-mais">Mais opções</h2>
+    <div class="acoes" id="acoes"></div>
+  </section>
+
+  <footer class="rodape entra" style="--i:10">
+    <img src="letreiro-branco.svg" alt="" width="92" height="19">
+    <span id="ano"></span>
+  </footer>
+</main>
+
+<dialog class="folha" id="escolha" aria-labelledby="t-escolha">
+  <div class="folha-corpo vidro">
+    <span class="alca" aria-hidden="true"></span>
+    <h2 id="t-escolha">Com qual loja quer falar?</h2>
+    <p>O WhatsApp abre com a mensagem pronta.</p>
+    <div id="opcoes" style="display:grid;gap:10px"></div>
+    <button class="fechar" type="button" id="fechar">Cancelar</button>
+  </div>
+</dialog>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  const LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
+  const $ = id => document.getElementById(id);
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)");
+
+  const COPIA = '<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+  const CHECK = '<svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  const CONTATO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 20c.8-3.6 3.4-5.6 6.5-5.6 1.4 0 2.6.4 3.6 1.1"/><path d="M18 14v6M15 17h6"/></svg>';
+  const PARTILHA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M8 11H6.5A2.5 2.5 0 0 0 4 13.5v4A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5v-4A2.5 2.5 0 0 0 17.5 11H16"/></svg>';
+  const CURTO = { email: "E-mail", site: "Site", insta: "Instagram", zap: "WhatsApp", mapa: "Mapa" };
+
+  /* ----- Montagem a partir de links.js ----- */
+  $("cidades").innerHTML = LOJAS.map(l => `<span>${esc(l.nome)}</span>`).join('<i aria-hidden="true"></i>');
+  $("cta-ico").innerHTML = ICO.zap;
+  $("cta-seta").outerHTML = SETA;
+  $("ano").textContent = "© " + new Date().getFullYear() + " AD Motos";
+
+  function item(k, extra) {
+    const verde = k.tipo === "zap";
+    const sub = k.sub || (k.tipo === "mapa" ? "Abrir no Google Maps" : "");
+    return `<a class="item ${extra || ""}" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}>
+      <span class="disco${verde ? " verde" : ""}">${ICO[k.tipo] || ICO.site}</span>
+      <span class="t"><strong>${esc(k.titulo)}</strong>${sub ? `<small>${esc(sub)}</small>` : ""}</span>${SETA}</a>`;
+  }
+
+  $("lista-lojas").innerHTML = LOJAS.map((l, n) => {
+    const linhas = l.links.map(k => {
+      if (k.tipo === "zap" && k.sub) {
+        const idc = k.id.replace(/^zap-/, "copiar-");
+        return `<div class="linha">${item(k)}
+          <button class="copiar" type="button" data-id="${esc(idc)}" data-numero="${esc(k.sub)}"
+            aria-label="Copiar número de ${esc(l.nome)}: ${esc(k.sub)}">${COPIA}${CHECK}</button></div>`;
+      }
+      return item(k);
+    }).join("");
+    return `<article class="loja vidro entra" style="--i:${6 + n}" aria-labelledby="loja-${n}">
+      <div class="loja-cab">
+        ${l.detalhe ? `<span class="selo"><i aria-hidden="true"></i>${esc(l.detalhe)}</span>` : ""}
+        <h3 id="loja-${n}">${esc(l.nome)}</h3>
+        ${l.endereco ? `<p class="end">${ICO.pino}<span>${esc(l.endereco)}</span></p>` : ""}
+      </div>${linhas}</article>`;
+  }).join("");
+
+  $("opcoes").innerHTML = LOJAS.map(l => {
+    const k = l.links.find(x => x.tipo === "zap");
+    if (!k) return "";
+    return `<a class="item opcao" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}>
+      <span class="disco verde">${ICO.zap}</span>
+      <span class="t"><strong>${esc(l.nome)}</strong><small>${esc([l.detalhe, k.sub].filter(Boolean).join(" · "))}</small></span>${SETA}</a>`;
+  }).join("");
+
+  $("acoes").innerHTML =
+    `<a class="acao vidro" href="admotos.vcf" data-id="salvar-contato" download><span class="disco">${CONTATO}</span><span class="r">Salvar contato</span></a>
+     <button class="acao vidro" type="button" data-id="compartilhar" id="compartilhar"><span class="disco">${PARTILHA}</span><span class="r">Compartilhar</span></button>` +
+    OUTROS.map(k => `<a class="acao vidro" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}
+        aria-label="${esc(k.titulo + (k.sub ? ": " + k.sub : ""))}"><span class="disco">${ICO[k.tipo] || ICO.site}</span><span class="r">${esc(CURTO[k.tipo] || k.titulo)}</span></a>`).join("");
+  if (OUTROS.length + 2 !== 3) $("acoes").style.gridTemplateColumns = `repeat(${Math.min(OUTROS.length + 2, 4)}, minmax(0,1fr))`;
+
+  /* ----- Aviso ----- */
+  let tAviso;
+  function avisar(txt) {
+    const a = $("aviso");
+    a.innerHTML = CHECK.replace('class="ok" ', "") + `<span>${esc(txt)}</span>`;
+    a.classList.add("ver");
+    clearTimeout(tAviso); tAviso = setTimeout(() => a.classList.remove("ver"), 2200);
+  }
+  async function copiar(txt) {
+    try { await navigator.clipboard.writeText(txt); return true; } catch (e) {}
+    try {
+      const t = document.createElement("textarea"); t.value = txt; t.setAttribute("readonly", "");
+      t.style.cssText = "position:fixed;top:-100px;opacity:0"; document.body.appendChild(t); t.select();
+      const ok = document.execCommand("copy"); t.remove(); return ok;
+    } catch (e) { return false; }
+  }
+
+  document.addEventListener("click", async ev => {
+    const b = ev.target.closest(".copiar");
+    if (!b) return;
+    if (await copiar(b.dataset.numero)) {
+      b.classList.add("feito"); setTimeout(() => b.classList.remove("feito"), 1800);
+      avisar("Número copiado");
+    } else avisar("Não deu para copiar: " + b.dataset.numero);
+  });
+
+  $("compartilhar").addEventListener("click", async () => {
+    const dados = { title: "AD Motos", text: "Peças e acessórios para a sua moto — fale com a AD Motos.", url: location.href };
+    if (navigator.share) {
+      try { await navigator.share(dados); return; } catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    avisar(await copiar(location.href) ? "Link copiado" : "Copie o link na barra do navegador");
+  });
+
+  /* ----- Folha de escolha ----- */
+  const folha = $("escolha"), abrir = $("abrir");
+  function abrirFolha(ev) {
+    if (!folha.showModal) return;          // sem suporte: o link leva até as lojas
+    ev.preventDefault();
+    folha.classList.remove("saindo");
+    folha.showModal();
+    abrir.setAttribute("aria-expanded", "true");
+  }
+  function fecharFolha() {
+    if (!folha.open) return;
+    if (reduz.matches) { folha.close(); return; }
+    folha.classList.add("saindo");
+    setTimeout(() => { folha.close(); folha.classList.remove("saindo"); }, 240);
+  }
+  abrir.addEventListener("click", abrirFolha);
+  abrir.addEventListener("keydown", ev => { if (ev.key === " ") { ev.preventDefault(); abrir.click(); } });
+  $("fechar").addEventListener("click", fecharFolha);
+  folha.addEventListener("click", ev => { if (ev.target === folha) fecharFolha(); });
+  folha.addEventListener("cancel", ev => { ev.preventDefault(); fecharFolha(); });
+  folha.addEventListener("close", () => { abrir.setAttribute("aria-expanded", "false"); abrir.focus({ preventScroll: true }); });
+  $("opcoes").addEventListener("click", ev => { if (ev.target.closest("a")) setTimeout(fecharFolha, 350); });
+
+  /* ----- Luz que segue o ponteiro nos cartões ----- */
+  document.addEventListener("pointermove", ev => {
+    const v = ev.target.closest && ev.target.closest(".vidro");
+    document.querySelectorAll(".vidro.aceso").forEach(x => { if (x !== v) x.classList.remove("aceso"); });
+    if (!v) return;
+    const r = v.getBoundingClientRect();
+    v.style.setProperty("--mx", (ev.clientX - r.left) + "px");
+    v.style.setProperty("--my", (ev.clientY - r.top) + "px");
+    v.classList.add("aceso");
+  }, { passive: true });
+
+  /* ===== Estrada em perspectiva (canvas) ===== */
+  const cv = $("estrada"), ctx = cv.getContext("2d");
+  if (!ctx) return;
+  let W = 0, H = 0, hx = 0, hy = 0, yTxt = 0, F = 1, R = 1, rodando = false, visivel = true, t0 = 0, ultimo = 0, off = 0;
+  const ZMAX = 70, ZMIN = .55;
+  let carros = [], proxCarro = 0;
+
+  function medir() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const a = $("app").getBoundingClientRect(), c = cv.getBoundingClientRect();
+    hx = a.left + a.width / 2 - c.left; hy = a.top + a.height / 2 - c.top;
+    yTxt = $("cidades").getBoundingClientRect().bottom - c.top;
+    F = Math.max(80, H * 1.05 - hy);                // z = 1 cai logo abaixo da borda
+    R = Math.min(W, 760) * .62 / F;                  // meia largura da pista
+  }
+  const px = (X, z) => hx + F * X / z;
+  const py = z => hy + F / z;
+
+  function novoCarro(z) {
+    const vindo = Math.random() < .55;               // faróis vindo (esquerda) ou lanternas indo (direita)
+    return { vindo, z: z != null ? z : (vindo ? ZMAX : 1.4 + Math.random() * 2), v: vindo ? 15 + Math.random() * 7 : 6 + Math.random() * 4,
+             faixa: vindo ? -.5 : .5, brilho: .6 + Math.random() * .4 };
+  }
+
+  function desenhar(tempo, dt) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = "source-over";
+
+    // brilho do horizonte atrás do ícone
+    const g = ctx.createRadialGradient(hx, hy, 0, hx, hy, Math.max(W, H) * .55);
+    g.addColorStop(0, "rgba(90,140,255,.30)"); g.addColorStop(.35, "rgba(40,80,200,.10)"); g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    // asfalto: leve reflexo na pista
+    ctx.beginPath();
+    ctx.moveTo(px(-R, ZMAX), py(ZMAX)); ctx.lineTo(px(R, ZMAX), py(ZMAX));
+    ctx.lineTo(px(R, ZMIN), py(ZMIN)); ctx.lineTo(px(-R, ZMIN), py(ZMIN)); ctx.closePath();
+    const ga = ctx.createLinearGradient(0, hy, 0, H);
+    ga.addColorStop(0, "rgba(70,110,230,0)"); ga.addColorStop(.45, "rgba(70,110,230,.07)"); ga.addColorStop(1, "rgba(70,110,230,.13)");
+    ctx.fillStyle = ga; ctx.fill();
+
+    // bordas da pista
+    const gb = ctx.createLinearGradient(0, hy, 0, H);
+    gb.addColorStop(0, "rgba(170,200,255,0)"); gb.addColorStop(.5, "rgba(170,200,255,.26)"); gb.addColorStop(1, "rgba(170,200,255,.42)");
+    ctx.strokeStyle = gb; ctx.lineWidth = 1.2;
+    [-R, R].forEach(X => { ctx.beginPath(); ctx.moveTo(px(X, ZMAX), py(ZMAX)); ctx.lineTo(px(X, ZMIN), py(ZMIN)); ctx.stroke(); });
+
+    // faixas tracejadas vindo na direção de quem olha
+    const P = 5, L = 2.1, w = R * .022;
+    off = (off + dt * 9) % P;
+    for (let z = P - off; z < ZMAX; z += P) {
+      const z0 = Math.max(z - L, ZMIN), z1 = z;
+      if (z1 <= ZMIN) continue;
+      const y0 = py(z0), y1 = py(z1), w0 = Math.min(2.4, F * w / z0), w1 = Math.min(2.4, F * w / z1);
+      // atrás do letreiro e da frase a faixa quase some; ela "acende" abaixo do texto
+      const zona = Math.min(1, Math.max(.22, (y0 - yTxt) / 120));
+      const a = Math.min(1, (1 - z1 / ZMAX) * 1.6) * .42 * zona;
+      if (a < .01) continue;
+      ctx.fillStyle = `rgba(235,240,255,${a.toFixed(3)})`;
+      ctx.beginPath();
+      ctx.moveTo(hx - w1, y1); ctx.lineTo(hx + w1, y1); ctx.lineTo(hx + w0, y0); ctx.lineTo(hx - w0, y0); ctx.closePath(); ctx.fill();
+    }
+
+    // rastros de luz (faróis e lanternas)
+    ctx.globalCompositeOperation = "lighter";
+    if (dt > 0) {
+      proxCarro -= dt;
+      if (proxCarro <= 0 && carros.length < 5) { carros.push(novoCarro()); proxCarro = .9 + Math.random() * 1.8; }
+      carros.forEach(c => { c.z += (c.vindo ? -c.v : c.v) * dt; });
+      carros = carros.filter(c => c.z > ZMIN + .05 && c.z < ZMAX);
+    }
+    carros.forEach(c => {
+      const rastro = c.vindo ? 5 : -2.6;
+      const za = c.z, zb = Math.max(ZMIN + .02, c.z + rastro);
+      const dist = Math.min(1, (1 - za / ZMAX) * 2.2);
+      const cor = c.vindo ? "205,222,255" : "255,62,62";
+      const alfa = (c.vindo ? .62 : .7) * c.brilho * dist;
+      [-.13, .13].forEach(dx => {
+        const X = (c.faixa + dx) * R;
+        const xa = px(X, za), ya = py(za), xb = px(X, zb), yb = py(zb);
+        const lw = Math.min(3.2, Math.max(.6, F * R * .02 / za));
+        const gr = ctx.createLinearGradient(xa, ya, xb, yb);
+        gr.addColorStop(0, `rgba(${cor},${alfa.toFixed(3)})`); gr.addColorStop(1, `rgba(${cor},0)`);
+        ctx.strokeStyle = gr; ctx.lineWidth = lw; ctx.lineCap = "round";
+        ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xb, yb); ctx.stroke();
+        const rg = ctx.createRadialGradient(xa, ya, 0, xa, ya, lw * 4);
+        rg.addColorStop(0, `rgba(${cor},${(alfa * .7).toFixed(3)})`); rg.addColorStop(1, `rgba(${cor},0)`);
+        ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(xa, ya, lw * 4, 0, 6.2832); ctx.fill();
+      });
+    });
+
+    // momento especial: o "farol alto" de saudação (duas piscadas) no ponto de fuga
+    if (tempo != null) {
+      const s = tempo / 1000;
+      const pisca = x => Math.max(0, 1 - Math.abs(s - x) / .11);
+      const f = Math.max(pisca(1.0), pisca(1.32));
+      if (f > 0) {
+        const fg = ctx.createRadialGradient(hx, hy, 0, hx, hy, 230);
+        fg.addColorStop(0, `rgba(215,230,255,${(.55 * f).toFixed(3)})`); fg.addColorStop(.4, `rgba(120,165,255,${(.22 * f).toFixed(3)})`); fg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H);
+      }
+    }
+    ctx.globalCompositeOperation = "source-over";
+  }
+
+  function quadro(agora) {
+    if (!rodando) return;
+    if (!t0) { t0 = agora; ultimo = agora; }
+    const dt = Math.min(.05, (agora - ultimo) / 1000); ultimo = agora;
+    desenhar(agora - t0, dt);
+    requestAnimationFrame(quadro);
+  }
+  function parado() {   // quadro estático (movimento reduzido)
+    carros = [{ vindo: true, z: 9, v: 0, faixa: -.5, brilho: .9 }, { vindo: true, z: 26, v: 0, faixa: -.5, brilho: .7 },
+              { vindo: false, z: 6, v: 0, faixa: .5, brilho: .9 }, { vindo: false, z: 18, v: 0, faixa: .5, brilho: .7 }];
+    off = 1.2; desenhar(null, 0);
+  }
+  function iniciar() {
+    if (reduz.matches) { rodando = false; parado(); return; }
+    if (rodando || !visivel || document.hidden) return;
+    rodando = true; ultimo = 0; if (t0) t0 = -1e9; /* retomada: sem repetir a piscada */
+    if (carros.some(c => !c.v)) carros = [novoCarro(14), novoCarro(36)];
+    requestAnimationFrame(quadro);
+  }
+  function parar() { rodando = false; }
+
+  medir();
+  if (!reduz.matches) { carros = [novoCarro(14), novoCarro(32), novoCarro(50)]; }
+  iniciar();
+  let tm; addEventListener("resize", () => { clearTimeout(tm); tm = setTimeout(() => { medir(); if (reduz.matches) parado(); }, 120); });
+  addEventListener("load", () => { medir(); if (reduz.matches) parado(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { medir(); if (!rodando && reduz.matches) parado(); });
+  document.addEventListener("visibilitychange", () => document.hidden ? parar() : iniciar());
+  if ("IntersectionObserver" in window) new IntersectionObserver(e => { visivel = e[0].isIntersecting; visivel ? iniciar() : parar(); }).observe(cv);
+  (reduz.addEventListener ? reduz.addEventListener.bind(reduz, "change") : reduz.addListener.bind(reduz))(() => { parar(); iniciar(); });
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>

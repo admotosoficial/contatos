@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:;AD Motos;;;
+FN:AD Motos
+ORG:AD Motos
+TEL;TYPE=CELL,VOICE;TYPE=pref:+55 74 98821-5750
+TEL;TYPE=CELL,VOICE:+55 74 98809-6304
+EMAIL;TYPE=WORK:comercial@admotos.com.br
+ADR;TYPE=WORK:;;Rod. BR 407;Várzea da Roça;BA;44635-000;Brasil
+ADR;TYPE=WORK:;;Av. Contorno;Senhor do Bonfim;BA;48970-000;Brasil
+NOTE:WhatsApp Várzea da Roça (matriz): (74) 9 8821-5750 · WhatsApp Senhor do Bonfim (filial): (74) 9 8809-6304
+END:VCARD
