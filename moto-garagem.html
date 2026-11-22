@@ -18,16 +18,15 @@
 <meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a loja pelo WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<script>/* liga a animação só com JS e sem "reduzir movimento"; sem isso a moto já aparece desenhada */
+try { if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("anima"); } catch (e) {}
+</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
-/*
-  ANIMAÇÃO PENDENTE DE APROVAÇÃO
-  Esta versão é só o visual estático (estado final, silhueta inteira). Nenhuma animação está ligada.
-*/
 :root {
   --azul: #002C8F; --azul-1: #0A3CB0; --noite: #00133F; --noite-2: #000B28;
   --vermelho: #E92525; --verde: #1FAF5A; --verde-2: #178F49;
@@ -80,6 +79,21 @@ svg { flex: none; }
 .vitrine svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .moto { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .moto .f { stroke-width: 1; stroke-opacity: .55; }
+
+/* Abertura da vitrine (só com a classe "anima", posta no <head>): o spot acende, a moto se desenha,
+   o reflexo aparece e por fim farol e lanterna acendem em vermelho. Não mexe no layout nem nos botões. */
+.anima .lampada { animation: liga .55s linear both; }
+.anima .feixe { animation: surge .8s cubic-bezier(.2, .8, .2, 1) .2s both; }
+.anima .traco > * { stroke-dasharray: 1; animation: desenha .8s cubic-bezier(.55, 0, .3, 1) var(--d, .3s) both; }
+.anima .refl { animation: surge .6s ease-out 1.25s both; }
+.anima .luz { animation: surge .25s ease-out 1.5s both; }
+.anima .halo { transform-box: fill-box; transform-origin: center; animation: acende .9s cubic-bezier(.2, .8, .2, 1) 1.5s both; }
+.anima .facho { animation: surge .9s ease-out 1.65s both; }
+@keyframes liga { 0% { opacity: 0; } 25% { opacity: .9; } 35% { opacity: .2; } 50%, 100% { opacity: 1; } }
+@keyframes surge { from { opacity: 0; } }
+@keyframes desenha { 0% { stroke-dashoffset: 1; opacity: 0; } 2% { opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 1; } } /* opacity: esconde o ponto da ponta redonda antes de cada traço começar */
+@keyframes acende { 0% { opacity: 0; transform: scale(.5); } 45% { opacity: 1; transform: scale(1.3); } 100% { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .anima .vitrine * { animation: none !important; } }
 
 .titulo { text-align: center; margin: 26px auto 0; max-width: 560px; }
 .olho { margin: 0 0 10px; font: 500 13px/1.2 var(--txt); letter-spacing: .16em; text-transform: uppercase; color: var(--suave); }
@@ -221,69 +235,70 @@ h1 .traco::after { /* rastro de lanterna: o detalhe vermelho da tipografia */
           </mask>
           <filter id="suave" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
 
-          <g id="moto" class="moto">
-            <!-- rodas -->
-            <circle cx="92" cy="146" r="32"/>
-            <circle class="f" cx="92" cy="146" r="25"/>
-            <circle cx="92" cy="146" r="3.5"/>
-            <circle class="f" cx="92" cy="146" r="10"/>
-            <circle cx="270" cy="146" r="32"/>
-            <circle class="f" cx="270" cy="146" r="25"/>
-            <circle cx="270" cy="146" r="3.5"/>
-            <circle class="f" cx="270" cy="146" r="14"/>
-            <!-- corpo: rabeta, banco e tanque num traço só -->
-            <path d="M58 92 C70 92 84 96 100 98 C118 100 134 101 148 100 C156 99 162 92 170 86 C184 77 206 74 220 78 C228 80 233 84 236 90 L228 100 C220 106 212 110 206 112 L170 112 C150 112 132 108 112 106 C90 104 72 100 58 92 Z"/>
-            <path class="f" d="M180 88 C192 94 206 95 222 90"/>
-            <path class="f" d="M148 100 L152 108"/>
-            <!-- motor: cilindro e cárter -->
-            <path d="M176 114 L204 114 L210 132 L180 134 Z"/>
-            <path class="f" d="M179 120 H205 M180 126 H207"/>
-            <path d="M166 136 L210 134 C215 144 211 155 199 158 L173 158 C164 156 160 146 166 136 Z"/>
-            <circle class="f" cx="186" cy="147" r="5.5"/>
-            <!-- quadro, balança, amortecedor e corrente -->
-            <path d="M170 112 L164 138"/>
-            <path d="M92 146 L164 138"/>
-            <path d="M138 106 L122 136"/>
-            <path class="f" d="M92 136 L176 142 M92 156 L176 152"/>
-            <!-- escapamento -->
-            <path d="M206 154 C198 166 178 168 160 166 L138 165"/>
-            <path class="f" d="M138 161 V169"/>
-            <!-- garfo, mesa e guidão -->
-            <path d="M234 88 L266 146 M242 86 L274 144"/>
-            <path d="M230 86 L248 82"/>
-            <path d="M238 82 C236 74 230 70 218 70 L210 70"/>
-            <path d="M232 74 L228 62 M222 60.5 L234 58.5"/>
-            <!-- carenagem do farol e paralamas -->
-            <path d="M246 84 C258 84 264 92 262 102"/>
-            <path d="M250 124 C262 114 284 114 298 126"/>
-            <path class="f" d="M64 98 C62 108 64 116 70 122"/>
-          </g>
         </defs>
 
         <!-- trilho da luz e feixe -->
         <path d="M150 0 H210" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round"/>
-        <rect x="171" y="0" width="18" height="7" rx="3" fill="#fff" fill-opacity=".9"/>
-        <polygon points="166,7 194,7 336,184 24,184" fill="url(#feixe)" filter="url(#suave)"/>
-        <ellipse cx="180" cy="184" rx="160" ry="13" fill="url(#piso)"/>
+        <rect class="lampada" x="171" y="0" width="18" height="7" rx="3" fill="#fff" fill-opacity=".9"/>
+        <polygon class="feixe" points="166,7 194,7 336,184 24,184" fill="url(#feixe)" filter="url(#suave)"/>
+        <ellipse class="feixe" cx="180" cy="184" rx="160" ry="13" fill="url(#piso)"/>
         <line x1="0" y1="184" x2="360" y2="184" stroke="url(#chao)" stroke-width="1"/>
 
         <!-- reflexo no piso -->
-        <g mask="url(#reflexo)">
+        <g class="refl" mask="url(#reflexo)">
           <use href="#moto" transform="translate(2 368) scale(1 -1)"/>
         </g>
 
         <!-- facho do farol -->
-        <polygon points="259,98 360,76 360,126" fill="url(#farolfeixe)" filter="url(#suave)"/>
+        <polygon class="facho" points="259,98 360,76 360,126" fill="url(#farolfeixe)" filter="url(#suave)"/>
 
-        <!-- a moto -->
-        <use href="#moto" transform="translate(2 6)"/>
+        <!-- a moto (o reflexo acima reaproveita este desenho) -->
+        <g transform="translate(2 6)">
+            <g id="moto" class="moto traco">
+              <!-- rodas -->
+              <circle pathLength="1" style="--d:0.30s" cx="92" cy="146" r="32"/>
+              <circle pathLength="1" style="--d:0.32s" class="f" cx="92" cy="146" r="25"/>
+              <circle pathLength="1" style="--d:0.34s" cx="92" cy="146" r="3.5"/>
+              <circle pathLength="1" style="--d:0.37s" class="f" cx="92" cy="146" r="10"/>
+              <circle pathLength="1" style="--d:0.39s" cx="270" cy="146" r="32"/>
+              <circle pathLength="1" style="--d:0.41s" class="f" cx="270" cy="146" r="25"/>
+              <circle pathLength="1" style="--d:0.43s" cx="270" cy="146" r="3.5"/>
+              <circle pathLength="1" style="--d:0.45s" class="f" cx="270" cy="146" r="14"/>
+              <!-- corpo: rabeta, banco e tanque num traço só -->
+              <path pathLength="1" style="--d:0.48s" d="M58 92 C70 92 84 96 100 98 C118 100 134 101 148 100 C156 99 162 92 170 86 C184 77 206 74 220 78 C228 80 233 84 236 90 L228 100 C220 106 212 110 206 112 L170 112 C150 112 132 108 112 106 C90 104 72 100 58 92 Z"/>
+              <path pathLength="1" style="--d:0.50s" class="f" d="M180 88 C192 94 206 95 222 90"/>
+              <path pathLength="1" style="--d:0.52s" class="f" d="M148 100 L152 108"/>
+              <!-- motor: cilindro e cárter -->
+              <path pathLength="1" style="--d:0.54s" d="M176 114 L204 114 L210 132 L180 134 Z"/>
+              <path pathLength="1" style="--d:0.56s" class="f" d="M179 120 H205 M180 126 H207"/>
+              <path pathLength="1" style="--d:0.59s" d="M166 136 L210 134 C215 144 211 155 199 158 L173 158 C164 156 160 146 166 136 Z"/>
+              <circle pathLength="1" style="--d:0.61s" class="f" cx="186" cy="147" r="5.5"/>
+              <!-- quadro, balança, amortecedor e corrente -->
+              <path pathLength="1" style="--d:0.63s" d="M170 112 L164 138"/>
+              <path pathLength="1" style="--d:0.65s" d="M92 146 L164 138"/>
+              <path pathLength="1" style="--d:0.67s" d="M138 106 L122 136"/>
+              <path pathLength="1" style="--d:0.70s" class="f" d="M92 136 L176 142 M92 156 L176 152"/>
+              <!-- escapamento -->
+              <path pathLength="1" style="--d:0.72s" d="M206 154 C198 166 178 168 160 166 L138 165"/>
+              <path pathLength="1" style="--d:0.74s" class="f" d="M138 161 V169"/>
+              <!-- garfo, mesa e guidão -->
+              <path pathLength="1" style="--d:0.76s" d="M234 88 L266 146 M242 86 L274 144"/>
+              <path pathLength="1" style="--d:0.78s" d="M230 86 L248 82"/>
+              <path pathLength="1" style="--d:0.81s" d="M238 82 C236 74 230 70 218 70 L210 70"/>
+              <path pathLength="1" style="--d:0.83s" d="M232 74 L228 62 M222 60.5 L234 58.5"/>
+              <!-- carenagem do farol e paralamas -->
+              <path pathLength="1" style="--d:0.85s" d="M246 84 C258 84 264 92 262 102"/>
+              <path pathLength="1" style="--d:0.87s" d="M250 124 C262 114 284 114 298 126"/>
+              <path pathLength="1" style="--d:0.89s" class="f" d="M64 98 C62 108 64 116 70 122"/>
+            </g>
+        </g>
 
         <!-- farol e lanterna (vermelho) -->
-        <circle cx="256" cy="100" r="17" fill="url(#brilho)"/>
-        <circle cx="256" cy="100" r="6" fill="none" stroke="#fff" stroke-width="1.5"/>
-        <circle cx="256" cy="100" r="3.6" fill="#E92525"/>
-        <circle cx="57" cy="98" r="11" fill="url(#brilho)"/>
-        <rect x="52" y="96" width="9" height="4" rx="2" fill="#E92525"/>
+        <circle class="halo" cx="256" cy="100" r="17" fill="url(#brilho)"/>
+        <g class="traco"><circle cx="256" cy="100" r="6" fill="none" stroke="#fff" stroke-width="1.5" pathLength="1" style="--d:.95s"/></g>
+        <circle class="luz" cx="256" cy="100" r="3.6" fill="#E92525"/>
+        <circle class="halo" cx="57" cy="98" r="11" fill="url(#brilho)"/>
+        <rect class="luz" x="52" y="96" width="9" height="4" rx="2" fill="#E92525"/>
       </svg>
     </div>
 
