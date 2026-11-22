@@ -37,7 +37,7 @@ h1 { margin: 0; font-size: 28px; color: var(--azul); text-wrap: balance; }
 </head>
 <body>
 <main class="pg">
-  <h1>6 modelos premium da página de links</h1>
+  <h1>4 modelos premium da página de links</h1>
   <p class="intro">Cada celular abaixo é a página funcionando de verdade: role dentro dele, toque nos botões, veja as animações.
   Os botões de WhatsApp e mapa abrem de verdade. Escolha o seu favorito pelo número.</p>
   <div class="grade" id="grade"></div>
@@ -46,10 +46,8 @@ h1 { margin: 0; font-size: 28px; color: var(--azul); text-wrap: balance; }
 const MODELOS = [
   ["premium-farois.html", "Faróis", "Estrada noturna animada chegando no ícone da AD Motos, cartões de vidro e um botão principal que abre a escolha da loja."],
   ["premium-vitrine.html", "Vitrine", "Estilo Apple: claro, letras enormes, cartões grandes e o botão do WhatsApp fixo no rodapé."],
-  ["premium-corrida.html", "Corrida", "Pintura de moto de competição: faixas diagonais, letras itálicas pesadas e plaquetas 01 Matriz / 02 Filial."],
   ["premium-painel-moto.html", "Painel de moto", "Painel digital de moto: o conta-giros acelera ao abrir; cada loja é um modo do painel."],
   ["premium-aurora.html", "Aurora", "Degradê animado com as cores da marca, anel de stories no símbolo e botões de vidro fosco."],
-  ["premium-carteira.html", "Carteira", "Cada loja é um cartão metálico como na carteira do celular; toque no cartão para trocar de loja."],
 ];
 const grade = document.getElementById("grade");
 grade.innerHTML = MODELOS.map(([arq, nome, ideia], i) => `
