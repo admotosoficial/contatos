@@ -14,18 +14,28 @@ try {
 } catch (e) { visitante = ""; }
 
 function registrar(botao) {
-  if (!CFG.supabaseUrl || !CFG.supabaseKey) return;
+  if (!CFG.supabaseUrl || !CFG.supabaseKey) return Promise.resolve();
   try {
-    fetch(CFG.supabaseUrl.replace(/\/$/, "") + "/rest/v1/cliques", {
+    return fetch(CFG.supabaseUrl.replace(/\/$/, "") + "/rest/v1/cliques", {
       method: "POST", keepalive: true,
       headers: { "apikey": CFG.supabaseKey, "Content-Type": "application/json", "Prefer": "return=minimal" },
       body: JSON.stringify({ botao, origem, dispositivo, visitante: visitante.slice(0, 40) })
     }).catch(() => {});
-  } catch (e) {}
+  } catch (e) { return Promise.resolve(); }
 }
 registrar("_visita");
+// Links que saem da página (WhatsApp, mapa, e-mail): registra o clique ANTES de sair,
+// senão o celular pode cortar o envio ao abrir o outro app. Espera no máximo 600 ms.
 document.addEventListener("click", ev => {
-  const a = ev.target.closest("a[data-id], button[data-id], [role=button][data-id]");
-  if (a) registrar(a.dataset.id);
+  const el = ev.target.closest("a[data-id], button[data-id], [role=button][data-id]");
+  if (!el) return;
+  const envio = registrar(el.dataset.id);
+  const href = el.tagName === "A" ? el.getAttribute("href") : null;
+  const sai = href && !href.startsWith("#") && !el.hasAttribute("download") && el.getAttribute("role") !== "button";
+  if (!sai || ev.defaultPrevented || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button) return;
+  ev.preventDefault();
+  let foi = false;
+  const ir = () => { if (foi) return; foi = true; location.href = el.href; };
+  Promise.race([envio, new Promise(r => setTimeout(r, 600))]).then(ir, ir);
 });
 })();
