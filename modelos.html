@@ -37,24 +37,29 @@ h1 { margin: 0; font-size: 28px; color: var(--azul); text-wrap: balance; }
 </head>
 <body>
 <main class="pg">
-  <h1>4 modelos premium da página de links</h1>
+  <h1>Modelos da página de links</h1>
   <p class="intro">Cada celular abaixo é a página funcionando de verdade: role dentro dele, toque nos botões, veja as animações.
   Os botões de WhatsApp e mapa abrem de verdade. Escolha o seu favorito pelo número.</p>
   <div class="grade" id="grade"></div>
 </main>
 <script>
 const MODELOS = [
-  ["premium-farois.html", "Faróis", "Estrada noturna animada chegando no ícone da AD Motos, cartões de vidro e um botão principal que abre a escolha da loja."],
-  ["premium-vitrine.html", "Vitrine", "Estilo Apple: claro, letras enormes, cartões grandes e o botão do WhatsApp fixo no rodapé."],
-  ["premium-painel-moto.html", "Painel de moto", "Painel digital de moto: o conta-giros acelera ao abrir; cada loja é um modo do painel."],
-  ["premium-aurora.html", "Aurora", "Degradê animado com as cores da marca, anel de stories no símbolo e botões de vidro fosco."],
+  ["pro-corporativo.html", "A · Grande varejista", "Barra branca com o logo e botão de WhatsApp fixo, faixa azul de destaque, lojas em cartões iguais e rodapé institucional."],
+  ["pro-atendimento.html", "B · Atendimento", "\"Olá! Como podemos ajudar?\" e uma lista de ações grandes por loja, como o app de atendimento de uma empresa grande."],
+  ["pro-concessionaria.html", "C · Concessionária", "Topo azul-noite de showroom com os dois WhatsApps na primeira tela; cada loja numa ficha."],
+  ["pro-localizador.html", "D · Localizador", "Mapa ilustrado com os pinos das duas cidades; toque no pino para ir à loja. Como o \"encontre uma loja\" das grandes redes."],
+  ["pro-executivo.html", "E · Executivo", "Institucional minimalista e preciso, com grade fina e \"Fale com a AD Motos.\" em destaque."],
+  ["premium-farois.html", "Faróis (premium)", "Estrada noturna animada chegando no ícone da AD Motos, cartões de vidro e um botão principal que abre a escolha da loja."],
+  ["premium-vitrine.html", "Vitrine (premium)", "Estilo Apple: claro, letras enormes, cartões grandes e o botão do WhatsApp fixo no rodapé."],
+  ["premium-painel-moto.html", "Painel de moto (no ar)", "Painel digital de moto: o conta-giros acelera ao abrir; cada loja é um modo do painel."],
+  ["premium-aurora.html", "Aurora (premium)", "Degradê animado com as cores da marca, anel de stories no símbolo e botões de vidro fosco."],
 ];
 const grade = document.getElementById("grade");
 grade.innerHTML = MODELOS.map(([arq, nome, ideia], i) => `
   <article class="modelo">
-    <h2><span>${i + 1}</span>${nome}</h2>
+    <h2>${nome}</h2>
     <p>${ideia}</p>
-    <div class="celular"><iframe src="${arq}" title="Modelo ${i + 1}: ${nome}" loading="lazy"></iframe></div>
+    <div class="celular"><iframe src="${arq}" title="Modelo ${nome}" loading="lazy"></iframe></div>
     <a class="abrir" href="${arq}" target="_blank" rel="noopener">Abrir em tela cheia</a>
   </article>`).join("");
 function escala() {
