@@ -25,7 +25,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
 <style>
-/* ANIMAÇÃO PENDENTE DE APROVAÇÃO: esta versão é só o visual estático (estado final parado). */
 :root {
   --borracha: #0B0D11;
   --grafite: #13161C;
@@ -219,6 +218,17 @@ button { font: inherit; color: inherit; }
 .aviso svg { width: 20px; height: 20px; flex: none; color: #13823F; }
 .aviso.erro svg { color: var(--vermelho); }
 
+/* ---------- Animação: a roda dá uma volta e para; o rastro rola página abaixo saindo dela.
+   Só decoração: o conteúdo já está no lugar desde o primeiro quadro. ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .roda { transform-box: fill-box; transform-origin: center; animation: girar 1.7s cubic-bezier(.25, .7, .2, 1) both; }
+  #rastro { animation: rolar 2.1s cubic-bezier(.33, .55, .2, 1) .12s both; }
+  .zap.rodando::after { animation: banda .65s cubic-bezier(.2, .7, .3, 1); }
+}
+@keyframes girar { from { transform: rotate(-360deg); } to { transform: none; } }
+@keyframes rolar { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes banda { from { background-position: -56px -5px, 0 0; } to { background-position: 0 -5px, 0 0; } }
+
 @media (min-width: 700px) {
   .pagina { padding-top: 64px; }
   .roda { width: 360px; height: 360px; right: -190px; top: -150px; }
@@ -403,6 +413,13 @@ button { font: inherit; color: inherit; }
       clearTimeout(el._t); el._t = setTimeout(() => { s.innerHTML = el.dataset.orig; }, 4000);
     }
   });
+  // Faixa de banda de rodagem do botão de WhatsApp corre um pouco ao toque
+  document.getElementById("zaps").addEventListener("pointerdown", ev => {
+    const z = ev.target.closest(".zap");
+    if (!z) return;
+    z.classList.remove("rodando"); void z.offsetWidth; z.classList.add("rodando");
+  });
+  document.getElementById("zaps").addEventListener("animationend", ev => ev.target.classList.remove("rodando"));
   window.addEventListener("pageshow", () => document.querySelectorAll(".zap[data-orig]").forEach(el => {
     el.querySelector(".s").innerHTML = el.dataset.orig;
   }));
@@ -470,7 +487,6 @@ button { font: inherit; color: inherit; }
   window.addEventListener("resize", agendar);
   window.addEventListener("load", desenharRastro);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(desenharRastro);
-  // ANIMAÇÃO PENDENTE DE APROVAÇÃO: proposta = a roda do topo gira uma volta e o rastro "rola" página abaixo ao abrir.
 })();
 </script>
 <script src="rastreio.js"></script>
