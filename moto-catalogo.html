@@ -225,7 +225,21 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
 .aviso svg { flex: none; width: 18px; height: 18px; color: #6EE7A0; }
 .aviso.erro svg { color: #FFB4B4; }
 
-/* ANIMAÇÃO PENDENTE DE APROVAÇÃO: nenhuma animação nesta versão; a página fica no estado final parado. */
+/* ---------- Animação de abertura (só com JS e sem "reduzir movimento") ----------
+   A classe .anima é posta pelo script; sem ela (ou com prefers-reduced-motion) o desenho já aparece pronto.
+   Só a ilustração anima: fichas e botões ficam parados e clicáveis desde o início. */
+@media (prefers-reduced-motion: no-preference) {
+  .desenho.anima .pc { animation: encaixe .95s cubic-bezier(.22, .7, .18, 1) var(--d, 0s) both; }
+  .desenho.anima .chamada { stroke-dasharray: 1; animation: traco .38s ease-out both; animation-delay: .78s; }
+  .desenho.anima .ponto, .desenho.anima .bl { transform-box: fill-box; transform-origin: center; }
+  .desenho.anima .ponto { animation: surge .25s ease-out .74s both; }
+  .desenho.anima .bl { animation: surge .32s cubic-bezier(.3, 1.3, .5, 1) var(--d) both; }
+  .desenho.anima .det { transform-box: fill-box; transform-origin: 62% 62%; animation: marca .5s cubic-bezier(.22, .7, .18, 1) 1.25s both; }
+}
+@keyframes encaixe { from { transform: translate(var(--dx), var(--dy)); opacity: .35; } to { transform: none; opacity: 1; } }
+@keyframes traco { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes surge { from { transform: scale(.55); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes marca { from { transform: scale(1.35); opacity: 0; } to { transform: none; opacity: 1; } }
 
 /* ---------- Computador ---------- */
 @media (min-width: 1000px) {
@@ -268,7 +282,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
         <path class="centro" d="M266 200H346M306 160V240"/>
 
         <!-- 1 · vela de ignição -->
-        <g transform="translate(0 52)">
+        <g class="pc" style="--dx:-16px;--dy:0px;--d:0s"><g transform="translate(0 52)">
           <rect class="t p" x="42" y="10" width="8" height="12" rx="1.5"/>
           <path class="t fino" d="M42 15.5H50"/>
           <rect class="t p" x="39" y="22" width="14" height="44" rx="2"/>
@@ -282,10 +296,10 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
           <rect class="t p" x="43" y="118" width="6" height="6"/>
           <path class="t" d="M46 124V129"/>
           <path class="t" stroke-width="1.6" d="M53 118V132H47"/>
-        </g>
+        </g></g>
 
         <!-- 2 · anéis (com a abertura na frente) -->
-        <g>
+        <g class="pc" style="--dx:0px;--dy:-16px;--d:.06s">
           <path class="t p" d="M114 26V29A46 8 0 0 0 156 36.97V33.97A46 8 0 0 1 114 26ZM164 33.97V36.97A46 8 0 0 0 206 29V26A46 8 0 0 1 164 33.97Z"/>
           <path class="t" d="M156 33.97A46 8 0 1 1 164 33.97"/>
           <path class="t fino" d="M157 32.18A40 6.2 0 1 1 163 32.18"/>
@@ -295,7 +309,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
         </g>
 
         <!-- 3 · pistão -->
-        <g>
+        <g class="pc" style="--dx:0px;--dy:-7px;--d:.03s">
           <path class="t p" d="M114 62V128A46 8 0 0 0 206 128V62Z"/>
           <ellipse class="t p" cx="160" cy="62" rx="46" ry="8"/>
           <ellipse class="t fino" cx="160" cy="62" rx="41" ry="6.3"/>
@@ -306,14 +320,14 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
         </g>
 
         <!-- 4 · pino do pistão -->
-        <g>
+        <g class="pc" style="--dx:15px;--dy:8.7px;--d:.12s">
           <path class="t p" d="M226 137.07L248 149.77A8 8 0 0 1 240 163.63L218 150.93A8 8 0 0 1 226 137.07Z"/>
           <circle class="t p" cx="244" cy="156.7" r="8"/>
           <circle class="t fino" cx="244" cy="156.7" r="4.4"/>
         </g>
 
         <!-- 5 · biela -->
-        <g>
+        <g class="pc" style="--dx:0px;--dy:13px;--d:.09s">
           <path class="t p" d="M154 163.5L148 186.8L172 186.8L166 163.5Z"/>
           <path class="t fino" d="M157.5 167L155.5 183.5M162.5 167L164.5 183.5"/>
           <circle class="t p" cx="160" cy="152" r="13"/>
@@ -328,7 +342,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
         </g>
 
         <!-- 6 · engrenagem -->
-        <g>
+        <g class="pc" style="--dx:16px;--dy:4px;--d:.15s">
           <path class="t p" d="M331.9,197.5 L338.0,198.4 L338.0,201.6 L331.9,202.5 L330.9,207.5 L336.2,210.7 L334.9,213.7 L328.9,212.3 L326.1,216.5 L329.8,221.4 L327.4,223.8 L322.5,220.1 L318.3,222.9 L319.7,228.9 L316.7,230.2 L313.5,224.9 L308.5,225.9 L307.6,232.0 L304.4,232.0 L303.5,225.9 L298.5,224.9 L295.3,230.2 L292.3,228.9 L293.7,222.9 L289.5,220.1 L284.6,223.8 L282.2,221.4 L285.9,216.5 L283.1,212.3 L277.1,213.7 L275.8,210.7 L281.1,207.5 L280.1,202.5 L274.0,201.6 L274.0,198.4 L280.1,197.5 L281.1,192.5 L275.8,189.3 L277.1,186.3 L283.1,187.7 L285.9,183.5 L282.2,178.6 L284.6,176.2 L289.5,179.9 L293.7,177.1 L292.3,171.1 L295.3,169.8 L298.5,175.1 L303.5,174.1 L304.4,168.0 L307.6,168.0 L308.5,174.1 L313.5,175.1 L316.7,169.8 L319.7,171.1 L318.3,177.1 L322.5,179.9 L327.4,176.2 L329.8,178.6 L326.1,183.5 L328.9,187.7 L334.9,186.3 L336.2,189.3 L330.9,192.5Z"/>
           <circle class="t fino" cx="306" cy="200" r="23"/>
           <g class="t fino"><circle cx="321.2" cy="208.8" r="3.4"/><circle cx="306" cy="217.5" r="3.4"/><circle cx="290.8" cy="208.8" r="3.4"/><circle cx="290.8" cy="191.2" r="3.4"/><circle cx="306" cy="182.5" r="3.4"/><circle cx="321.2" cy="191.2" r="3.4"/></g>
@@ -338,25 +352,25 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
         </g>
 
         <!-- marcação de destaque (vermelho) -->
-        <circle class="destaque" cx="114" cy="80" r="13"/>
-        <text class="destaque-txt" x="93" y="68">A</text>
+        <g class="det"><circle class="destaque" cx="114" cy="80" r="13"/>
+        <text class="destaque-txt" x="93" y="68">A</text></g>
 
         <!-- linhas de chamada + balões -->
         <g>
-          <path class="chamada" d="M42 64L27 47"/><circle class="ponto" cx="42" cy="64" r="1.3"/>
-          <path class="chamada" d="M205 31L232 22"/><circle class="ponto" cx="205" cy="31" r="1.3"/>
-          <path class="chamada" d="M204 112L232 102"/><circle class="ponto" cx="204" cy="112" r="1.3"/>
-          <path class="chamada" d="M251 160L264 147"/><circle class="ponto" cx="251" cy="160" r="1.3"/>
-          <path class="chamada" d="M149 180L130 178"/><circle class="ponto" cx="149" cy="180" r="1.3"/>
-          <path class="chamada" d="M328 180L337 168"/><circle class="ponto" cx="328" cy="180" r="1.3"/>
+          <path class="chamada" pathLength="1" d="M42 64L27 47"/><circle class="ponto" cx="42" cy="64" r="1.3"/>
+          <path class="chamada" pathLength="1" d="M205 31L232 22"/><circle class="ponto" cx="205" cy="31" r="1.3"/>
+          <path class="chamada" pathLength="1" d="M204 112L232 102"/><circle class="ponto" cx="204" cy="112" r="1.3"/>
+          <path class="chamada" pathLength="1" d="M251 160L264 147"/><circle class="ponto" cx="251" cy="160" r="1.3"/>
+          <path class="chamada" pathLength="1" d="M149 180L130 178"/><circle class="ponto" cx="149" cy="180" r="1.3"/>
+          <path class="chamada" pathLength="1" d="M328 180L337 168"/><circle class="ponto" cx="328" cy="180" r="1.3"/>
         </g>
         <g class="balao">
-          <circle cx="22" cy="41" r="8"/><text x="22" y="41.4">1</text>
-          <circle cx="240" cy="20" r="8"/><text x="240" y="20.4">2</text>
-          <circle cx="240" cy="100" r="8"/><text x="240" y="100.4">3</text>
-          <circle cx="270" cy="141" r="8"/><text x="270" y="141.4">4</text>
-          <circle cx="122" cy="178" r="8"/><text x="122" y="178.4">5</text>
-          <circle cx="342" cy="161" r="8"/><text x="342" y="161.4">6</text>
+          <g class="bl" style="--d:0.90s"><circle cx="22" cy="41" r="8"/><text x="22" y="41.4">1</text></g>
+          <g class="bl" style="--d:0.95s"><circle cx="240" cy="20" r="8"/><text x="240" y="20.4">2</text></g>
+          <g class="bl" style="--d:1.00s"><circle cx="240" cy="100" r="8"/><text x="240" y="100.4">3</text></g>
+          <g class="bl" style="--d:1.05s"><circle cx="270" cy="141" r="8"/><text x="270" y="141.4">4</text></g>
+          <g class="bl" style="--d:1.10s"><circle cx="122" cy="178" r="8"/><text x="122" y="178.4">5</text></g>
+          <g class="bl" style="--d:1.15s"><circle cx="342" cy="161" r="8"/><text x="342" y="161.4">6</text></g>
         </g>
       </svg>
 
@@ -396,6 +410,14 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
 <script src="icones.js"></script>
 <script>
 (function () {
+  // Liga a animação do desenho só se o navegador aceita movimento
+  try {
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const d = document.querySelector(".desenho");
+      if (d) d.classList.add("anima");
+    }
+  } catch (e) {}
+
   // Ícones próprios, traço técnico 1,6 px
   const S = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || "") + '>' + d + '</svg>';
   const IC = {
