@@ -1,0 +1,404 @@
+<!doctype html>
+<!--
+  IDENTIDADE VISUAL · "Moto na luz da vitrine"
+  Motivo: silhueta genérica de moto de rua em traço contínuo branco e fino, sob um feixe de luz, como numa vitrine à noite;
+  o mesmo traço desenha os ícones (WhatsApp, mapa, capacete, chave, peça, contato, e-mail).
+  Cores: azul da marca profundo (#002C8F → #00113A) com gradiente sutil; linhas brancas; vermelho #E92525 só no farol,
+  na lanterna e no traço de luz sob "sua moto"; verde do WhatsApp apenas no botão principal de cada loja.
+  Tipografia: Barlow Condensed (títulos, eco do letreiro condensado) + Barlow (textos). Detalhe memorável: a moto acesa na vitrine.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="theme-color" content="#00133F">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a loja pelo WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/*
+  ANIMAÇÃO PENDENTE DE APROVAÇÃO
+  Esta versão é só o visual estático (estado final, silhueta inteira). Nenhuma animação está ligada.
+*/
+:root {
+  --azul: #002C8F; --azul-1: #0A3CB0; --noite: #00133F; --noite-2: #000B28;
+  --vermelho: #E92525; --verde: #1FAF5A; --verde-2: #178F49;
+  --branco: #FFFFFF; --texto: #E9EEFA; --suave: #A9B6D6; --fraco: #7E8DB5;
+  --linha: rgba(255, 255, 255, .12); --linha-2: rgba(255, 255, 255, .2);
+  --vidro: rgba(255, 255, 255, .045);
+  --disp: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --txt: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gx: max(20px, env(safe-area-inset-left, 0px)); --gxr: max(20px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { -webkit-text-size-adjust: 100%; background: var(--noite-2); }
+body {
+  min-height: 100vh; overflow-x: hidden; color: var(--texto); font: 400 16px/1.5 var(--txt);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(10, 60, 176, .55) 0%, rgba(0, 44, 143, .18) 45%, transparent 75%),
+    linear-gradient(180deg, #001A55 0%, var(--noite) 38%, var(--noite-2) 100%);
+  background-attachment: fixed;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a, button { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; border-radius: 12px; }
+svg { flex: none; }
+.ic { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.pg { max-width: 1120px; margin: 0 auto; padding: 0 var(--gxr) 0 var(--gx); }
+
+/* ---------- topo ---------- */
+.topo { display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 22px); }
+.marca { display: inline-flex; align-items: center; gap: 12px; }
+.selo { width: 44px; height: 44px; border-radius: 50%; background: #fff; display: grid; place-items: center;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .5), 0 6px 18px rgba(0, 0, 0, .35); }
+.selo img { width: 30px; height: 30px; display: block; margin-top: 1px; }
+.letreiro { display: block; width: 128px; height: auto; }
+
+/* ---------- vitrine (hero) ---------- */
+.hero { padding-top: 20px; }
+.vitrine { position: relative; margin: 0 auto; max-width: 560px; aspect-ratio: 360 / 214; border-radius: 22px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(0, 10, 40, .55), rgba(0, 10, 40, .15) 60%, rgba(0, 10, 40, .5));
+  box-shadow: inset 0 0 0 1px var(--linha), 0 30px 60px -30px rgba(0, 0, 0, .7); }
+.vitrine::after { /* reflexo do vidro */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(112deg, transparent 0 58%, rgba(255, 255, 255, .045) 58% 66%, transparent 66% 70%, rgba(255, 255, 255, .03) 70% 72%, transparent 72%); }
+.vitrine svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.moto { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.moto .f { stroke-width: 1; stroke-opacity: .55; }
+
+.titulo { text-align: center; margin: 26px auto 0; max-width: 560px; }
+.olho { margin: 0 0 10px; font: 500 13px/1.2 var(--txt); letter-spacing: .16em; text-transform: uppercase; color: var(--suave); }
+h1 { margin: 0; font: 600 40px/1.02 var(--disp); letter-spacing: -.005em; color: #fff; text-transform: uppercase; }
+h1 .l { display: block; }
+h1 .traco { position: relative; display: inline-block; }
+h1 .traco::after { /* rastro de lanterna: o detalhe vermelho da tipografia */
+  content: ""; position: absolute; left: 2%; right: 2%; bottom: -7px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, rgba(233, 37, 37, 0), var(--vermelho) 30%, var(--vermelho) 70%, rgba(233, 37, 37, 0));
+  box-shadow: 0 0 10px rgba(233, 37, 37, .7); }
+.selos { display: flex; justify-content: center; gap: 22px; margin: 24px 0 0; padding: 0; list-style: none;
+  font: 500 14px/1 var(--txt); color: var(--suave); }
+.selos li { display: inline-flex; align-items: center; gap: 8px; }
+.selos .ic { width: 20px; height: 20px; color: #fff; }
+
+/* ---------- seções ---------- */
+.secao { display: flex; align-items: center; gap: 12px; margin: 40px 0 14px; }
+.secao h2 { margin: 0; font: 600 15px/1 var(--txt); letter-spacing: .14em; text-transform: uppercase; color: var(--suave); }
+.secao::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--linha-2), transparent); }
+.secao .ic { width: 18px; height: 18px; color: var(--suave); }
+
+/* ---------- lojas ---------- */
+.lojas { display: grid; gap: 16px; }
+.loja { position: relative; overflow: hidden; border-radius: 22px; padding: 22px 18px 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .03));
+  box-shadow: inset 0 0 0 1px var(--linha); }
+.loja::before { /* luz de vitrine no topo do cartão */
+  content: ""; position: absolute; left: 12%; right: 12%; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .7), transparent); }
+.cab { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.cidade { margin: 0; font: 600 30px/1 var(--disp); text-transform: uppercase; letter-spacing: .005em; color: #fff; }
+.tag { font: 600 12px/1 var(--txt); letter-spacing: .14em; text-transform: uppercase; color: var(--suave);
+  padding: 6px 9px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--linha-2); white-space: nowrap; }
+.end { display: flex; align-items: center; gap: 7px; margin: 10px 0 18px; font: 400 15px/1.35 var(--txt); color: var(--suave); }
+.end svg { width: 15px; height: 15px; color: var(--fraco); }
+
+.zap { display: flex; align-items: center; gap: 14px; min-height: 72px; padding: 12px 16px 12px 14px; border-radius: 16px;
+  background: linear-gradient(180deg, #22B862, var(--verde-2)); color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 12px 26px -14px rgba(31, 175, 90, .8); }
+.zap .bola { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .16); }
+.zap .bola .ic { width: 24px; height: 24px; stroke-width: 1.7; }
+.zap .t { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.zap b { font: 500 15px/1.15 var(--txt); opacity: .92; }
+.zap small { font: 600 23px/1.05 var(--disp); letter-spacing: .02em; white-space: nowrap; }
+.zap .seta { width: 20px; height: 20px; opacity: .9; }
+.zap:active { filter: brightness(.94); }
+
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.sec { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 10px; border-radius: 14px;
+  font: 500 15px/1.1 var(--txt); color: #fff; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px var(--linha); }
+.sec .ic { width: 20px; height: 20px; }
+.sec:active { background: rgba(255, 255, 255, .12); }
+
+/* ---------- ações ---------- */
+.acoes { border-radius: 22px; overflow: hidden; background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px var(--linha); }
+.acao { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 66px; padding: 12px 16px; text-align: left; }
+.acao + .acao { border-top: 1px solid var(--linha); }
+.acao .ic { width: 24px; height: 24px; color: #fff; }
+.acao .t { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.acao b { font: 500 16px/1.2 var(--txt); color: #fff; }
+.acao small { font: 400 14px/1.25 var(--txt); color: var(--suave); overflow-wrap: anywhere; }
+.acao .seta { width: 18px; height: 18px; color: var(--fraco); }
+.acao:active { background: rgba(255, 255, 255, .06); }
+
+/* ---------- rodapé ---------- */
+.rodape { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 40px 0 32px; text-align: center;
+  font: 400 13px/1.4 var(--txt); color: var(--fraco); }
+.rodape .chaves { display: flex; gap: 14px; color: var(--fraco); }
+.rodape .chaves .ic { width: 18px; height: 18px; stroke-width: 1.4; }
+
+/* ---------- aviso ---------- */
+.aviso { position: fixed; z-index: 40; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); transform: translateX(-50%);
+  display: none; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; font: 500 15px/1 var(--txt); color: #fff;
+  background: rgba(4, 16, 52, .96); box-shadow: inset 0 0 0 1px var(--linha-2), 0 14px 30px rgba(0, 0, 0, .45); white-space: nowrap; }
+.aviso.ver { display: inline-flex; }
+.aviso .ic { width: 18px; height: 18px; color: #5BE38F; stroke-width: 2; }
+
+/* ---------- computador ---------- */
+@media (min-width: 960px) {
+  .pg { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 64px; align-items: start; }
+  .topo { grid-column: 1 / -1; justify-content: flex-start; padding-top: 36px; }
+  .hero { position: sticky; top: 36px; padding-top: 32px; }
+  .vitrine { max-width: none; }
+  .titulo { text-align: left; max-width: none; margin-top: 34px; }
+  h1 { font-size: 56px; }
+  .selos { justify-content: flex-start; }
+  main { padding-top: 16px; }
+  main .secao:first-child { margin-top: 16px; }
+  .rodape { grid-column: 1 / -1; }
+}
+@media (max-width: 359px) {
+  h1 { font-size: 34px; }
+  .cidade { font-size: 26px; }
+  .zap small { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="pg">
+  <header class="topo">
+    <span class="marca">
+      <span class="selo"><img src="favicon.svg" alt="" width="30" height="30"></span>
+      <img class="letreiro" src="letreiro-branco.svg" alt="AD Motos" width="128" height="26">
+    </span>
+  </header>
+
+  <section class="hero" aria-labelledby="manchete">
+    <div class="vitrine">
+      <svg viewBox="0 0 360 214" role="img" aria-label="Ilustração de uma moto iluminada na vitrine">
+        <defs>
+          <linearGradient id="feixe" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+            <stop offset=".7" stop-color="#fff" stop-opacity=".05"/>
+            <stop offset="1" stop-color="#fff" stop-opacity=".02"/>
+          </linearGradient>
+          <radialGradient id="piso" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="chao" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#fff" stop-opacity=".35"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="brilho" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#FF5A5A" stop-opacity=".75"/>
+            <stop offset="1" stop-color="#E92525" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="farolfeixe" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#E92525" stop-opacity=".2"/>
+            <stop offset="1" stop-color="#E92525" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="some" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".3"/>
+            <stop offset=".6" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="reflexo" maskUnits="userSpaceOnUse" x="0" y="180" width="360" height="40">
+            <rect x="0" y="180" width="360" height="40" fill="url(#some)"/>
+          </mask>
+          <filter id="suave" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+
+          <g id="moto" class="moto">
+            <!-- rodas -->
+            <circle cx="92" cy="146" r="32"/>
+            <circle class="f" cx="92" cy="146" r="25"/>
+            <circle cx="92" cy="146" r="3.5"/>
+            <circle class="f" cx="92" cy="146" r="10"/>
+            <circle cx="270" cy="146" r="32"/>
+            <circle class="f" cx="270" cy="146" r="25"/>
+            <circle cx="270" cy="146" r="3.5"/>
+            <circle class="f" cx="270" cy="146" r="14"/>
+            <!-- corpo: rabeta, banco e tanque num traço só -->
+            <path d="M58 92 C70 92 84 96 100 98 C118 100 134 101 148 100 C156 99 162 92 170 86 C184 77 206 74 220 78 C228 80 233 84 236 90 L228 100 C220 106 212 110 206 112 L170 112 C150 112 132 108 112 106 C90 104 72 100 58 92 Z"/>
+            <path class="f" d="M180 88 C192 94 206 95 222 90"/>
+            <path class="f" d="M148 100 L152 108"/>
+            <!-- motor: cilindro e cárter -->
+            <path d="M176 114 L204 114 L210 132 L180 134 Z"/>
+            <path class="f" d="M179 120 H205 M180 126 H207"/>
+            <path d="M166 136 L210 134 C215 144 211 155 199 158 L173 158 C164 156 160 146 166 136 Z"/>
+            <circle class="f" cx="186" cy="147" r="5.5"/>
+            <!-- quadro, balança, amortecedor e corrente -->
+            <path d="M170 112 L164 138"/>
+            <path d="M92 146 L164 138"/>
+            <path d="M138 106 L122 136"/>
+            <path class="f" d="M92 136 L176 142 M92 156 L176 152"/>
+            <!-- escapamento -->
+            <path d="M206 154 C198 166 178 168 160 166 L138 165"/>
+            <path class="f" d="M138 161 V169"/>
+            <!-- garfo, mesa e guidão -->
+            <path d="M234 88 L266 146 M242 86 L274 144"/>
+            <path d="M230 86 L248 82"/>
+            <path d="M238 82 C236 74 230 70 218 70 L210 70"/>
+            <path d="M232 74 L228 62 M222 60.5 L234 58.5"/>
+            <!-- carenagem do farol e paralamas -->
+            <path d="M246 84 C258 84 264 92 262 102"/>
+            <path d="M250 124 C262 114 284 114 298 126"/>
+            <path class="f" d="M64 98 C62 108 64 116 70 122"/>
+          </g>
+        </defs>
+
+        <!-- trilho da luz e feixe -->
+        <path d="M150 0 H210" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="171" y="0" width="18" height="7" rx="3" fill="#fff" fill-opacity=".9"/>
+        <polygon points="166,7 194,7 336,184 24,184" fill="url(#feixe)" filter="url(#suave)"/>
+        <ellipse cx="180" cy="184" rx="160" ry="13" fill="url(#piso)"/>
+        <line x1="0" y1="184" x2="360" y2="184" stroke="url(#chao)" stroke-width="1"/>
+
+        <!-- reflexo no piso -->
+        <g mask="url(#reflexo)">
+          <use href="#moto" transform="translate(2 368) scale(1 -1)"/>
+        </g>
+
+        <!-- facho do farol -->
+        <polygon points="259,98 360,76 360,126" fill="url(#farolfeixe)" filter="url(#suave)"/>
+
+        <!-- a moto -->
+        <use href="#moto" transform="translate(2 6)"/>
+
+        <!-- farol e lanterna (vermelho) -->
+        <circle cx="256" cy="100" r="17" fill="url(#brilho)"/>
+        <circle cx="256" cy="100" r="6" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="256" cy="100" r="3.6" fill="#E92525"/>
+        <circle cx="57" cy="98" r="11" fill="url(#brilho)"/>
+        <rect x="52" y="96" width="9" height="4" rx="2" fill="#E92525"/>
+      </svg>
+    </div>
+
+    <div class="titulo">
+      <p class="olho">Várzea da Roça · Senhor do Bonfim</p>
+      <h1 id="manchete"><span class="l">Peças e acessórios</span><span class="l">para a <span class="traco">sua moto</span></span></h1>
+      <ul class="selos" aria-label="O que você encontra">
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-peca"/></svg>Peças</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-capacete"/></svg>Acessórios</li>
+      </ul>
+    </div>
+  </section>
+
+  <main>
+    <div class="secao"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pino"/></svg><h2>Fale com a loja</h2></div>
+    <div class="lojas" id="lojas"></div>
+
+    <div class="secao"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chave"/></svg><h2>Mais contatos</h2></div>
+    <div class="acoes" id="acoes"></div>
+  </main>
+
+  <footer class="rodape">
+    <span class="chaves" aria-hidden="true">
+      <svg class="ic" viewBox="0 0 24 24"><use href="#i-chave"/></svg>
+      <svg class="ic" viewBox="0 0 24 24"><use href="#i-peca"/></svg>
+      <svg class="ic" viewBox="0 0 24 24"><use href="#i-capacete"/></svg>
+    </span>
+    <span>AD Motos · <span id="cidades"></span></span>
+  </footer>
+</div>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<!-- ícones em traço contínuo -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="i-zap"><path d="M4.6 19.6 5.7 16A8.2 8.2 0 1 1 8.4 18.7Z"/><path d="M9.3 8.2c.3-.4.8-.5 1.1-.2l.9 1.3c.2.3.1.7-.2.9l-.5.4c.5 1.2 1.4 2.1 2.6 2.7l.4-.5c.2-.3.6-.4.9-.2l1.3.9c.3.3.3.8-.1 1.1-1 1-2.6.8-4.3-.6-1.6-1.3-2.8-3.1-2.6-4.4.1-.6.3-1 .5-1.4Z"/></g>
+    <g id="i-mapa"><path d="M3.5 6.5 9 4.5l6 2 5.5-2v13l-5.5 2-6-2-5.5 2Z"/><path d="M9 4.5v13M15 6.5v13"/></g>
+    <g id="i-pino"><path d="M12 21s-6.5-5.7-6.5-11a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></g>
+    <g id="i-copiar"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 5.5A2 2 0 0 0 13.5 4.5H6.5a2 2 0 0 0-2 2v7a2 2 0 0 0 1 1.7"/></g>
+    <g id="i-capacete"><path d="M4 16.5V15a8.3 8.3 0 0 1 8.3-9.5c4.6 0 8.2 3.5 8.2 8v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M20.4 10.5H13.5a2 2 0 0 0-2 2v.5a2 2 0 0 0 2 2h7"/></g>
+    <g id="i-chave"><path d="M14.5 4.2a4.3 4.3 0 0 0-1 5.6L4.6 18.7a1.6 1.6 0 0 0 2.3 2.3l8.9-8.9a4.3 4.3 0 0 0 5.6-1l-2.6-.6-.6-2.5 2.2-2.2.6 2.5"/></g>
+    <g id="i-peca"><circle cx="12" cy="12" r="3"/><path d="M10.6 3.5h2.8l.5 2.3 1.7.8 2-1.3 2 2-1.3 2 .8 1.7 2.3.5v2.8l-2.3.5-.8 1.7 1.3 2-2 2-2-1.3-1.7.8-.5 2.3h-2.8l-.5-2.3-1.7-.8-2 1.3-2-2 1.3-2-.8-1.7-2.3-.5v-2.8l2.3-.5.8-1.7-1.3-2 2-2 2 1.3 1.7-.8Z"/></g>
+    <g id="i-contato"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9.5" cy="10.5" r="2.3"/><path d="M5.8 16.5a3.9 3.9 0 0 1 7.4 0M15 10h3M15 13.5h3"/></g>
+    <g id="i-email"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></g>
+    <g id="i-compartilhar"><path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M6 11.5H5.5v7a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-7H18"/></g>
+    <g id="i-ok"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
+    <g id="i-seta"><path d="m9.5 6 6 6-6 6"/></g>
+  </defs>
+</svg>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  const $ = s => document.querySelector(s);
+  const ic = (nome, extra = "") => `<svg class="ic${extra}" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${nome}"/></svg>`;
+  const seta = ic("seta", " seta");
+  const link = (k, cls, dentro, extra = "") => `<a class="${cls}" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}${extra}>${dentro}</a>`;
+  const sufixo = nome => nome.split(/\s+/).pop().normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const idCopia = (l, z) => "copiar-" + (z && z.id.startsWith("zap-") ? z.id.slice(4) : sufixo(l.nome));
+  const lojas = window.LOJAS || [], outros = window.OUTROS || [];
+  const icone = { zap: "zap", mapa: "mapa", email: "email" };
+
+  $("#lojas").innerHTML = lojas.map(l => {
+    const z = l.links.find(k => k.tipo === "zap"), m = l.links.find(k => k.tipo === "mapa");
+    return `<article class="loja" aria-label="Loja de ${esc(l.nome)}">
+      <div class="cab"><h3 class="cidade">${esc(l.nome)}</h3>${l.detalhe ? `<span class="tag">${esc(l.detalhe)}</span>` : ""}</div>
+      ${l.endereco ? `<p class="end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pino"/></svg><span>${esc(l.endereco)}</span></p>` : ""}
+      ${z ? link(z, "zap", `<span class="bola">${ic("zap")}</span><span class="t"><b>${esc(z.titulo)}</b><small>${esc(z.sub)}</small></span>${seta}`,
+        ` aria-label="${esc(z.titulo)}: ${esc(l.nome)}, ${esc(z.sub)}"`) : ""}
+      <div class="duas">
+        ${m ? link(m, "sec", `${ic("mapa")}<span>${esc(m.titulo)}</span>`, ` aria-label="${esc(m.titulo)}: ${esc(l.nome)}"`) : ""}
+        ${z && z.sub ? `<button class="sec" type="button" data-id="${idCopia(l, z)}" data-copiar="${esc(z.sub)}" aria-label="Copiar número de ${esc(l.nome)}">${ic("copiar")}<span>Copiar número</span></button>` : ""}
+      </div>
+    </article>`;
+  }).join("");
+
+  $("#acoes").innerHTML =
+    `<a class="acao" href="admotos.vcf" data-id="salvar-contato" download>${ic("contato")}<span class="t"><b>Salvar contato</b><small>As duas lojas na sua agenda</small></span>${seta}</a>` +
+    outros.map(k => link(k, "acao", `${ic(icone[k.tipo] || "email")}<span class="t"><b>${esc(k.titulo)}</b><small>${esc(k.sub || "")}</small></span>${seta}`)).join("") +
+    `<button class="acao" type="button" data-id="compartilhar">${ic("compartilhar")}<span class="t"><b>Compartilhar</b><small>Envie esta página para alguém</small></span>${seta}</button>`;
+
+  $("#cidades").textContent = lojas.map(l => l.nome).join(" · ") + " · BA";
+
+  let tAviso;
+  function avisar(txt) {
+    const a = $("#aviso");
+    a.innerHTML = ic("ok") + "<span>" + esc(txt) + "</span>";
+    a.classList.add("ver");
+    clearTimeout(tAviso); tAviso = setTimeout(() => a.classList.remove("ver"), 2200);
+  }
+  async function copiar(txt) {
+    try { await navigator.clipboard.writeText(txt); return true; } catch (e) {}
+    try {
+      const t = document.createElement("textarea");
+      t.value = txt; t.setAttribute("readonly", ""); t.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+      document.body.appendChild(t); t.select(); const ok = document.execCommand("copy"); t.remove(); return ok;
+    } catch (e) { return false; }
+  }
+  document.addEventListener("click", async e => {
+    const c = e.target.closest("[data-copiar]");
+    if (c) { avisar((await copiar(c.dataset.copiar)) ? "Número copiado" : c.dataset.copiar); return; }
+    if (e.target.closest('button[data-id="compartilhar"]')) {
+      const url = location.href.split("#")[0];
+      if (navigator.share) {
+        try { await navigator.share({ title: "AD Motos", text: "Peças e acessórios para a sua moto. Fale com a AD Motos pelo WhatsApp:", url }); return; }
+        catch (err) { if (err && err.name === "AbortError") return; }
+      }
+      avisar((await copiar(url)) ? "Link copiado" : "Não foi possível copiar");
+    }
+  });
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>

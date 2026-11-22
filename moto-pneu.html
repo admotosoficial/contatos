@@ -1,0 +1,478 @@
+<!doctype html>
+<!--
+  IDENTIDADE VISUAL · "Pneu e banda de rodagem"
+  Motivo: o desenho da banda de rodagem de um pneu de moto (sulcos em espinha, desenhados em SVG), usado em faixas finas
+  como textura e num rastro contínuo que atravessa a página e passa por baixo das lojas, como se uma moto tivesse passado.
+  Cores: preto-borracha e grafite profundo; azul da marca nos botões de rota e no aro da roda; vermelho só como acento (etiquetas, cubo).
+  Tipografia: Barlow Condensed (títulos, eco do letreiro condensado) + Barlow (textos). Ícones próprios de traço arredondado, como borracha.
+  Detalhe memorável: a roda em traço fino no topo, de onde sai o rastro de pneu que desce pela página.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="Peças e acessórios para motos em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="theme-color" content="#0B0D11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para motos. Fale com a gente pelo WhatsApp.">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* ANIMAÇÃO PENDENTE DE APROVAÇÃO: esta versão é só o visual estático (estado final parado). */
+:root {
+  --borracha: #0B0D11;
+  --grafite: #13161C;
+  --grafite-2: #1A1E26;
+  --grafite-3: #232833;
+  --linha: rgba(255, 255, 255, .08);
+  --linha-2: rgba(255, 255, 255, .14);
+  --texto: #F4F6FA;
+  --texto-2: #B7BECC;
+  --texto-3: #8D96A8;
+  --azul: #002C8F;
+  --azul-2: #0B3CB5;
+  --azul-luz: #7FA2FF;
+  --vermelho: #E92525;
+  --vermelho-txt: #FF5C5C;
+  --verde: #13823F;
+  --verde-2: #0F7236;
+  --foco: #9DB8FF;
+  --fc: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f: "Barlow", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --raio: 18px;
+  /* Banda de rodagem (faixa horizontal): sulcos em espinha, traço fino */
+  --banda: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='20' viewBox='0 0 28 20'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.16' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M3 2.5 11 8.5'/%3E%3Cpath d='M17 17.5 25 11.5'/%3E%3C/g%3E%3C/svg%3E");
+  --banda-escura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='20' viewBox='0 0 28 20'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='.2' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M3 2.5 11 8.5'/%3E%3Cpath d='M17 17.5 25 11.5'/%3E%3C/g%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+html { background: var(--borracha); }
+body {
+  position: relative; min-height: 100vh; min-height: 100dvh;
+  background:
+    radial-gradient(90% 420px at 85% -60px, rgba(11, 60, 181, .16), transparent 70%),
+    var(--borracha);
+  color: var(--texto); font: 16px/1.45 var(--f);
+  -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-x: clip;
+}
+img, svg { display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; border-radius: 14px; }
+
+.tela { position: relative; overflow: hidden; overflow: clip; min-height: 100vh; min-height: 100dvh; }
+
+/* ---------- Rastro de pneu (atrás de tudo) ---------- */
+#rastro { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+#rastro svg { width: 100%; height: 100%; }
+
+.pagina {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 480px; margin: 0 auto;
+  padding:
+    calc(28px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(28px + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
+}
+
+/* ---------- Topo ---------- */
+.topo { position: relative; padding: 6px 4px 26px; }
+.roda {
+  position: absolute; z-index: -1; width: 270px; height: 270px;
+  right: -150px; top: -158px; opacity: .9;
+}
+.marca { display: flex; align-items: center; gap: 14px; }
+.simbolo {
+  width: 58px; height: 58px; flex: none; border-radius: 16px; background: #fff;
+  display: grid; place-items: center;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .5), 0 10px 26px -10px rgba(0, 0, 0, .8);
+}
+.simbolo img { width: 40px; height: auto; }
+.letreiro { width: 168px; height: auto; }
+.frase {
+  margin: 22px 0 0; font: 600 27px/1.08 var(--fc); letter-spacing: .005em; color: #fff;
+}
+.cidades { margin: 8px 0 0; color: var(--texto-2); font-size: 15px; }
+.cidades span { color: var(--texto-3); padding: 0 6px; }
+
+/* Faixa de banda de rodagem */
+.banda {
+  height: 20px; border-radius: 6px;
+  background: var(--banda) 0 0 / 28px 20px repeat-x, var(--grafite);
+  box-shadow: inset 0 0 0 1px var(--linha);
+}
+.banda.fina { height: 20px; }
+
+/* ---------- Títulos de seção ---------- */
+.secao { margin-top: 30px; }
+.secao:first-of-type { margin-top: 0; }
+.rotulo {
+  display: flex; align-items: center; gap: 10px; margin: 0 4px 14px;
+  font: 600 14px/1 var(--fc); letter-spacing: .16em; text-transform: uppercase; color: var(--texto-2);
+}
+.rotulo::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: var(--vermelho); flex: none; }
+.rotulo::after { content: ""; flex: 1; height: 1px; background: var(--linha); }
+
+/* ---------- WhatsApp ---------- */
+.zaps { display: grid; gap: 12px; }
+.zap {
+  position: relative; display: grid; grid-template-columns: 48px 1fr 20px; align-items: center; gap: 14px;
+  min-height: 84px; padding: 16px 18px 22px; border-radius: var(--raio); overflow: hidden;
+  background: linear-gradient(180deg, #16904A, var(--verde));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16), 0 12px 28px -16px rgba(19, 130, 63, .9);
+}
+.zap::after { /* faixa de banda de rodagem na base do botão */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px;
+  background: var(--banda-escura) 0 -5px / 28px 20px repeat-x, rgba(0, 0, 0, .08);
+}
+.zap .ic {
+  width: 48px; height: 48px; border-radius: 14px; background: #fff; color: var(--verde);
+  display: grid; place-items: center;
+}
+.zap .ic svg { width: 26px; height: 26px; }
+.zap .t { display: block; font: 700 21px/1.05 var(--fc); letter-spacing: .01em; color: #fff; }
+.zap .s { display: block; margin-top: 4px; font-size: 15px; font-weight: 600; color: #fff; }
+.zap .s em { font-style: normal; font-weight: 500; color: rgba(255, 255, 255, .86); }
+.zap .seta { color: #fff; width: 20px; height: 20px; }
+.zap:active { background: linear-gradient(180deg, var(--verde), var(--verde-2)); }
+
+/* ---------- Lojas ---------- */
+.lojas { display: grid; gap: 14px; }
+.loja {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background: rgba(19, 22, 28, .9);
+  box-shadow: inset 0 0 0 1px var(--linha), 0 18px 40px -24px rgba(0, 0, 0, .9);
+}
+.loja .banda { border-radius: 0; height: 12px; background-position: 0 -4px; box-shadow: none; border-bottom: 1px solid var(--linha); }
+.loja-corpo { padding: 18px 18px 18px; }
+.loja-cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.etiqueta {
+  display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 7px;
+  font: 600 13px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--vermelho-txt); background: rgba(233, 37, 37, .1); box-shadow: inset 0 0 0 1px rgba(233, 37, 37, .32);
+}
+.num-loja { font: 600 13px/1 var(--fc); letter-spacing: .14em; color: var(--texto-3); }
+.loja h3 { margin: 12px 0 0; font: 700 30px/1 var(--fc); letter-spacing: .01em; text-transform: uppercase; }
+.endereco { display: flex; align-items: flex-start; gap: 8px; margin: 10px 0 0; color: var(--texto-2); font-size: 15px; }
+.endereco svg { width: 17px; height: 17px; flex: none; margin-top: 2px; color: var(--texto-3); }
+.botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.bt {
+  display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 10px 12px; border-radius: 14px;
+  border: 0; cursor: pointer; text-align: left; width: 100%;
+}
+.bt svg { width: 22px; height: 22px; flex: none; }
+.bt .t { display: block; font-weight: 700; font-size: 15px; line-height: 1.15; }
+.bt .s { display: block; font-size: 12.5px; line-height: 1.25; margin-top: 2px; }
+.bt.rota { background: var(--azul); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); }
+.bt.rota .s { color: #C9D6FF; }
+.bt.rota:active { background: #00237A; }
+.bt.copia { background: var(--grafite-2); color: var(--texto); box-shadow: inset 0 0 0 1px var(--linha-2); }
+.bt.copia svg { color: var(--texto-2); }
+.bt.copia .s { color: var(--texto-2); }
+.bt.copia:active { background: var(--grafite-3); }
+.bt.ok svg { color: #4ADE80; }
+
+/* ---------- Mais opções ---------- */
+.lista {
+  list-style: none; margin: 0; padding: 0; border-radius: 20px; overflow: hidden;
+  background: rgba(19, 22, 28, .9); box-shadow: inset 0 0 0 1px var(--linha);
+}
+.lista li + li { border-top: 1px solid var(--linha); }
+.item {
+  display: grid; grid-template-columns: 44px 1fr 18px; align-items: center; gap: 14px;
+  width: 100%; min-height: 72px; padding: 12px 18px; background: none; border: 0; text-align: left; cursor: pointer;
+}
+.item:active { background: rgba(255, 255, 255, .04); }
+.item .ic {
+  width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center;
+  background: var(--grafite-2); box-shadow: inset 0 0 0 1px var(--linha-2); color: var(--azul-luz);
+}
+.item .ic svg { width: 22px; height: 22px; }
+.item .t { display: block; font-weight: 700; font-size: 16px; line-height: 1.2; }
+.item .s { display: block; font-size: 14px; color: var(--texto-2); margin-top: 2px; overflow-wrap: anywhere; }
+.item .seta { width: 18px; height: 18px; color: var(--texto-3); }
+.item.ok .ic { color: #4ADE80; }
+
+/* ---------- Rodapé ---------- */
+.rodape { margin-top: 34px; text-align: center; }
+.rodape .banda { margin: 0 auto 16px; max-width: 168px; height: 14px; background-position: 0 -3px; }
+.rodape p { margin: 0; color: var(--texto-3); font-size: 13px; }
+
+/* ---------- Aviso ---------- */
+.aviso {
+  position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 10;
+  transform: translateX(-50%); display: none; align-items: center; gap: 10px;
+  max-width: calc(100% - 32px); padding: 12px 16px; border-radius: 14px;
+  background: #F4F6FA; color: #0B0D11; font-weight: 600; font-size: 15px;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .8);
+}
+.aviso.mostra { display: flex; }
+.aviso svg { width: 20px; height: 20px; flex: none; color: #13823F; }
+.aviso.erro svg { color: var(--vermelho); }
+
+@media (min-width: 700px) {
+  .pagina { padding-top: 64px; }
+  .roda { width: 360px; height: 360px; right: -190px; top: -150px; }
+}
+</style>
+</head>
+<body>
+<div class="tela">
+<div id="rastro" aria-hidden="true"></div>
+
+<div class="pagina">
+  <header class="topo">
+    <svg class="roda" viewBox="-160 -160 320 320" aria-hidden="true">
+      <!-- Roda genérica em traço fino: pneu, banda, aro, disco e cubo -->
+      <circle r="146" fill="#0F1217"/>
+      <circle r="146" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+      <circle r="151" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="7" stroke-dasharray="3 10.18" stroke-linecap="round"/>
+      <circle r="134" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+      <circle r="118" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+      <circle r="108" fill="none" stroke="#0B3CB5" stroke-width="3"/>
+      <circle r="101" fill="none" stroke="rgba(127,162,255,.35)" stroke-width="1"/>
+      <g fill="none" stroke="rgba(255,255,255,.13)" stroke-width="1.4" stroke-linecap="round">
+        <path d="M0-22 L-6-100 M0-22 L6-100"/>
+        <path d="M0-22 L-6-100 M0-22 L6-100" transform="rotate(72)"/>
+        <path d="M0-22 L-6-100 M0-22 L6-100" transform="rotate(144)"/>
+        <path d="M0-22 L-6-100 M0-22 L6-100" transform="rotate(216)"/>
+        <path d="M0-22 L-6-100 M0-22 L6-100" transform="rotate(288)"/>
+      </g>
+      <circle r="58" fill="none" stroke="rgba(255,255,255,.11)" stroke-width="10" stroke-dasharray="1.2 5.2"/>
+      <circle r="64" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+      <circle r="52" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+      <circle r="18" fill="#13161C" stroke="rgba(255,255,255,.18)" stroke-width="1.2"/>
+      <circle r="6" fill="#E92525"/>
+    </svg>
+    <div class="marca">
+      <span class="simbolo"><img src="favicon.svg" alt="" width="40" height="39"></span>
+      <img class="letreiro" src="letreiro-branco.svg" alt="AD Motos" width="168" height="35">
+    </div>
+    <p class="frase">Peças e acessórios para motos</p>
+    <p class="cidades">Várzea da Roça<span>·</span>Senhor do Bonfim<span>·</span>BA</p>
+  </header>
+
+  <main id="conteudo">
+    <section class="secao" aria-labelledby="cab-zap">
+      <h2 class="rotulo" id="cab-zap">Fale com a gente no WhatsApp</h2>
+      <div class="zaps" id="zaps"></div>
+    </section>
+
+    <section class="secao" aria-labelledby="cab-lojas">
+      <h2 class="rotulo" id="cab-lojas">Nossas lojas</h2>
+      <div class="lojas" id="lojas"></div>
+    </section>
+
+    <section class="secao" aria-labelledby="cab-mais">
+      <h2 class="rotulo" id="cab-mais">Mais opções</h2>
+      <ul class="lista" id="mais"></ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="banda" aria-hidden="true"></div>
+    <p>AD Motos · Peças e acessórios para motos</p>
+  </footer>
+</div>
+</div>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  // Ícones próprios: traço arredondado, cantos macios como borracha
+  const S = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || "") + '>' + d + '</svg>';
+  const IC = {
+    zap: S('<path d="M12 3.6a8.4 8.4 0 0 0-7.3 12.6L3.6 20.4l4.3-1.1A8.4 8.4 0 1 0 12 3.6Z"/>' +
+           '<path fill="currentColor" stroke="none" d="M9.3 7.9c.3-.3.8-.2 1 .2l.8 1.6c.1.3.1.6-.1.8l-.6.7c.6 1.1 1.5 2 2.6 2.6l.7-.6c.2-.2.5-.2.8-.1l1.6.8c.4.2.5.7.2 1l-.7.8c-.5.6-1.4.8-2.1.5a8.4 8.4 0 0 1-4.5-4.5c-.3-.7-.1-1.6.5-2.1Z"/>'),
+    rota: S('<path d="M19.5 4.5 4.8 10.6c-.7.3-.6 1.3.1 1.5l5.4 1.6 1.6 5.4c.2.7 1.2.8 1.5.1Z"/>'),
+    pino: S('<path d="M12 21s-6.5-5.7-6.5-11a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>'),
+    copiar: S('<rect x="8.5" y="8.5" width="11" height="11" rx="2.8"/><path d="M15.5 8.5V7a2.5 2.5 0 0 0-2.5-2.5H7A2.5 2.5 0 0 0 4.5 7v6A2.5 2.5 0 0 0 7 15.5h1.5"/>'),
+    contato: S('<rect x="3.5" y="4.5" width="17" height="15" rx="3.2"/><circle cx="10" cy="10.5" r="2.3"/><path d="M6.6 16c.6-1.6 1.9-2.4 3.4-2.4s2.8.8 3.4 2.4M16 9.5h1.8M16 12.5h1.8"/>'),
+    email: S('<rect x="3.5" y="5.5" width="17" height="13" rx="3.2"/><path d="m4.5 7.5 6.3 4.8c.7.5 1.7.5 2.4 0l6.3-4.8"/>'),
+    compartilhar: S('<path d="M12 14.5V4m0 0L8.3 7.7M12 4l3.7 3.7"/><path d="M8 10.5H7a2.5 2.5 0 0 0-2.5 2.5v4.5A2.5 2.5 0 0 0 7 20h10a2.5 2.5 0 0 0 2.5-2.5V13a2.5 2.5 0 0 0-2.5-2.5h-1"/>'),
+    seta: S('<path d="m9.5 6 6 6-6 6"/>', ' class="seta" stroke-width="2.4"'),
+    ok: S('<path d="m5 12.5 4.3 4.3L19 7.2"/>', ' stroke-width="2.6"'),
+    alerta: S('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.8v5M12 16.2h.01"/>')
+  };
+
+  const LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
+  const curto = n => String(n).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ")[0];
+  const sufixo = l => { const z = l.links.find(k => k.tipo === "zap"); return z ? z.id.replace(/^zap-/, "") : curto(l.nome); };
+
+  // ---------- WhatsApp: um botão grande por loja ----------
+  let zaps = "";
+  LOJAS.forEach(l => {
+    const z = l.links.find(k => k.tipo === "zap");
+    if (!z) return;
+    zaps += '<a class="zap" href="' + esc(z.url) + '"' + alvo(z.url) + ' data-id="' + esc(z.id) + '" data-tipo="zap">' +
+      '<span class="ic">' + IC.zap + '</span>' +
+      '<span><span class="t">' + esc(l.nome) + '</span>' +
+      '<span class="s"><em>' + esc(l.detalhe) + ' · </em>' + esc(z.sub) + '</span></span>' + IC.seta + '</a>';
+  });
+  document.getElementById("zaps").innerHTML = zaps;
+
+  // ---------- Lojas: endereço, Como chegar, Copiar número ----------
+  let lojas = "";
+  LOJAS.forEach((l, i) => {
+    const z = l.links.find(k => k.tipo === "zap"), m = l.links.find(k => k.tipo === "mapa");
+    const suf = sufixo(l);
+    lojas += '<article class="loja" aria-labelledby="loja-' + i + '"><div class="banda" aria-hidden="true"></div><div class="loja-corpo">' +
+      '<div class="loja-cab"><span class="etiqueta">' + esc(l.detalhe) + '</span><span class="num-loja" aria-hidden="true">LOJA 0' + (i + 1) + '</span></div>' +
+      '<h3 id="loja-' + i + '">' + esc(l.nome) + '</h3>' +
+      '<p class="endereco">' + IC.pino + '<span>' + esc(l.endereco) + '</span></p><div class="botoes">' +
+      (m ? '<a class="bt rota" href="' + esc(m.url) + '"' + alvo(m.url) + ' data-id="' + esc(m.id) + '" data-tipo="mapa">' + IC.rota +
+           '<span><span class="t">' + esc(m.titulo) + '</span><span class="s">Abrir no mapa</span></span></a>' : '') +
+      (z ? '<button type="button" class="bt copia" data-id="copiar-' + esc(suf) + '" data-numero="' + esc(z.sub) + '">' + IC.copiar +
+           '<span><span class="t">Copiar número</span><span class="s">' + esc(z.sub) + '</span></span></button>' : '') +
+      '</div></div></article>';
+  });
+  document.getElementById("lojas").innerHTML = lojas;
+
+  // ---------- Mais opções: Salvar contato, E-mail, Compartilhar ----------
+  const item = o => '<li>' + (o.href
+      ? '<a class="item" href="' + esc(o.href) + '"' + (o.extra || alvo(o.href)) + ' data-id="' + esc(o.id) + '">'
+      : '<button type="button" class="item" data-id="' + esc(o.id) + '">') +
+    '<span class="ic">' + o.ic + '</span><span><span class="t">' + esc(o.t) + '</span><span class="s">' + esc(o.s) + '</span></span>' +
+    IC.seta + (o.href ? '</a>' : '</button>') + '</li>';
+  let mais = item({ id: "salvar-contato", href: "admotos.vcf", extra: " download", ic: IC.contato, t: "Salvar contato", s: "Os dois números na sua agenda" });
+  OUTROS.forEach(o => { mais += item({ id: o.id, href: o.url, ic: IC[o.tipo] || IC.email, t: o.titulo, s: o.sub }); });
+  mais += item({ id: "compartilhar", ic: IC.compartilhar, t: "Compartilhar", s: "Envie esta página para alguém" });
+  document.getElementById("mais").innerHTML = mais;
+
+  // ---------- Aviso e ações ----------
+  const aviso = document.getElementById("aviso");
+  let tAviso;
+  function avisar(msg, erro) {
+    aviso.innerHTML = (erro ? IC.alerta : IC.ok) + '<span></span>';
+    aviso.lastChild.textContent = msg;
+    aviso.classList.toggle("erro", !!erro);
+    aviso.classList.add("mostra");
+    clearTimeout(tAviso); tAviso = setTimeout(() => aviso.classList.remove("mostra"), 2400);
+  }
+  function copiar(texto) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto);
+    return new Promise((ok, falha) => {
+      const t = document.createElement("textarea");
+      t.value = texto; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { document.execCommand("copy") ? ok() : falha(); } catch (e) { falha(e); }
+      t.remove();
+    });
+  }
+  function confirmar(el, msg) {
+    const sub = el.querySelector(".s"), svg = el.querySelector("svg");
+    if (!el.dataset.orig) { el.dataset.orig = sub.textContent; el.dataset.ic = svg.outerHTML; }
+    svg.outerHTML = IC.ok; sub.textContent = msg; el.classList.add("ok");
+    clearTimeout(el._t);
+    el._t = setTimeout(() => {
+      el.querySelector("svg").outerHTML = el.dataset.ic; el.querySelector(".s").textContent = el.dataset.orig; el.classList.remove("ok");
+    }, 2200);
+  }
+  document.addEventListener("click", ev => {
+    const el = ev.target.closest("[data-id]");
+    if (!el) return;
+    const id = el.dataset.id;
+    if (id.startsWith("copiar-")) {
+      const num = el.dataset.numero;
+      copiar(num).then(() => { confirmar(el, "Número copiado!"); avisar("Número copiado: " + num); },
+                       () => avisar("Não deu para copiar. Anote: " + num, true));
+    } else if (id === "compartilhar") {
+      const url = location.href.split("#")[0];
+      if (navigator.share) { navigator.share({ title: "AD Motos", text: "AD Motos · Peças e acessórios para motos", url }).catch(() => {}); return; }
+      copiar(url).then(() => { confirmar(el, "Link copiado!"); avisar("Link copiado"); },
+                       () => avisar("Não deu para copiar o link", true));
+    } else if (id === "salvar-contato") {
+      avisar("Baixando o contato da AD Motos");
+    } else if (el.dataset.tipo === "zap" && !(ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button)) {
+      const s = el.querySelector(".s");
+      if (!el.dataset.orig) el.dataset.orig = s.innerHTML;
+      s.textContent = "Abrindo o WhatsApp…";
+      clearTimeout(el._t); el._t = setTimeout(() => { s.innerHTML = el.dataset.orig; }, 4000);
+    }
+  });
+  window.addEventListener("pageshow", () => document.querySelectorAll(".zap[data-orig]").forEach(el => {
+    el.querySelector(".s").innerHTML = el.dataset.orig;
+  }));
+
+  // ---------- Rastro de pneu: sai da roda do topo e desce pela página, passando por baixo das lojas ----------
+  const caixa = document.getElementById("rastro"), tela = document.querySelector(".tela");
+  const NS = "http://www.w3.org/2000/svg";
+  function desenharRastro() {
+    const W = document.documentElement.clientWidth;
+    caixa.style.height = "0px";
+    const H = tela.scrollHeight;
+    caixa.style.height = H + "px";
+    const pag = document.querySelector(".pagina").getBoundingClientRect();
+    const roda = document.querySelector(".roda").getBoundingClientRect();
+    const sy = window.scrollY;
+    const meio = pag.left + pag.width / 2;
+    const amp = Math.min(W * 0.33, 300);
+    // Pontos de passagem: começa sob a roda e serpenteia até o fim
+    // Fica na borda direita enquanto passa ao lado do texto do topo, depois entra na página
+    const topo = document.querySelector(".topo").getBoundingClientRect(), rx = roda.left + roda.width / 2;
+    const pts = [[rx, roda.bottom + sy - 20], [rx - 4, topo.bottom + sy - 30]];
+    const y0 = topo.bottom + sy + 150, passos = Math.max(3, Math.round((H - y0) / 520));
+    for (let i = 0; i <= passos; i++) {
+      const y = y0 + (H + 60 - y0) * i / passos;
+      pts.push([meio + (i % 2 ? amp : -amp) * (i === passos ? .4 : 1), y]);
+    }
+    // Catmull-Rom → pontos densos → reamostragem por comprimento
+    const ext = [pts[0], ...pts, pts[pts.length - 1]], dens = [];
+    for (let i = 1; i < ext.length - 2; i++) {
+      const [p0, p1, p2, p3] = [ext[i - 1], ext[i], ext[i + 1], ext[i + 2]];
+      for (let k = 0; k < 60; k++) {
+        const t = k / 60, t2 = t * t, t3 = t2 * t;
+        dens.push([0, 1].map(j => .5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3)));
+      }
+    }
+    dens.push(pts[pts.length - 1]);
+    const L = 20, P = 15; // meia largura do rastro, passo dos sulcos
+    let borda1 = "", borda2 = "", sulcos = "", acum = 0, prox = 0;
+    for (let i = 1; i < dens.length; i++) {
+      const [x0, y0b] = dens[i - 1], [x1, y1] = dens[i];
+      const seg = Math.hypot(x1 - x0, y1 - y0b); if (!seg) continue;
+      const tx = (x1 - x0) / seg, ty = (y1 - y0b) / seg, nx = -ty, ny = tx;
+      while (prox <= acum + seg) {
+        const f = (prox - acum) / seg, px = x0 + (x1 - x0) * f, py = y0b + (y1 - y0b) * f;
+        const lado = Math.round(prox / P) % 2 ? 1 : -1;
+        // Sulco em espinha: do centro para a borda, inclinado para trás
+        const a = [px + nx * lado * 4, py + ny * lado * 4], b = [px + nx * lado * (L - 4) - tx * 8, py + ny * lado * (L - 4) - ty * 8];
+        sulcos += "M" + a[0].toFixed(1) + " " + a[1].toFixed(1) + "L" + b[0].toFixed(1) + " " + b[1].toFixed(1);
+        prox += P / 2;
+      }
+      const c1 = (x0 + nx * L).toFixed(1) + " " + (y0b + ny * L).toFixed(1), c2 = (x0 - nx * L).toFixed(1) + " " + (y0b - ny * L).toFixed(1);
+      borda1 += (borda1 ? "L" : "M") + c1; borda2 += (borda2 ? "L" : "M") + c2;
+      acum += seg;
+    }
+    const centro = "M" + dens.map(p => p[0].toFixed(1) + " " + p[1].toFixed(1)).join("L");
+    caixa.innerHTML = '<svg xmlns="' + NS + '" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
+      '<path d="' + centro + '" fill="none" stroke="rgba(255,255,255,.022)" stroke-width="' + (L * 2) + '" stroke-linejoin="round"/>' +
+      '<path d="' + borda1 + borda2 + '" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="1"/>' +
+      '<path d="' + sulcos + '" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.6" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+  let tR;
+  const agendar = () => { clearTimeout(tR); tR = setTimeout(desenharRastro, 60); };
+  desenharRastro();
+  window.addEventListener("resize", agendar);
+  window.addEventListener("load", desenharRastro);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(desenharRastro);
+  // ANIMAÇÃO PENDENTE DE APROVAÇÃO: proposta = a roda do topo gira uma volta e o rastro "rola" página abaixo ao abrir.
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>

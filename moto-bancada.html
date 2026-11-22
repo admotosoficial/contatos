@@ -1,0 +1,431 @@
+<!doctype html>
+<!--
+  IDENTIDADE VISUAL — "Painel de ferramentas" (moto-bancada.html)
+  Motivo: painel perfurado azul de loja de peças, com ferramentas e peças desenhadas em traço fino branco
+  (chave de boca, vela, corrente, disco de freio, capacete, coroa), penduradas em ganchos alinhados à grade de furos.
+  Cores: azul da marca no painel, branco nas etiquetas, vermelho só no logo e nas plaquetas de seção, verde só no WhatsApp.
+  Tipografia: Barlow Condensed (cidades e títulos, eco do letreiro condensado) + Barlow (textos e botões).
+  Ícones próprios em traço 2 px arredondado. Detalhe memorável: cada loja é uma etiqueta branca pendurada pelo furo
+  num gancho do painel — e todo gancho cai exatamente num furo da grade.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="AD Motos — peças e acessórios para motos em Várzea da Roça e Senhor do Bonfim (BA). Fale com a gente pelo WhatsApp.">
+<meta name="theme-color" content="#0636A6">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente pelo WhatsApp.">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#002C8F; --azul-2:#0636A6; --azul-3:#00226F; --furo:#001A57;
+  --vermelho:#D21F1F; --verde:#12874A; --verde-2:#0F7A42;
+  --tinta:#0A1A44; --texto:#46526E; --linha:#D9E1F2; --claro:#F1F5FF;
+  --gy:0px;
+  --cond:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --sans:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{
+  background-color:var(--azul);
+  /* painel perfurado: furo + brilho na borda inferior do furo + luz de cima + degradê do painel */
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--furo) 0 2.5px, transparent 3px),
+    radial-gradient(circle at 50% 57%, rgba(255,255,255,.13) 0 2.7px, transparent 3.2px),
+    radial-gradient(70% 520px at 50% 0, rgba(255,255,255,.11), transparent 100%),
+    linear-gradient(var(--azul-2), var(--azul) 560px, var(--azul-3));
+  background-size:24px 24px,24px 24px,100% 100%,100% 100%;
+  background-repeat:repeat,repeat,no-repeat,no-repeat;
+  background-position:50% var(--gy),50% var(--gy),0 0,0 0;
+  min-height:100%;
+  -webkit-text-size-adjust:100%;
+}
+body{margin:0;font-family:var(--sans);color:var(--tinta);overflow-x:hidden;min-height:100vh;
+  padding-bottom:env(safe-area-inset-bottom)}
+a,button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+button{border:0;background:none;cursor:pointer}
+:focus-visible{outline:3px solid #FFD23F;outline-offset:3px;border-radius:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- topo: painel com ferramentas ---------- */
+.painel{position:relative;height:228px;overflow:hidden;margin-top:env(safe-area-inset-top)}
+.palco{position:absolute;top:0;left:50%;width:390px;height:240px;margin-left:-195px}
+.ferramentas{position:absolute;top:0;left:-420px;width:1230px;height:240px;pointer-events:none}
+.t{fill:#0B39A8;stroke:#F2F6FF;stroke-width:1.2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.t2{fill:#1446BA}
+.d{fill:none;stroke:#A9C0FF;stroke-width:1;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.b{fill:none;stroke:#F2F6FF;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+
+.cartaz{position:absolute;left:97px;top:50px;width:196px;padding:14px 14px 12px;background:#fff;border-radius:6px;
+  box-shadow:0 10px 22px rgba(0,14,58,.38),0 1px 0 rgba(0,0,0,.04)}
+.cartaz::before{content:"";position:absolute;inset:5px;border:1px solid #E4E9F4;border-radius:3px;pointer-events:none}
+.cartaz img{display:block;width:100%;height:auto;position:relative}
+.ilhos{position:absolute;top:5px;width:8px;height:8px;border-radius:50%;border:1.6px solid #B9C4DC;background:var(--azul-2)}
+.ilhos.e{left:9px}.ilhos.d2{right:9px}
+
+.chamada{position:absolute;left:50%;top:148px;width:220px;margin-left:-110px;text-align:center;color:#fff}
+.chamada h1{margin:0;font-family:var(--cond);font-weight:600;font-size:23px;line-height:1.08;letter-spacing:.035em;text-transform:uppercase}
+.chamada p{margin:7px 0 0;font-size:14.5px;line-height:1.35;color:rgba(255,255,255,.84)}
+
+/* ---------- conteúdo ---------- */
+main{width:100%;max-width:472px;margin:0 auto;
+  padding:0 max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left))}
+.secao{display:flex;justify-content:center;margin:0}
+.placa{position:relative;display:inline-block;padding:5px 16px 5px;background:var(--vermelho);color:#fff;border-radius:3px;
+  font-family:var(--cond);font-weight:700;font-size:13px;letter-spacing:.17em;text-transform:uppercase;line-height:1.2;
+  box-shadow:0 3px 8px rgba(0,10,45,.3)}
+.placa::before,.placa::after{content:"";position:absolute;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;
+  background:rgba(255,255,255,.7)}
+.placa::before{left:6px}.placa::after{right:6px}
+
+/* etiqueta pendurada */
+.loja{position:relative;padding-top:40px;margin-top:20px}
+.gancho{position:absolute;left:50%;top:0;width:4px;height:29px;margin-left:-2px;border-radius:2px;
+  background:linear-gradient(90deg,#9AA8C9,#F4F7FF 45%,#B6C2DE);box-shadow:1px 2px 2px rgba(0,10,40,.35);z-index:2}
+.gancho::before{content:"";position:absolute;left:50%;top:-1px;width:10px;height:10px;margin-left:-5px;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,#E9EEFA 0 2px,#8E9DC1 2.6px 3.6px,var(--furo) 4px)}
+.tag{position:relative;background:#fff;border-radius:16px;padding:15px 18px 16px;
+  filter:drop-shadow(0 10px 16px rgba(0,12,50,.34)) drop-shadow(0 1px 1px rgba(0,12,50,.2))}
+.tag::before{content:"";position:absolute;left:50%;top:-24px;width:66px;height:30px;margin-left:-33px;background:#fff;
+  border-radius:15px 15px 0 0;
+  -webkit-mask:radial-gradient(circle at 50% 12px,transparent 5.6px,#000 6.2px);
+          mask:radial-gradient(circle at 50% 12px,transparent 5.6px,#000 6.2px)}
+.tag::after{content:"";position:absolute;left:50%;top:-20px;width:16px;height:16px;margin-left:-8px;border-radius:50%;
+  border:2px solid #C3CCE0;box-sizing:border-box}
+.topo-tag{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.selo{display:inline-block;padding:4px 9px 3px;border-radius:4px;font-size:11.5px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;background:var(--azul);color:#fff}
+.selo.f{background:#E7EDFC;color:var(--azul)}
+.marca{height:10px;width:auto;opacity:.9}
+.cidade{margin:8px 0 0;font-family:var(--cond);font-weight:700;font-size:33px;line-height:1;letter-spacing:.005em;color:var(--tinta)}
+.end{display:flex;align-items:flex-start;gap:6px;margin:6px 0 0;font-size:14.5px;line-height:1.35;color:var(--texto)}
+.end svg{flex:none;margin-top:2px;color:var(--azul)}
+.picote{height:0;border-top:1.5px dashed #D3DBEC;margin:12px -18px 13px}
+
+.zap{display:flex;align-items:center;gap:12px;min-height:60px;padding:9px 14px 9px 10px;border-radius:12px;text-decoration:none;
+  background:linear-gradient(180deg,#149152,var(--verde-2));color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 4px 10px rgba(15,122,66,.28)}
+.zap-ico{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#fff;color:var(--verde)}
+.zap-ico svg{width:25px;height:25px}
+.zap-txt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.zap-txt strong{font-size:18px;font-weight:700;letter-spacing:.005em}
+.zap-txt span{margin-top:3px;font-size:15px;font-weight:500;color:rgba(255,255,255,.92);font-variant-numeric:tabular-nums}
+.seta{flex:none;opacity:.9}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.sec{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:8px 10px;border-radius:12px;
+  background:var(--claro);border:1px solid var(--linha);color:var(--azul);font-size:15px;font-weight:600;text-decoration:none;
+  white-space:nowrap}
+.sec svg{flex:none;width:19px;height:19px}
+
+/* mais opções: etiquetas pequenas lado a lado */
+.extras{--w:112px;--g:8px;display:flex;justify-content:center;gap:var(--g);margin-top:12px;padding-top:40px;position:relative}
+.mini{position:relative;width:var(--w);flex:none}
+.mini .gancho{top:-40px}
+.mini .tag{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;height:100%;padding:14px 8px 14px;
+  border-radius:14px;text-decoration:none;color:var(--tinta);width:100%}
+.mini .tag::before{width:52px;margin-left:-26px}
+.m-ico{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#EAF0FF;color:var(--azul)}
+.m-ico svg{width:21px;height:21px}
+.m-tit{margin-top:9px;font-size:14.5px;font-weight:700;line-height:1.15}
+.m-sub{margin-top:4px;font-size:11.5px;line-height:1.3;color:var(--texto);overflow-wrap:anywhere}
+
+footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,255,.78);font-size:13px;line-height:1.5}
+.rodape-marca{display:inline-flex;align-items:center;gap:10px;margin-bottom:6px}
+.rodape-marca .simb{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#fff}
+.rodape-marca .simb img{width:19px;height:19px}
+.rodape-marca img.letra{height:13px;width:auto}
+
+.aviso{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:9;
+  display:none;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:#fff;color:var(--tinta);
+  font-weight:600;font-size:15px;box-shadow:0 10px 26px rgba(0,12,50,.4)}
+.aviso.on{display:inline-flex}
+.aviso svg{color:var(--verde)}
+
+@media (min-width:480px){ .extras{--w:136px} }
+@media (min-width:760px){
+  .painel{height:236px}
+  main{max-width:488px}
+}
+/* ANIMAÇÃO PENDENTE DE APROVAÇÃO: entrada das etiquetas, balanço ao toque e balanço leve das ferramentas
+   ficam desligados até o dono aprovar o visual estático. */
+</style>
+</head>
+<body>
+
+<header class="painel">
+  <div class="palco">
+    <svg class="ferramentas" viewBox="-420 0 1230 240" width="1230" height="240" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="1.6" dy="3" stdDeviation="1.6" flood-color="#000F38" flood-opacity=".5"/>
+        </filter>
+        <linearGradient id="metal" x1="0" x2="1">
+          <stop offset="0" stop-color="#97A6C8"/><stop offset=".45" stop-color="#F4F7FF"/><stop offset="1" stop-color="#B3BFDB"/>
+        </linearGradient>
+        <g id="peg"><circle r="4" fill="#00164C"/><rect x="-1.7" y="-1.2" width="3.4" height="9.5" rx="1.7" fill="url(#metal)"/></g>
+        <!-- chave de boca (pendurada pela boca de cima) -->
+        <g id="chave">
+          <path class="t" d="M-9.1 -10.2L-9.6 -10.7L-10 -10.8L-10.5 -10.7L-12 -9L-13.2 -7.1L-14.6 -3.6L-14.9 -1.4L-15 0.7L-14.4 4.3L-12.9 7.7L-11.1 10.1L-9.5 11.6L-7.7 12.9L-7.4 13.6L-5.6 119.8L-5.9 120.5L-7.6 121.7L-8.9 123L-10.6 125.4L-11.3 127L-11.8 128.7L-12 130.4L-11.9 132.2L-11.5 134.5L-10.6 136.6L-9.3 138.6L-8 139.8L-7.4 139.7L-7 139.3L-5.5 133.6L-5 133L-4.3 133L3 135L3.4 135.5L3.4 136L1.9 141.7L2.2 142.4L2.8 142.6L4.6 142.1L6.2 141.3L7.6 140.3L8.9 139L10 137.6L11.1 135.6L11.6 133.9L11.9 132.2L12 130.4L11.8 128.6L11.3 127L10.6 125.4L8.9 123L7.6 121.7L5.9 120.5L5.6 119.8L7.4 13.6L7.7 12.9L10.1 11.1L11.6 9.5L13.5 6.4L14.7 2.9L15 0.8L14.9 -1.4L14.5 -3.7L13.8 -5.8L12.5 -8.3L11.1 -10.1L9.5 -11.6L7.1 -13.2L4.4 -14.3L3.7 -14.5L3.3 -14.4L2.9 -14.1L2.8 -13.4L7.2 2.8L7.2 3.3L6.9 3.7L6.5 4L-3.6 6.7L-4.2 6.7L-4.6 6.4L-4.8 6Z"/>
+          <path class="d" d="M0 24V108"/>
+          <path class="d" d="M-3.2 24.5 -2.6 107M3.2 24.5 2.6 107" opacity=".45"/>
+        </g>
+        <!-- vela de ignição -->
+        <g id="vela">
+          <path class="t" d="M-10.4 53L-10.8 53.2L-11 53.6L-11 66.4L-10.7 66.9L-9.4 67L-9.1 67.3L-9 70.4L-9.3 70.9L-10.1 71L-10.4 71.3L-10.5 73.4L-10.1 74L-6.9 74L-6.5 74.4L-6.5 94.6L-5.9 95L6.1 95L6.5 94.4L6.5 74.6L6.6 74.3L6.9 74L10.1 74L10.5 73.6L10.4 71.3L10.1 71L9.3 70.9L9 70.6L9 67.6L9.3 67.1L10.6 67L11 66.6L11 53.6L10.6 53L8.8 53L8.4 52.7L6 45.1L6 37.6L6.2 37.2L6.8 36.9L7.2 36.6L7.2 34.6L7 34.1L6.3 33.9L6 33.6L6 31.1L6.2 30.7L7.1 30.2L7.2 28.1L6.9 27.6L6.3 27.4L6 27.1L6 24.6L6.2 24.2L7.1 23.7L7.2 21.6L6.9 21.1L6.3 20.9L6 20.6L6 18.1L6.2 17.7L7.1 17.2L7.2 15.1L6.9 14.6L6.3 14.4L6 14.1L6 11.6L5.8 11.2L5.4 11L3.8 11L3.4 10.6L3.4 1.6L3 1L-2.8 1L-3.3 1.3L-3.4 10.6L-3.8 11L-5.4 11L-5.8 11.2L-6 11.6L-6 14.1L-6.3 14.4L-6.9 14.6L-7.2 15L-7.2 17L-6.9 17.4L-6.2 17.7L-6 18.1L-6 20.6L-6.3 20.9L-6.9 21.1L-7.2 21.6L-7.1 23.7L-6.2 24.2L-6 24.6L-6 27.1L-6.3 27.4L-6.9 27.6L-7.2 28.1L-7.1 30.2L-6.2 30.7L-6 31.1L-6 33.6L-6.3 33.9L-7 34.1L-7.2 34.6L-7.2 36.6L-6.8 36.9L-6.2 37.2L-6 37.6L-6 44.9L-8.4 52.7L-8.8 53Z"/>
+          <path class="d" d="M-3.4 6.5H3.4M-3.6 54v12M3.6 54v12M-9 69H9"/>
+          <path class="d" d="M-6.5 78.2 6.5 76.4M-6.5 81.8 6.5 80M-6.5 85.4 6.5 83.6M-6.5 89 6.5 87.2M-6.5 92.6 6.5 90.8"/>
+          <path class="b" d="M0 95v4.5M4.4 95v6.2q0 2.2-2.2 2.2h-5"/>
+        </g>
+        <!-- disco de freio (pendurado pelo furo central) R=30 -->
+        <g id="disco">
+          <path class="t" fill-rule="evenodd" d="M0 -30L1.3 -29.8L2.6 -29.4L3.8 -28.7L4.9 -28L6.1 -27.4L7.2 -26.9L8.4 -26.7L9.7 -26.7L11.1 -26.7L12.5 -26.7L13.8 -26.5L15 -26L16 -25.2L16.9 -24.1L17.6 -23L18.3 -21.8L18.9 -20.7L19.7 -19.7L20.7 -18.9L21.8 -18.3L23 -17.6L24.1 -16.9L25.2 -16L26 -15L26.5 -13.8L26.7 -12.5L26.7 -11.1L26.7 -9.7L26.7 -8.4L26.9 -7.2L27.4 -6.1L28 -4.9L28.7 -3.8L29.4 -2.6L29.8 -1.3L30 -0L29.8 1.3L29.4 2.6L28.7 3.8L28 4.9L27.4 6.1L26.9 7.2L26.7 8.4L26.7 9.7L26.7 11.1L26.7 12.5L26.5 13.8L26 15L25.2 16L24.1 16.9L23 17.6L21.8 18.3L20.7 18.9L19.7 19.7L18.9 20.7L18.3 21.8L17.6 23L16.9 24.1L16 25.2L15 26L13.8 26.5L12.5 26.7L11.1 26.7L9.7 26.7L8.4 26.7L7.2 26.9L6.1 27.4L4.9 28L3.8 28.7L2.6 29.4L1.3 29.8L0 30L-1.3 29.8L-2.6 29.4L-3.8 28.7L-4.9 28L-6.1 27.4L-7.2 26.9L-8.4 26.7L-9.7 26.7L-11.1 26.7L-12.5 26.7L-13.8 26.5L-15 26L-16 25.2L-16.9 24.1L-17.6 23L-18.3 21.8L-18.9 20.7L-19.7 19.7L-20.7 18.9L-21.8 18.3L-23 17.6L-24.1 16.9L-25.2 16L-26 15L-26.5 13.8L-26.7 12.5L-26.7 11.1L-26.7 9.7L-26.7 8.4L-26.9 7.2L-27.4 6.1L-28 4.9L-28.7 3.8L-29.4 2.6L-29.8 1.3L-30 0L-29.8 -1.3L-29.4 -2.6L-28.7 -3.8L-28 -4.9L-27.4 -6.1L-26.9 -7.2L-26.7 -8.4L-26.7 -9.7L-26.7 -11.1L-26.7 -12.5L-26.5 -13.8L-26 -15L-25.2 -16L-24.1 -16.9L-23 -17.6L-21.8 -18.3L-20.7 -18.9L-19.7 -19.7L-18.9 -20.7L-18.3 -21.8L-17.6 -23L-16.9 -24.1L-16 -25.2L-15 -26L-13.8 -26.5L-12.5 -26.7L-11.1 -26.7L-9.7 -26.7L-8.4 -26.7L-7.2 -26.9L-6.1 -27.4L-4.9 -28L-3.8 -28.7L-2.6 -29.4L-1.3 -29.8ZM-18 0a18 18 0 1 0 36 0a18 18 0 1 0 -36 0ZM4.7 -22.6a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM15.2 -16.5a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM21.3 -6.1a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM21.3 6.1a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM15.2 16.5a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM4.7 22.6a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM-7.4 22.6a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM-17.9 16.5a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM-24 6.1a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM-24 -6.1a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM-17.9 -16.5a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0ZM-7.4 -22.6a1.3 1.3 0 1 0 2.7 0a1.3 1.3 0 1 0 -2.7 0Z"/>
+          <path class="t t2" fill-rule="evenodd" d="M-18 0a18 18 0 1 0 36 0a18 18 0 1 0 -36 0ZM-6.6 0a6.6 6.6 0 1 0 13.2 0a6.6 6.6 0 1 0 -13.2 0ZM5 -10a2.2 2.2 0 1 0 4.5 0a2.2 2.2 0 1 0 -4.5 0ZM9.4 3.8a2.2 2.2 0 1 0 4.5 0a2.2 2.2 0 1 0 -4.5 0ZM-2.2 12.3a2.2 2.2 0 1 0 4.5 0a2.2 2.2 0 1 0 -4.5 0ZM-13.9 3.8a2.2 2.2 0 1 0 4.5 0a2.2 2.2 0 1 0 -4.5 0ZM-9.5 -10a2.2 2.2 0 1 0 4.5 0a2.2 2.2 0 1 0 -4.5 0Z"/>
+          <path class="t" d="M-1.2 -18a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0ZM15.9 -5.6a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0ZM9.4 14.6a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0ZM-11.8 14.6a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0ZM-18.3 -5.6a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0Z"/>
+        </g>
+        <!-- coroa -->
+        <g id="coroa"><path class="t" fill-rule="evenodd" d="M-3 -30.3L-1.8 -30.5L-1.1 -34L1.1 -34L1.8 -30.5L3 -30.3L4.2 -30.3L5.6 -33.5L7.7 -33.1L7.7 -29.6L8.8 -29.1L10 -28.9L12 -31.8L14 -31L13.4 -27.5L14.3 -26.8L15.5 -26.4L18 -28.8L19.8 -27.7L18.5 -24.4L19.3 -23.5L20.3 -22.9L23.3 -24.8L24.8 -23.3L22.9 -20.3L23.5 -19.3L24.4 -18.5L27.7 -19.8L28.8 -18L26.4 -15.5L26.8 -14.3L27.5 -13.4L31 -14L31.8 -12L28.9 -10L29.1 -8.8L29.6 -7.7L33.1 -7.7L33.5 -5.6L30.3 -4.2L30.3 -3L30.5 -1.8L34 -1.1L34 1.1L30.5 1.8L30.3 3L30.3 4.2L33.5 5.6L33.1 7.7L29.6 7.7L29.1 8.8L28.9 10L31.8 12L31 14L27.5 13.4L26.8 14.3L26.4 15.5L28.8 18L27.7 19.8L24.4 18.5L23.5 19.3L22.9 20.3L24.8 23.3L23.3 24.8L20.3 22.9L19.3 23.5L18.5 24.4L19.8 27.7L18 28.8L15.5 26.4L14.3 26.8L13.4 27.5L14 31L12 31.8L10 28.9L8.8 29.1L7.7 29.6L7.7 33.1L5.6 33.5L4.2 30.3L3 30.3L1.8 30.5L1.1 34L-1.1 34L-1.8 30.5L-3 30.3L-4.2 30.3L-5.6 33.5L-7.7 33.1L-7.7 29.6L-8.8 29.1L-10 28.9L-12 31.8L-14 31L-13.4 27.5L-14.3 26.8L-15.5 26.4L-18 28.8L-19.8 27.7L-18.5 24.4L-19.3 23.5L-20.3 22.9L-23.3 24.8L-24.8 23.3L-22.9 20.3L-23.5 19.3L-24.4 18.5L-27.7 19.8L-28.8 18L-26.4 15.5L-26.8 14.3L-27.5 13.4L-31 14L-31.8 12L-28.9 10L-29.1 8.8L-29.6 7.7L-33.1 7.7L-33.5 5.6L-30.3 4.2L-30.3 3L-30.5 1.8L-34 1.1L-34 -1.1L-30.5 -1.8L-30.3 -3L-30.3 -4.2L-33.5 -5.6L-33.1 -7.7L-29.6 -7.7L-29.1 -8.8L-28.9 -10L-31.8 -12L-31 -14L-27.5 -13.4L-26.8 -14.3L-26.4 -15.5L-28.8 -18L-27.7 -19.8L-24.4 -18.5L-23.5 -19.3L-22.9 -20.3L-24.8 -23.3L-23.3 -24.8L-20.3 -22.9L-19.3 -23.5L-18.5 -24.4L-19.8 -27.7L-18 -28.8L-15.5 -26.4L-14.3 -26.8L-13.4 -27.5L-14 -31L-12 -31.8L-10 -28.9L-8.8 -29.1L-7.7 -29.6L-7.7 -33.1L-5.6 -33.5L-4.2 -30.3ZM-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0ZM-6.2 -19a6.2 6.2 0 1 0 12.4 0a6.2 6.2 0 1 0 -12.4 0ZM11.9 -5.9a6.2 6.2 0 1 0 12.4 0a6.2 6.2 0 1 0 -12.4 0ZM5 15.4a6.2 6.2 0 1 0 12.4 0a6.2 6.2 0 1 0 -12.4 0ZM-17.4 15.4a6.2 6.2 0 1 0 12.4 0a6.2 6.2 0 1 0 -12.4 0ZM-24.3 -5.9a6.2 6.2 0 1 0 12.4 0a6.2 6.2 0 1 0 -12.4 0ZM5.2 -9.3a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0ZM9.3 3.6a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0ZM-1.6 11.5a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0ZM-12.5 3.6a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0ZM-8.4 -9.3a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0Z"/><circle class="d" r="25.5"/></g>
+        <!-- capacete (de lado, pendurado pela cinta jugular) -->
+        <g id="capacete">
+          <path class="d" d="M0 3 -11 22M0 3 9 20" style="stroke:#C9D7FF;stroke-width:1.3"/>
+          <path class="t" d="M-33 63C-37 40-24 19 2 17 25 15.5 37 31 38 48L37 60C36.5 67 32 72 24 73H-22C-28.5 73-32 69.5-33 63Z"/>
+          <path class="t t2" d="M9 35C20 33.5 31 37 35.5 45L35 53C24 50.5 13 50.5 5 53 2.5 46 3.5 38.5 9 35Z"/>
+          <path class="d" d="M11 38.5C19 37.5 26 39 30.5 42.5" opacity=".9"/>
+          <path class="d" d="M-30.5 61.5C-12 57.5 10 57.5 25 61M-25 33C-15 25-4 22.5 9 23"/>
+          <path class="d" d="M-9 20.5-5 26" opacity=".7"/>
+        </g>
+        <!-- corrente em U entre dois ganchos (48 px) -->
+        <path id="u" d="M-24 4C-25 46-21 86 0 86 21 86 25 46 24 4"/>
+        <g id="corrente">
+          <use href="#u" style="fill:none;stroke:#F2F6FF;stroke-width:4.6"/>
+          <use href="#u" style="fill:none;stroke:#0B39A8;stroke-width:2.4"/>
+          <use href="#u" style="fill:none;stroke:#F2F6FF;stroke-width:7.4;stroke-dasharray:7 9;stroke-linecap:round;stroke-dashoffset:-1"/>
+          <use href="#u" style="fill:none;stroke:#0B39A8;stroke-width:5;stroke-dasharray:7 9;stroke-linecap:round;stroke-dashoffset:-1"/>
+          <use href="#u" style="fill:none;stroke:#A9C0FF;stroke-width:2.6;stroke-dasharray:0 8;stroke-linecap:round"/>
+        </g>
+      </defs>
+
+      <!-- barbantes do cartaz -->
+      <path d="M195 12 114 57M195 12 276 57" stroke="#DCE4F6" stroke-width="1.3" fill="none"/>
+
+      <!-- celular: lado esquerdo -->
+      <g filter="url(#sh)"><use href="#chave" transform="translate(27 36) scale(.85)"/></g>
+      <g filter="url(#sh)"><use href="#vela" transform="translate(75 36)"/></g>
+      <g filter="url(#sh)"><use href="#disco" transform="translate(51 185) scale(.9)"/></g>
+      <!-- celular: lado direito -->
+      <g filter="url(#sh)"><use href="#capacete" transform="translate(339 12)"/></g>
+      <g filter="url(#sh)"><use href="#corrente" transform="translate(339 132)"/></g>
+
+      <!-- computador: fileira de cima alinhada (y 36), fileira de baixo (y 132/156) -->
+      <g filter="url(#sh)">
+        <use href="#coroa" transform="translate(-45 41)"/>
+        <use href="#vela" transform="translate(-117 36)"/>
+        <use href="#vela" transform="translate(-165 36)"/>
+        <use href="#vela" transform="translate(-213 36)"/>
+        <use href="#chave" transform="translate(-285 36) scale(.85)"/>
+        <use href="#chave" transform="translate(-333 36) scale(.72)"/>
+        <use href="#capacete" transform="translate(-69 132)"/>
+        <use href="#corrente" transform="translate(-165 132)"/>
+      </g>
+      <g filter="url(#sh)">
+        <use href="#coroa" transform="translate(435 41)"/>
+        <use href="#vela" transform="translate(507 36)"/>
+        <use href="#vela" transform="translate(555 36)"/>
+        <use href="#vela" transform="translate(603 36)"/>
+        <use href="#chave" transform="translate(675 36) scale(.85)"/>
+        <use href="#chave" transform="translate(723 36) scale(.72)"/>
+        <use href="#disco" transform="translate(459 161) scale(1.05)"/>
+        <use href="#corrente" transform="translate(555 132)"/>
+      </g>
+
+      <!-- ganchos (por cima das peças) -->
+      <g>
+        <use href="#peg" x="195" y="12"/>
+        <use href="#peg" x="27" y="36"/>
+        <use href="#peg" x="75" y="36"/>
+        <use href="#peg" x="51" y="180"/>
+        <use href="#peg" x="339" y="12"/>
+        <use href="#peg" x="315" y="132"/>
+        <use href="#peg" x="363" y="132"/>
+        <use href="#peg" x="-45" y="36"/>
+        <use href="#peg" x="-117" y="36"/>
+        <use href="#peg" x="-165" y="36"/>
+        <use href="#peg" x="-213" y="36"/>
+        <use href="#peg" x="-285" y="36"/>
+        <use href="#peg" x="-333" y="36"/>
+        <use href="#peg" x="-69" y="132"/>
+        <use href="#peg" x="-189" y="132"/>
+        <use href="#peg" x="-141" y="132"/>
+        <use href="#peg" x="435" y="36"/>
+        <use href="#peg" x="507" y="36"/>
+        <use href="#peg" x="555" y="36"/>
+        <use href="#peg" x="603" y="36"/>
+        <use href="#peg" x="675" y="36"/>
+        <use href="#peg" x="723" y="36"/>
+        <use href="#peg" x="459" y="156"/>
+        <use href="#peg" x="531" y="132"/>
+        <use href="#peg" x="579" y="132"/>
+      </g>
+    </svg>
+
+    <div class="cartaz">
+      <span class="ilhos e" aria-hidden="true"></span><span class="ilhos d2" aria-hidden="true"></span>
+      <img src="logo.svg" alt="AD Motos" width="168" height="52">
+    </div>
+
+    <div class="chamada">
+      <h1>Peças e acessórios para a sua moto</h1>
+      <p>Fale com a gente pelo WhatsApp</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="secao"><span class="placa">Nossas lojas</span></div>
+  <div id="lojas"></div>
+
+  <div class="secao" style="margin-top:30px"><span class="placa">Mais opções</span></div>
+  <div class="extras" id="extras"></div>
+</main>
+
+<footer>
+  <div class="rodape-marca">
+    <span class="simb"><img src="favicon.svg" alt=""></span>
+    <img class="letra" src="letreiro-branco.svg" alt="AD Motos">
+  </div>
+  <div>Peças e acessórios para motos<br>Várzea da Roça e Senhor do Bonfim - BA</div>
+</footer>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  var LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
+  var E = window.esc, A = window.alvo;
+  // ícones próprios (traço 2 px, pontas arredondadas)
+  var IC = {
+    pino: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s-7-6-7-11.6a7 7 0 0 1 14 0c0 5.6-7 11.6-7 11.6Z"/><circle cx="12" cy="9.8" r="2.4"/></svg>',
+    rota: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 21.2 12 12 21.2 2.8 12Z"/><path d="M9.2 14.2v-2.4a1.6 1.6 0 0 1 1.6-1.6h4.4"/><path d="m13.4 8.2 2 2-2 2"/></svg>',
+    copiar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.4"/><path d="M15.5 8.5V6.4A2.4 2.4 0 0 0 13.1 4H6.4A2.4 2.4 0 0 0 4 6.4v6.7a2.4 2.4 0 0 0 2.4 2.4h2.1"/></svg>',
+    contato: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.6"/><circle cx="9" cy="10.6" r="2.3"/><path d="M5.6 16.4a3.6 3.6 0 0 1 6.8 0M14.5 10h3.5M14.5 13.4h3.5"/></svg>',
+    email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.6"/><path d="m3.8 7 8.2 6 8.2-6"/></svg>',
+    site: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
+    insta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+    partilhar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11M8 7.3l4-3.8 4 3.8"/><path d="M8.5 10.5H7a2.5 2.5 0 0 0-2.5 2.5v5A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5v-5a2.5 2.5 0 0 0-2.5-2.5h-1.5"/></svg>',
+    ok: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>'
+  };
+  var ZAP = window.ICO.zap;
+
+  function gancho() { return '<span class="gancho" aria-hidden="true"></span>'; }
+
+  // ---- lojas ----
+  var h = "";
+  LOJAS.forEach(function (l, i) {
+    var zap = l.links.filter(function (k) { return k.tipo === "zap"; })[0];
+    var mapa = l.links.filter(function (k) { return k.tipo === "mapa"; })[0];
+    var outros = l.links.filter(function (k) { return k !== zap && k !== mapa; });
+    var matriz = /matriz/i.test(l.detalhe || "");
+    h += '<article class="loja" aria-labelledby="loja-' + i + '">' + gancho() +
+      '<div class="tag">' +
+        '<div class="topo-tag"><span class="selo' + (matriz ? '' : ' f') + '">' + E(l.detalhe || "") + '</span>' +
+        '<img class="marca" src="letreiro-azul.svg" alt="" width="50" height="10"></div>' +
+        '<h2 class="cidade" id="loja-' + i + '">' + E(l.nome) + '</h2>' +
+        '<p class="end">' + IC.pino + '<span>' + E(l.endereco || "") + '</span></p>' +
+        '<div class="picote" aria-hidden="true"></div>';
+    if (zap) {
+      h += '<a class="zap" href="' + E(zap.url) + '" data-id="' + E(zap.id) + '"' + A(zap.url) +
+        ' aria-label="' + E(zap.titulo + " — " + l.nome + (zap.sub ? ", " + zap.sub : "")) + '">' +
+        '<span class="zap-ico">' + ZAP + '</span>' +
+        '<span class="zap-txt"><strong>' + E(zap.titulo) + '</strong>' + (zap.sub ? '<span>' + E(zap.sub) + '</span>' : '') + '</span>' +
+        window.SETA + '</a>';
+    }
+    h += '<div class="acoes">';
+    if (mapa) {
+      h += '<a class="sec" href="' + E(mapa.url) + '" data-id="' + E(mapa.id) + '"' + A(mapa.url) +
+        ' aria-label="' + E(mapa.titulo + " até a loja de " + l.nome) + '">' + IC.rota + E(mapa.titulo) + '</a>';
+    }
+    if (zap && zap.sub) {
+      h += '<button type="button" class="sec" data-id="' + E(zap.id.replace(/^zap-/, "copiar-")) + '" data-copiar="' + E(zap.sub) +
+        '" aria-label="' + E("Copiar número de " + l.nome + ", " + zap.sub) + '">' + IC.copiar + 'Copiar número</button>';
+    }
+    outros.forEach(function (k) {
+      h += '<a class="sec" href="' + E(k.url) + '" data-id="' + E(k.id) + '"' + A(k.url) + '>' + (IC[k.tipo] || "") + E(k.titulo) + '</a>';
+    });
+    h += '</div></div></article>';
+  });
+  document.getElementById("lojas").innerHTML = h;
+
+  // ---- mais opções ----
+  function mini(tag, attrs, ico, tit, sub) {
+    return '<div class="mini">' + gancho() + '<' + tag + ' class="tag" ' + attrs + '><span class="m-ico">' + ico + '</span>' +
+      '<span class="m-tit">' + tit + '</span>' + (sub ? '<span class="m-sub">' + sub + '</span>' : '') + '</' + tag + '></div>';
+  }
+  var x = mini("a", 'href="admotos.vcf" data-id="salvar-contato" download', IC.contato, "Salvar contato", "Na agenda do celular");
+  OUTROS.forEach(function (o) {
+    x += mini("a", 'href="' + E(o.url) + '" data-id="' + E(o.id) + '"' + A(o.url), IC[o.tipo] || IC.site,
+      E(o.tipo === "email" ? "E-mail" : o.titulo), o.sub ? E(o.sub).replace("@", "@<wbr>") : "");
+  });
+  x += mini("button", 'type="button" data-id="compartilhar"', IC.partilhar, "Compartilhar", "Enviar esta página");
+  document.getElementById("extras").innerHTML = x;
+
+  // ---- aviso ----
+  var aviso = document.getElementById("aviso"), tAviso;
+  function avisar(msg) {
+    aviso.innerHTML = IC.ok + '<span>' + E(msg) + '</span>';
+    aviso.classList.add("on");
+    clearTimeout(tAviso); tAviso = setTimeout(function () { aviso.classList.remove("on"); }, 2200);
+  }
+  function copiar(txt) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(txt).catch(function () { return copiarAntigo(txt); });
+    return copiarAntigo(txt);
+  }
+  function copiarAntigo(txt) {
+    return new Promise(function (ok, erro) {
+      var t = document.createElement("textarea"); t.value = txt; t.setAttribute("readonly", "");
+      t.style.cssText = "position:fixed;top:0;left:0;opacity:0"; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy") ? ok() : erro(); } catch (e) { erro(e); } document.body.removeChild(t);
+    });
+  }
+  document.addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-copiar]");
+    if (b) { copiar(b.getAttribute("data-copiar")).then(function () { avisar("Número copiado"); }, function () { avisar("Não deu para copiar"); }); return; }
+    if (ev.target.closest('[data-id="compartilhar"]')) {
+      var dados = { title: "AD Motos", text: "AD Motos — peças e acessórios para motos. Fale com a gente pelo WhatsApp.", url: location.href };
+      if (navigator.share) { navigator.share(dados).catch(function () {}); }
+      else copiar(location.href).then(function () { avisar("Link copiado"); }, function () { avisar("Não deu para copiar o link"); });
+    }
+  });
+
+  // ---- cada gancho cai exatamente num furo da grade (24 px) ----
+  var raiz = document.documentElement, painel = document.querySelector(".painel");
+  function alinhar() {
+    var y0 = painel.getBoundingClientRect().top + scrollY;
+    var gy = ((y0 % 24) + 24) % 24;
+    raiz.style.setProperty("--gy", gy + "px");
+    var alvos = document.querySelectorAll(".loja, .extras");
+    for (var i = 0; i < alvos.length; i++) {
+      var el = alvos[i]; el.style.marginTop = "";
+      var base = parseFloat(getComputedStyle(el).marginTop) || 0;
+      var pino = el.getBoundingClientRect().top + scrollY + 4;          // centro do gancho
+      var d = (((gy + 12 - pino) % 24) + 24) % 24; if (d > 12) d -= 24;
+      el.style.marginTop = (base + d) + "px";
+    }
+  }
+  alinhar();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alinhar);
+  addEventListener("load", alinhar);
+  var tr; addEventListener("resize", function () { clearTimeout(tr); tr = setTimeout(alinhar, 80); });
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!doctype html>
+<!--
+  IDENTIDADE VISUAL · "Transmissão"
+  Motivo: coroa, pinhão e corrente de rolos desenhados em traço técnico fino. A corrente desce pela página,
+  passa por guias encaixadas nos cartões das duas lojas e fecha no pinhão do rodapé: as lojas estão ligadas.
+  Cores: fundo claro cinza-azulado, azul da marca na transmissão e nos títulos, vermelho só nos pinos da corrente
+  e nos parafusos, verde apenas no botão do WhatsApp. Tipografia: Barlow Condensed (títulos e rótulos) + Barlow (texto).
+  Ícones próprios em traço médio, cantos arredondados. Detalhe memorável: o símbolo da AD Motos é o miolo da coroa.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AD Motos</title>
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="theme-color" content="#F1F4F9">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AD Motos">
+<meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente no WhatsApp.">
+<meta property="og:image" content="https://helyanaraujo.github.io/admotos-links/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --azul: #002C8F; --azul-escuro: #001B5E; --azul-medio: #3557B0; --azul-tinta: #EAF0FA; --azul-linha: #C9D5EC;
+  --vermelho: #E92525;
+  --verde: #1A9F52; --verde-2: #168A47;
+  --fundo: #F1F4F9; --cartao: #FFFFFF;
+  --texto: #0A1A44; --texto-2: #4A5878; --texto-3: #6C7893;
+  --linha: #E1E7F1;
+  --fc: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f: "Barlow", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --raio: 18px;
+  --sombra: 0 1px 2px rgba(10, 26, 68, .05), 0 10px 30px -14px rgba(10, 26, 68, .18);
+  color-scheme: light;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+html { background: var(--fundo); }
+body {
+  min-height: 100vh; min-height: 100dvh; color: var(--texto); overflow-x: hidden;
+  font: 400 16px/1.45 var(--f); -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(90% 420px at 50% 0, #FFFFFF 0%, rgba(255,255,255,0) 100%),
+    var(--fundo);
+}
+/* Malha técnica muito leve, como papel de desenho mecânico */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 44, 143, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 44, 143, .035) 1px, transparent 1px);
+  background-size: 28px 28px; background-position: center top;
+  -webkit-mask-image: linear-gradient(#000, rgba(0,0,0,.25));
+          mask-image: linear-gradient(#000, rgba(0,0,0,.25));
+}
+img { display: block; }
+a, button { font: inherit; color: inherit; }
+button { border: 0; background: none; padding: 0; cursor: pointer; }
+a { text-decoration: none; }
+:focus-visible { outline: 3px solid #2F6BFF; outline-offset: 3px; border-radius: 12px; }
+
+.pagina {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 460px; margin: 0 auto;
+  padding:
+    calc(26px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(22px + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
+}
+.camada { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+#transmissao { z-index: 0; }
+#guias { z-index: 3; }
+
+/* ---------- Topo ---------- */
+.topo { position: relative; z-index: 2; text-align: center; }
+.topo h1 { margin: 0; display: flex; justify-content: center; }
+.topo h1 img { width: 214px; height: auto; }
+.frase {
+  margin: 16px auto 0; max-width: 22ch; text-wrap: balance;
+  font: 600 25px/1.08 var(--fc); letter-spacing: .005em; color: var(--texto);
+}
+.apoio { margin: 8px 0 0; font-size: 15px; color: var(--texto-2); }
+
+/* Espaço reservado para a coroa (desenhada no SVG de fundo) */
+.coroa-espaco { position: relative; height: 166px; margin: 8px 0 12px; }
+.coroa-espaco .ancora, .pinhao-espaco .ancora { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+.miolo {
+  position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; z-index: 2;
+  border-radius: 50%; background: #fff; display: grid; place-items: center;
+  box-shadow: 0 0 0 1px var(--azul-linha), 0 4px 12px -4px rgba(0, 27, 94, .35);
+}
+.miolo img { width: 26px; height: 26px; }
+
+/* ---------- Cartões ---------- */
+.lojas { display: grid; gap: 48px; position: relative; z-index: 2; }
+.cartao {
+  position: relative; background: var(--cartao); border-radius: var(--raio);
+  box-shadow: 0 0 0 1px var(--linha), var(--sombra);
+  padding: 20px 18px 18px;
+}
+.cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.selo {
+  font: 600 12.5px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--azul); background: var(--azul-tinta); padding: 6px 9px 5px; border-radius: 6px;
+}
+.indice { font: 600 12.5px/1 var(--fc); letter-spacing: .14em; color: var(--texto-3); }
+.loja-nome { margin: 12px 0 0; font: 700 31px/1 var(--fc); letter-spacing: .002em; color: var(--texto); }
+.endereco { margin: 7px 0 0; display: flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--texto-2); }
+.endereco svg { width: 16px; height: 16px; flex: none; color: var(--azul-medio); }
+
+.zap {
+  margin-top: 16px; display: flex; align-items: center; gap: 14px; min-height: 66px; padding: 10px 16px 10px 12px;
+  border-radius: 14px; background: var(--verde); color: #fff;
+  box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 8px 18px -10px rgba(22, 138, 71, .8);
+  transition: background-color .15s, transform .15s;
+}
+.zap:hover { background: var(--verde-2); }
+.zap:active { transform: scale(.985); }
+.zap .ic { width: 44px; height: 44px; border-radius: 11px; background: rgba(255,255,255,.16); display: grid; place-items: center; flex: none; }
+.zap .ic svg { width: 25px; height: 25px; }
+.zap .txt { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.zap strong { font: 600 18px/1.15 var(--f); }
+.zap .num { font: 500 15px/1.2 var(--f); opacity: .92; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.zap .seta { width: 20px; height: 20px; flex: none; opacity: .9; }
+
+.sec { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn2 {
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 10px;
+  border-radius: 12px; background: #fff; color: var(--azul);
+  box-shadow: 0 0 0 1px var(--azul-linha) inset;
+  font: 600 15px/1.1 var(--f); white-space: nowrap; transition: background-color .15s, transform .15s;
+}
+.btn2 svg { width: 19px; height: 19px; flex: none; }
+.btn2:hover { background: var(--azul-tinta); }
+.btn2:active { transform: scale(.98); }
+.btn2.ok { color: var(--verde-2); box-shadow: 0 0 0 1px #A9DDBF inset; background: #EEF8F2; }
+
+/* ---------- Outros ---------- */
+.outros { margin-top: 48px; position: relative; z-index: 2; padding: 6px 0; }
+.outros h2 {
+  margin: 0; padding: 14px 18px 8px; font: 600 12.5px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-3);
+}
+.lista { list-style: none; margin: 0; padding: 0; }
+.lista li + li .acao { border-top: 1px solid var(--linha); }
+.lista li { padding: 0 18px; }
+.lista li + li { margin-top: 0; }
+.acao {
+  width: 100%; display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 10px 0; text-align: left;
+}
+.acao .ic { width: 40px; height: 40px; border-radius: 11px; background: var(--azul-tinta); color: var(--azul); display: grid; place-items: center; flex: none; }
+.acao .ic svg { width: 21px; height: 21px; }
+.acao .txt { flex: 1; min-width: 0; display: grid; }
+.acao strong { font: 600 16px/1.25 var(--f); color: var(--texto); }
+.acao .sub { font-size: 14px; color: var(--texto-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.acao .seta { width: 18px; height: 18px; color: #9AA6BF; flex: none; }
+.acao:hover strong { color: var(--azul); }
+.acao.ok .ic { background: #E6F5EC; color: var(--verde-2); }
+.acao.ok .sub { color: var(--verde-2); }
+
+/* ---------- Rodapé ---------- */
+.pinhao-espaco { position: relative; height: 96px; margin-top: 30px; }
+.rodape { position: relative; z-index: 2; margin: 10px 0 0; text-align: center; font-size: 13px; color: var(--texto-3); }
+.rodape b { font: 600 13px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-2); }
+
+/* ---------- Aviso ---------- */
+.aviso {
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 10;
+  transform: translate(-50%, 24px); opacity: 0; visibility: hidden;
+  display: flex; align-items: center; gap: 8px; max-width: calc(100% - 32px);
+  padding: 12px 16px; border-radius: 12px; background: var(--azul-escuro); color: #fff;
+  font: 500 15px/1.3 var(--f); box-shadow: 0 12px 30px -10px rgba(0, 27, 94, .6);
+  transition: opacity .2s, transform .2s, visibility .2s;
+}
+.aviso.mostra { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.aviso svg { width: 18px; height: 18px; flex: none; color: #7BE0A4; }
+.aviso.erro svg { color: #FF9A9A; }
+
+@media (min-width: 900px) {
+  .pagina { padding-top: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="pagina" id="pagina">
+  <svg class="camada" id="transmissao" aria-hidden="true" focusable="false"></svg>
+
+  <header class="topo">
+    <h1><img src="logo.svg" alt="AD Motos" width="214" height="66"></h1>
+    <p class="frase">Peças e acessórios para a sua moto</p>
+    <p class="apoio">Escolha a loja e fale com a gente no WhatsApp.</p>
+    <div class="coroa-espaco">
+      <span class="ancora" id="ancora-coroa"></span>
+      <span class="miolo"><img src="favicon.svg" alt="" width="30" height="30"></span>
+    </div>
+  </header>
+
+  <main>
+    <div class="lojas" id="lojas"></div>
+    <section class="cartao outros" aria-labelledby="outros-cab">
+      <h2 id="outros-cab">Mais opções</h2>
+      <ul class="lista" id="outros"></ul>
+    </section>
+  </main>
+
+  <div class="pinhao-espaco" aria-hidden="true"><span class="ancora" id="ancora-pinhao"></span></div>
+  <p class="rodape"><b>AD Motos</b><br>Várzea da Roça e Senhor do Bonfim · BA</p>
+
+  <svg class="camada" id="guias" aria-hidden="true" focusable="false"></svg>
+</div>
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="links.js"></script>
+<script src="icones.js"></script>
+<script>
+(function () {
+  // ---------- Ícones próprios (traço médio) ----------
+  const S = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || "") + '>' + d + '</svg>';
+  const IC = {
+    zap: S('<path d="M12 3.6a8.4 8.4 0 0 0-7.3 12.6L3.6 20.4l4.3-1.1A8.4 8.4 0 1 0 12 3.6Z"/>' +
+           '<path fill="currentColor" stroke="none" d="M9.1 7.9c.4-.4 1-.4 1.3.2l.8 1.6c.2.4.1.8-.2 1.1l-.6.6a5.6 5.6 0 0 0 2.6 2.6l.6-.6c.3-.3.7-.4 1.1-.2l1.6.8c.6.3.6.9.2 1.3-.9.9-2.1 1.2-3.4.7a8.3 8.3 0 0 1-4.7-4.7c-.5-1.3-.2-2.5.7-3.4Z"/>'),
+    rota: S('<path d="M20 4 4.5 10.6l6.4 2.5 2.5 6.4Z"/>'),
+    copiar: S('<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.6"/><path d="M15.5 8.5V6.6A2.6 2.6 0 0 0 12.9 4H6.6A2.6 2.6 0 0 0 4 6.6v6.3a2.6 2.6 0 0 0 2.6 2.6h1.9"/>'),
+    contato: S('<rect x="3" y="4.5" width="18" height="15" rx="2.8"/><circle cx="9" cy="10.4" r="2.3"/><path d="M5.6 16.2c.6-1.5 1.9-2.3 3.4-2.3s2.8.8 3.4 2.3M15 9.8h3.2M15 13.4h3.2"/>'),
+    email: S('<rect x="3" y="5.5" width="18" height="13" rx="2.8"/><path d="m4 7.6 8 5.6 8-5.6"/>'),
+    compartilhar: S('<path d="M12 3.8v11M7.8 8 12 3.8 16.2 8M5 12.8v4.6A2.6 2.6 0 0 0 7.6 20h8.8a2.6 2.6 0 0 0 2.6-2.6v-4.6"/>'),
+    pino: S('<path d="M12 20.6s-6.2-5.4-6.2-10.4a6.2 6.2 0 0 1 12.4 0c0 5-6.2 10.4-6.2 10.4Z"/><circle cx="12" cy="10.2" r="2.2"/>'),
+    seta: S('<path d="m9.5 6 6 6-6 6"/>', ' class="seta"'),
+    ok: S('<path d="m5 12.6 4.4 4.4L19 7.4"/>'),
+    alerta: S('<circle cx="12" cy="12" r="8.6"/><path d="M12 7.8v5M12 16.2h.01"/>'),
+  };
+
+  // ---------- Monta as lojas a partir de links.js ----------
+  const html = (window.LOJAS || []).map((loja, i) => {
+    const zap = loja.links.find(l => l.tipo === "zap");
+    const mapa = loja.links.find(l => l.tipo === "mapa");
+    const chave = zap ? zap.id.replace(/^zap-/, "") : String(i);
+    const nid = "loja-" + chave;
+    let h = '<article class="cartao loja" aria-labelledby="' + nid + '">' +
+      '<div class="cab"><span class="selo">' + esc(loja.detalhe) + '</span><span class="indice">LOJA ' + String(i + 1).padStart(2, "0") + '</span></div>' +
+      '<h2 class="loja-nome" id="' + nid + '">' + esc(loja.nome) + '</h2>' +
+      '<p class="endereco">' + IC.pino + '<span>' + esc(loja.endereco) + '</span></p>';
+    if (zap) h += '<a class="zap" href="' + esc(zap.url) + '" data-id="' + esc(zap.id) + '" data-tipo="zap"' + alvo(zap.url) +
+      ' aria-label="' + esc(zap.titulo + ", " + loja.nome + ", " + zap.sub) + '">' +
+      '<span class="ic">' + IC.zap + '</span><span class="txt"><strong>' + esc(zap.titulo) + '</strong><span class="num">' + esc(zap.sub) + '</span></span>' + IC.seta + '</a>';
+    h += '<div class="sec">';
+    if (mapa) h += '<a class="btn2" href="' + esc(mapa.url) + '" data-id="' + esc(mapa.id) + '" data-tipo="mapa"' + alvo(mapa.url) +
+      ' aria-label="' + esc(mapa.titulo + " até a loja de " + loja.nome) + '">' + IC.rota + '<span>' + esc(mapa.titulo) + '</span></a>';
+    if (zap) h += '<button type="button" class="btn2 copiar" data-id="copiar-' + esc(chave) + '" data-numero="' + esc(zap.sub) + '"' +
+      ' aria-label="' + esc("Copiar número de " + loja.nome + ", " + zap.sub) + '">' + IC.copiar + '<span>Copiar número</span></button>';
+    return h + '</div></article>';
+  }).join("");
+  document.getElementById("lojas").innerHTML = html;
+
+  const linha = (tag, attrs, icone, titulo, sub) =>
+    '<li><' + tag + ' class="acao" ' + attrs + '><span class="ic">' + icone + '</span><span class="txt"><strong>' + esc(titulo) +
+    '</strong><span class="sub">' + esc(sub) + '</span></span>' + IC.seta + '</' + tag + '></li>';
+  let outros = linha("a", 'href="admotos.vcf" data-id="salvar-contato" download', IC.contato, "Salvar contato", "As duas lojas na sua agenda");
+  (window.OUTROS || []).forEach(o => {
+    outros += linha("a", 'href="' + esc(o.url) + '" data-id="' + esc(o.id) + '"' + alvo(o.url), IC[o.tipo] || IC.email, o.titulo, o.sub);
+  });
+  outros += linha("button", 'type="button" data-id="compartilhar"', IC.compartilhar, "Compartilhar", "Envie esta página para alguém");
+  document.getElementById("outros").innerHTML = outros;
+
+  // ---------- Aviso e cópia ----------
+  const aviso = document.getElementById("aviso");
+  let tAviso;
+  function avisar(msg, erro) {
+    aviso.innerHTML = (erro ? IC.alerta : IC.ok) + "<span></span>";
+    aviso.lastChild.textContent = msg;
+    aviso.classList.toggle("erro", !!erro);
+    aviso.classList.add("mostra");
+    clearTimeout(tAviso); tAviso = setTimeout(() => aviso.classList.remove("mostra"), 2400);
+  }
+  function copiar(texto) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto);
+    return new Promise((ok, falha) => {
+      const t = document.createElement("textarea");
+      t.value = texto; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { document.execCommand("copy") ? ok() : falha(); } catch (e) { falha(e); }
+      t.remove();
+    });
+  }
+  function marcar(el, sel, texto) {
+    const alvoTxt = el.querySelector(sel);
+    if (!el.dataset.orig) el.dataset.orig = alvoTxt.textContent;
+    alvoTxt.textContent = texto; el.classList.add("ok");
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { alvoTxt.textContent = el.dataset.orig; el.classList.remove("ok"); }, 2200);
+  }
+  document.addEventListener("click", ev => {
+    const el = ev.target.closest("[data-id]");
+    if (!el) return;
+    const id = el.dataset.id;
+    if (id.startsWith("copiar-")) {
+      const num = el.dataset.numero;
+      copiar(num).then(() => { marcar(el, "span", "Copiado!"); avisar("Número copiado: " + num); },
+                       () => avisar("Não deu para copiar. Anote: " + num, true));
+    } else if (id === "compartilhar") {
+      const url = location.href.split("#")[0];
+      const dados = { title: "AD Motos", text: "AD Motos · Peças e acessórios para a sua moto", url };
+      if (navigator.share) { navigator.share(dados).catch(() => {}); return; }
+      copiar(url).then(() => { marcar(el, ".sub", "Link copiado!"); avisar("Link copiado"); },
+                       () => avisar("Não deu para copiar o link", true));
+    } else if (id === "salvar-contato") {
+      avisar("Baixando o contato da AD Motos");
+    }
+  });
+
+  // ---------- Transmissão: coroa, pinhão e corrente (SVG) ----------
+  // ANIMAÇÃO PENDENTE DE APROVAÇÃO: por enquanto a corrente é desenhada parada (deslocamento fixo).
+  const NS = "http://www.w3.org/2000/svg";
+  const pagina = document.getElementById("pagina");
+  const fundo = document.getElementById("transmissao");
+  const frente = document.getElementById("guias");
+  const P0 = 13.5, Z1 = 31, Z2 = 15;          // passo da corrente e nº de dentes
+  const AZUL = "#002C8F", TRACO = "#002C8F", VERM = "#E92525";
+
+  function rel(el) {
+    let x = 0, y = 0;
+    while (el && el !== pagina) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+    return { x, y };
+  }
+  const pt = (cx, cy, r, a) => (cx + r * Math.cos(a)).toFixed(2) + " " + (cy + r * Math.sin(a)).toFixed(2);
+
+  // Perfil de dentes de roda dentada: vão (onde assenta o rolo) no ângulo 0
+  function dentes(Z, R, p) {
+    const passo = 2 * Math.PI / Z, Rt = R + 0.30 * p, Rr = R - 0.34 * p, Rf = R - 0.46 * p;
+    const meio = 0.26 * passo, topo = 0.12 * passo;
+    let d = "";
+    for (let k = 0; k < Z; k++) {
+      const g = k * passo;
+      d += (k ? " L " : "M ") + pt(0, 0, Rr, g - meio * .55);
+      d += " Q " + pt(0, 0, Rf, g) + " " + pt(0, 0, Rr, g + meio * .55);
+      d += " Q " + pt(0, 0, R + 0.06 * p, g + passo * .3) + " " + pt(0, 0, Rt, g + passo / 2 - topo);
+      d += " A " + Rt.toFixed(2) + " " + Rt.toFixed(2) + " 0 0 1 " + pt(0, 0, Rt, g + passo / 2 + topo);
+      d += " Q " + pt(0, 0, R + 0.06 * p, g + passo * .7) + " " + pt(0, 0, Rr, g + passo - meio * .55);
+    }
+    return d + " Z";
+  }
+  // Janelas de alívio da coroa (raios de largura constante)
+  function janelas(n, ri, ro, meiaLarg, giro) {
+    let d = "";
+    for (let k = 0; k < n; k++) {
+      const a = giro + k * 2 * Math.PI / n, b = a + 2 * Math.PI / n;
+      const eo = meiaLarg / ro, ei = meiaLarg / ri;
+      d += " M " + pt(0, 0, ro, a + eo) + " A " + ro + " " + ro + " 0 0 1 " + pt(0, 0, ro, b - eo) +
+           " L " + pt(0, 0, ri, b - ei) + " A " + ri + " " + ri + " 0 0 0 " + pt(0, 0, ri, a + ei) + " Z";
+    }
+    return d;
+  }
+  // Placa de elo em "8" entre dois pinos (comprimento p), a = raio da ponta, w = meia altura da cintura
+  function placa(p, a, w) {
+    const h = p / 2, c = a - 2 * w;
+    return "M " + (-h) + " " + (-a) + " Q 0 " + c.toFixed(2) + " " + h + " " + (-a) +
+      " A " + a + " " + a + " 0 0 1 " + h + " " + a +
+      " Q 0 " + (-c).toFixed(2) + " " + (-h) + " " + a +
+      " A " + a + " " + a + " 0 0 1 " + (-h) + " " + (-a) + " Z";
+  }
+  function el(tag, attrs, pai) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (pai) pai.appendChild(e);
+    return e;
+  }
+
+  let ultimo = "";
+  function desenhar() {
+    const W = pagina.offsetWidth, H = pagina.offsetHeight;
+    const a1 = rel(document.getElementById("ancora-coroa")), a2 = rel(document.getElementById("ancora-pinhao"));
+    const chave = [W, H, a1.x, a1.y, a2.x, a2.y].join(",");
+    if (chave === ultimo) return;
+    ultimo = chave;
+    [fundo, frente].forEach(s => { s.setAttribute("width", W); s.setAttribute("height", H); s.setAttribute("viewBox", "0 0 " + W + " " + H); s.innerHTML = ""; });
+
+    // Geometria do laço: raios ajustados para que o comprimento seja múltiplo exato do passo
+    const cx1 = a1.x, cy1 = a1.y, cx2 = a2.x, cy2 = a2.y, D = cy2 - cy1;
+    let p = P0, R, r, b, reta, L, N;
+    for (let it = 0; it < 6; it++) {
+      R = Z1 * p / (2 * Math.PI); r = Z2 * p / (2 * Math.PI);
+      b = Math.asin((R - r) / D); reta = Math.sqrt(D * D - (R - r) * (R - r));
+      L = R * (Math.PI + 2 * b) + r * (Math.PI - 2 * b) + 2 * reta;
+      N = 2 * Math.round(L / (2 * P0)); p = L / N;
+    }
+    const s1 = R * (Math.PI + 2 * b), s2 = s1 + reta, s3 = s2 + r * (Math.PI - 2 * b);
+    function pos(s) {
+      s = ((s % L) + L) % L;
+      if (s < s1) { const a = Math.PI - b + s / R; return [cx1 + R * Math.cos(a), cy1 + R * Math.sin(a)]; }
+      if (s < s2) { const t = (s - s1) / reta; return [cx1 + R * Math.cos(b) + t * (cx2 + r * Math.cos(b) - cx1 - R * Math.cos(b)), cy1 + R * Math.sin(b) + t * (cy2 + r * Math.sin(b) - cy1 - R * Math.sin(b))]; }
+      if (s < s3) { const a = b + (s - s2) / r; return [cx2 + r * Math.cos(a), cy2 + r * Math.sin(a)]; }
+      const t = (s - s3) / reta;
+      return [cx2 - r * Math.cos(b) + t * (cx1 - R * Math.cos(b) - cx2 + r * Math.cos(b)), cy2 + r * Math.sin(b) + t * (cy1 + R * Math.sin(b) - cy2 - r * Math.sin(b))];
+    }
+    const deslocamento = p * 0.25;  // posição fixa da corrente (sem animação por enquanto)
+    const grau = x => x * 180 / Math.PI;
+
+    // Coroa
+    const gC = el("g", { transform: "translate(" + cx1 + " " + cy1 + ") rotate(" + grau(Math.PI - b + deslocamento / R).toFixed(3) + ")" }, fundo);
+    el("path", { d: dentes(Z1, R, p) + janelas(6, R * 0.5, R * 0.74, 4.2, 0.3), "fill-rule": "evenodd",
+      fill: "#E8EEF9", stroke: TRACO, "stroke-width": 1.3, "stroke-linejoin": "round" }, gC);
+    el("circle", { r: (R - 0.34 * p - 4.5).toFixed(2), fill: "none", stroke: TRACO, "stroke-width": .7, opacity: .45 }, gC);
+    for (let k = 0; k < 6; k++) {
+      const a = 0.3 + (k + .5) * Math.PI / 3, rb = R * 0.41;
+      el("circle", { cx: (rb * Math.cos(a)).toFixed(2), cy: (rb * Math.sin(a)).toFixed(2), r: 2.1, fill: "#fff", stroke: VERM, "stroke-width": 1.2 }, gC);
+    }
+    // Pinhão
+    const gP = el("g", { transform: "translate(" + cx2 + " " + cy2 + ") rotate(" + grau(b + (deslocamento - s2) / r).toFixed(3) + ")" }, fundo);
+    el("path", { d: dentes(Z2, r, p), fill: "#E8EEF9", stroke: TRACO, "stroke-width": 1.3, "stroke-linejoin": "round" }, gP);
+    el("circle", { r: 12, fill: "#fff", stroke: TRACO, "stroke-width": 1.3 }, gP);
+    let estrias = "";
+    for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5; estrias += (k ? " L " : "M ") + pt(0, 0, 7.4, a) + " L " + pt(0, 0, 5.6, a + Math.PI / 10); }
+    el("path", { d: estrias + " Z", fill: "none", stroke: TRACO, "stroke-width": 1.1, "stroke-linejoin": "round" }, gP);
+    el("circle", { r: 2, fill: VERM }, gP);
+
+    // Corrente: placas internas, depois externas com pinos vermelhos
+    const gI = el("g", {}, fundo), gE = el("g", {}, fundo);
+    const dInt = placa(p, 3.7, 2.7), dExt = placa(p, 4.4, 3.05);
+    for (let i = 0; i < N; i++) {
+      const A = pos(deslocamento + i * p), B = pos(deslocamento + (i + 1) * p);
+      const t = "translate(" + ((A[0] + B[0]) / 2).toFixed(2) + " " + ((A[1] + B[1]) / 2).toFixed(2) + ") rotate(" + grau(Math.atan2(B[1] - A[1], B[0] - A[0])).toFixed(2) + ")";
+      if (i % 2) {
+        el("path", { d: dInt, transform: t, fill: "#8EA3D6" }, gI);
+      } else {
+        const g = el("g", { transform: t }, gE);
+        el("path", { d: dExt, fill: AZUL }, g);
+        el("circle", { cx: -p / 2, cy: 0, r: 1.45, fill: VERM }, g);
+        el("circle", { cx: p / 2, cy: 0, r: 1.45, fill: VERM }, g);
+      }
+    }
+
+    // Guias da corrente encaixadas na borda de cada cartão
+    const xR1 = cx1 + R * Math.cos(b), yR1 = cy1 + R * Math.sin(b), xR2 = cx2 + r * Math.cos(b), yR2 = cy2 + r * Math.sin(b);
+    const ang = grau(Math.atan2(yR2 - yR1, xR2 - xR1)) - 90;
+    const xEm = (y, lado) => { const t = (y - yR1) / (yR2 - yR1); const xr = xR1 + t * (xR2 - xR1); return lado > 0 ? xr : 2 * cx1 - xr; };
+    document.querySelectorAll(".cartao").forEach(c => {
+      const o = rel(c);
+      [o.y, o.y + c.offsetHeight].forEach(y => [-1, 1].forEach(lado => {
+        const x = xEm(y, lado);
+        const g = el("g", { transform: "translate(" + x.toFixed(2) + " " + y.toFixed(2) + ") rotate(" + (lado * ang).toFixed(2) + ")" }, frente);
+        el("rect", { x: -7.5, y: -8, width: 15, height: 16, rx: 4, fill: "#fff", stroke: TRACO, "stroke-width": 1.1 }, g);
+                el("circle", { r: 1.5, fill: VERM }, g);
+      }));
+    });
+  }
+
+  desenhar();
+  window.addEventListener("load", desenhar);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(desenhar);
+  if (window.ResizeObserver) { let f; new ResizeObserver(() => { cancelAnimationFrame(f); f = requestAnimationFrame(desenhar); }).observe(pagina); }
+  else window.addEventListener("resize", desenhar);
+})();
+</script>
+<script src="rastreio.js"></script>
+</body>
+</html>
