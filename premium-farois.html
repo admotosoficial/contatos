@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça, Senhor do Bonfim e Capim Grosso (BA). Fale com a loja pelo WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AD Motos">
 <meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente pelo WhatsApp.">
@@ -414,7 +414,7 @@ img { display: block; }
     `<a class="acao vidro" href="admotos.vcf" data-id="salvar-contato" download><span class="disco">${CONTATO}</span><span class="r">Salvar contato</span></a>
      <button class="acao vidro" type="button" data-id="compartilhar" id="compartilhar"><span class="disco">${PARTILHA}</span><span class="r">Compartilhar</span></button>` +
     OUTROS.map(k => `<a class="acao vidro" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}
-        aria-label="${esc(k.titulo + (k.sub ? ": " + k.sub : ""))}"><span class="disco">${ICO[k.tipo] || ICO.site}</span><span class="r">${esc(CURTO[k.tipo] || k.titulo)}</span></a>`).join("");
+        aria-label="${esc(k.titulo + (k.sub ? ": " + k.sub : ""))}"><span class="disco">${ICO[k.tipo] || ICO.site}</span><span class="r">${esc(k.curto || CURTO[k.tipo] || k.titulo)}</span></a>`).join("");
   if (OUTROS.length + 2 !== 3) $("acoes").style.gridTemplateColumns = `repeat(${Math.min(OUTROS.length + 2, 4)}, minmax(0,1fr))`;
 
   /* ----- Aviso ----- */

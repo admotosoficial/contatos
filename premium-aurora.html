@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça, Senhor do Bonfim e Capim Grosso (BA). Fale com a loja pelo WhatsApp.">
 <meta name="theme-color" content="#061649">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AD Motos">
@@ -149,7 +149,7 @@ img { display: block; }
 .copiar svg { width: 21px; height: 21px; }
 
 /* Fileira de ícones redondos */
-.redondos { display: flex; justify-content: center; gap: 22px; margin: 4px 0 0; padding: 0; list-style: none; }
+.redondos { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 22px; margin: 4px 0 0; padding: 0; list-style: none; }
 .redondos li { display: grid; justify-items: center; gap: 8px; }
 .redondo { width: 62px; height: 62px; border-radius: 50%; justify-content: center; padding: 0;
   background: rgba(14, 28, 84, .38); -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%);
@@ -294,7 +294,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
   OUTROS.forEach(o => {
     redondos += '<li><a class="btn redondo" data-id="' + esc(o.id) + '" href="' + esc(o.url) + '"' + alvo(o.url) +
       ' aria-label="' + esc(o.titulo + (o.sub ? ": " + o.sub : "")) + '"><span class="luz"></span>' + (ICO[o.tipo] || ICO.site) + '</a>' +
-      '<span aria-hidden="true">' + esc(CURTO[o.tipo] || o.titulo) + '</span></li>';
+      '<span aria-hidden="true">' + esc(o.curto || CURTO[o.tipo] || o.titulo) + '</span></li>';
   });
   document.getElementById("redondos").innerHTML = redondos;
   const email = OUTROS.find(o => o.tipo === "email" && o.sub);

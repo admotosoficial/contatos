@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para motos em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para motos em Várzea da Roça, Senhor do Bonfim e Capim Grosso (BA). Fale com a loja pelo WhatsApp.">
 <meta name="theme-color" content="#0B0D11">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AD Motos">
@@ -268,7 +268,7 @@ button { font: inherit; color: inherit; }
       <img class="letreiro" src="letreiro-branco.svg" alt="AD Motos" width="168" height="35">
     </div>
     <p class="frase">Peças e acessórios para motos</p>
-    <p class="cidades">Várzea da Roça<span>·</span>Senhor do Bonfim<span>·</span>BA</p>
+    <p class="cidades">Várzea da Roça<span>·</span>Senhor do Bonfim<span>·</span>Capim Grosso</p>
   </header>
 
   <main id="conteudo">
@@ -311,6 +311,7 @@ button { font: inherit; color: inherit; }
     pino: S('<path d="M12 21s-6.5-5.7-6.5-11a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>'),
     copiar: S('<rect x="8.5" y="8.5" width="11" height="11" rx="2.8"/><path d="M15.5 8.5V7a2.5 2.5 0 0 0-2.5-2.5H7A2.5 2.5 0 0 0 4.5 7v6A2.5 2.5 0 0 0 7 15.5h1.5"/>'),
     contato: S('<rect x="3.5" y="4.5" width="17" height="15" rx="3.2"/><circle cx="10" cy="10.5" r="2.3"/><path d="M6.6 16c.6-1.6 1.9-2.4 3.4-2.4s2.8.8 3.4 2.4M16 9.5h1.8M16 12.5h1.8"/>'),
+    site: S('<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/>'),
     email: S('<rect x="3.5" y="5.5" width="17" height="13" rx="3.2"/><path d="m4.5 7.5 6.3 4.8c.7.5 1.7.5 2.4 0l6.3-4.8"/>'),
     compartilhar: S('<path d="M12 14.5V4m0 0L8.3 7.7M12 4l3.7 3.7"/><path d="M8 10.5H7a2.5 2.5 0 0 0-2.5 2.5v4.5A2.5 2.5 0 0 0 7 20h10a2.5 2.5 0 0 0 2.5-2.5V13a2.5 2.5 0 0 0-2.5-2.5h-1"/>'),
     seta: S('<path d="m9.5 6 6 6-6 6"/>', ' class="seta" stroke-width="2.4"'),
@@ -357,7 +358,7 @@ button { font: inherit; color: inherit; }
       : '<button type="button" class="item" data-id="' + esc(o.id) + '">') +
     '<span class="ic">' + o.ic + '</span><span><span class="t">' + esc(o.t) + '</span><span class="s">' + esc(o.s) + '</span></span>' +
     IC.seta + (o.href ? '</a>' : '</button>') + '</li>';
-  let mais = item({ id: "salvar-contato", href: "admotos.vcf", extra: " download", ic: IC.contato, t: "Salvar contato", s: "Os dois números na sua agenda" });
+  let mais = item({ id: "salvar-contato", href: "admotos.vcf", extra: " download", ic: IC.contato, t: "Salvar contato", s: "Todos os contatos na sua agenda" });
   OUTROS.forEach(o => { mais += item({ id: o.id, href: o.url, ic: IC[o.tipo] || IC.email, t: o.titulo, s: o.sub }); });
   mais += item({ id: "compartilhar", ic: IC.compartilhar, t: "Compartilhar", s: "Envie esta página para alguém" });
   document.getElementById("mais").innerHTML = mais;

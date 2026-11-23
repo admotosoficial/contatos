@@ -13,7 +13,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="AD Motos — peças e acessórios para motos em Várzea da Roça e Senhor do Bonfim (BA). Fale com a gente pelo WhatsApp.">
+<meta name="description" content="AD Motos — peças e acessórios para motos em Várzea da Roça, Senhor do Bonfim e Capim Grosso (BA). Fale com a gente pelo WhatsApp.">
 <meta name="theme-color" content="#0636A6">
 <meta property="og:title" content="AD Motos">
 <meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente pelo WhatsApp.">
@@ -125,7 +125,7 @@ main{width:100%;max-width:472px;margin:0 auto;
 .sec svg{flex:none;width:19px;height:19px}
 
 /* mais opções: etiquetas pequenas lado a lado */
-.extras{--w:112px;--g:8px;display:flex;justify-content:center;gap:var(--g);margin-top:12px;padding-top:40px;position:relative}
+.extras{--w:112px;--g:8px;display:flex;flex-wrap:wrap;justify-content:center;gap:52px var(--g);margin-top:12px;padding-top:40px;position:relative}
 .mini{position:relative;width:var(--w);flex:none}
 .mini .gancho{top:-40px}
 .mini .tag{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;height:100%;padding:14px 8px 14px;
@@ -308,7 +308,7 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
     <span class="simb"><img src="favicon.svg" alt=""></span>
     <img class="letra" src="letreiro-branco.svg" alt="AD Motos">
   </div>
-  <div>Peças e acessórios para motos<br>Várzea da Roça e Senhor do Bonfim - BA</div>
+  <div>Peças e acessórios para motos<br>Várzea da Roça, Senhor do Bonfim e Capim Grosso - BA</div>
 </footer>
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
@@ -346,7 +346,7 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
     h += '<article class="loja" aria-labelledby="loja-' + i + '">' + gancho() +
       '<div class="tag" style="--d:' + (0.25 + i * 0.15).toFixed(2) + 's">' +
         '<div class="topo-tag"><span class="selo' + (matriz ? '' : ' f') + '">' + E(l.detalhe || "") + '</span>' +
-        '<img class="marca" src="letreiro-azul.svg" alt="" width="50" height="10"></div>' +
+        (/hesla/i.test(l.detalhe || "") ? '' : '<img class="marca" src="letreiro-azul.svg" alt="" width="50" height="10">') + '</div>' +
         '<h2 class="cidade" id="loja-' + i + '">' + E(l.nome) + '</h2>' +
         '<p class="end">' + IC.pino + '<span>' + E(l.endereco || "") + '</span></p>' +
         '<div class="picote" aria-hidden="true"></div>';
@@ -383,7 +383,7 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
   var x = mini("a", 'href="admotos.vcf" data-id="salvar-contato" download', IC.contato, "Salvar contato", "Na agenda do celular");
   OUTROS.forEach(function (o) {
     x += mini("a", 'href="' + E(o.url) + '" data-id="' + E(o.id) + '"' + A(o.url), IC[o.tipo] || IC.site,
-      E(o.tipo === "email" ? "E-mail" : o.titulo), o.sub ? E(o.sub).replace("@", "@<wbr>") : "");
+      E(o.curto || o.titulo), o.sub ? E(o.sub).replace("@", "@<wbr>") : "");
   });
   x += mini("button", 'type="button" data-id="compartilhar"', IC.partilhar, "Compartilhar", "Enviar esta página");
   document.getElementById("extras").innerHTML = x;

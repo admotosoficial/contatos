@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça, Senhor do Bonfim e Capim Grosso (BA). Fale com a loja pelo WhatsApp.">
 <meta name="theme-color" content="#00133F">
 <meta property="og:title" content="AD Motos">
 <meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a loja pelo WhatsApp.">
@@ -303,7 +303,7 @@ h1 .traco::after { /* rastro de lanterna: o detalhe vermelho da tipografia */
     </div>
 
     <div class="titulo">
-      <p class="olho">Várzea da Roça · Senhor do Bonfim</p>
+      <p class="olho">Várzea da Roça · Senhor do Bonfim · Capim Grosso</p>
       <h1 id="manchete"><span class="l">Peças e acessórios</span><span class="l">para a <span class="traco">sua moto</span></span></h1>
       <ul class="selos" aria-label="O que você encontra">
         <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-peca"/></svg>Peças</li>
@@ -343,6 +343,7 @@ h1 .traco::after { /* rastro de lanterna: o detalhe vermelho da tipografia */
     <g id="i-chave"><path d="M14.5 4.2a4.3 4.3 0 0 0-1 5.6L4.6 18.7a1.6 1.6 0 0 0 2.3 2.3l8.9-8.9a4.3 4.3 0 0 0 5.6-1l-2.6-.6-.6-2.5 2.2-2.2.6 2.5"/></g>
     <g id="i-peca"><circle cx="12" cy="12" r="3"/><path d="M10.6 3.5h2.8l.5 2.3 1.7.8 2-1.3 2 2-1.3 2 .8 1.7 2.3.5v2.8l-2.3.5-.8 1.7 1.3 2-2 2-2-1.3-1.7.8-.5 2.3h-2.8l-.5-2.3-1.7-.8-2 1.3-2-2 1.3-2-.8-1.7-2.3-.5v-2.8l2.3-.5.8-1.7-1.3-2 2-2 2 1.3 1.7-.8Z"/></g>
     <g id="i-contato"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9.5" cy="10.5" r="2.3"/><path d="M5.8 16.5a3.9 3.9 0 0 1 7.4 0M15 10h3M15 13.5h3"/></g>
+    <g id="i-site"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/></g>
     <g id="i-email"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></g>
     <g id="i-compartilhar"><path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M6 11.5H5.5v7a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-7H18"/></g>
     <g id="i-ok"><path d="m5 12.5 4.5 4.5L19 7.5"/></g>
@@ -362,7 +363,7 @@ h1 .traco::after { /* rastro de lanterna: o detalhe vermelho da tipografia */
   const sufixo = nome => nome.split(/\s+/).pop().normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const idCopia = (l, z) => "copiar-" + (z && z.id.startsWith("zap-") ? z.id.slice(4) : sufixo(l.nome));
   const lojas = window.LOJAS || [], outros = window.OUTROS || [];
-  const icone = { zap: "zap", mapa: "mapa", email: "email" };
+  const icone = { zap: "zap", mapa: "mapa", email: "email", site: "site" };
 
   $("#lojas").innerHTML = lojas.map(l => {
     const z = l.links.find(k => k.tipo === "zap"), m = l.links.find(k => k.tipo === "mapa");
@@ -379,7 +380,7 @@ h1 .traco::after { /* rastro de lanterna: o detalhe vermelho da tipografia */
   }).join("");
 
   $("#acoes").innerHTML =
-    `<a class="acao" href="admotos.vcf" data-id="salvar-contato" download>${ic("contato")}<span class="t"><b>Salvar contato</b><small>As duas lojas na sua agenda</small></span>${seta}</a>` +
+    `<a class="acao" href="admotos.vcf" data-id="salvar-contato" download>${ic("contato")}<span class="t"><b>Salvar contato</b><small>Todos os contatos na sua agenda</small></span>${seta}</a>` +
     outros.map(k => link(k, "acao", `${ic(icone[k.tipo] || "email")}<span class="t"><b>${esc(k.titulo)}</b><small>${esc(k.sub || "")}</small></span>${seta}`)).join("") +
     `<button class="acao" type="button" data-id="compartilhar">${ic("compartilhar")}<span class="t"><b>Compartilhar</b><small>Envie esta página para alguém</small></span>${seta}</button>`;
 

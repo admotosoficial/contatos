@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça e Senhor do Bonfim (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para a sua moto em Várzea da Roça, Senhor do Bonfim e Capim Grosso (BA). Fale com a loja pelo WhatsApp.">
 <meta name="theme-color" content="#F5F5F7">
 <meta property="og:title" content="AD Motos">
 <meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a loja pelo WhatsApp.">
@@ -242,7 +242,7 @@ body.folha-aberta.anima .barra { animation: none; }
     <section class="hero" aria-labelledby="manchete">
       <p class="olho"><i aria-hidden="true"></i>Peças e acessórios</p>
       <h1 id="manchete"><span class="l">Tudo para</span><span class="l"><span class="grad">a sua moto</span><span class="ponto">.</span></span></h1>
-      <p class="lead" id="lead">Duas lojas na Bahia. <b>Chame no WhatsApp</b> a que fica mais perto de você.</p>
+      <p class="lead" id="lead">Três lojas na Bahia. <b>Chame no WhatsApp</b> a que fica mais perto de você.</p>
     </section>
 
     <div class="secao"><h2>Nossas lojas</h2><span id="qtd-lojas"></span></div>
@@ -308,13 +308,13 @@ body.folha-aberta.anima .barra { animation: none; }
     </article>`;
   }).join("");
 
-  $("#qtd-lojas").textContent = lojas.length === 2 ? "Duas cidades" : "";
+  $("#qtd-lojas").textContent = lojas.length === 3 ? "Três cidades" : lojas.length === 2 ? "Duas cidades" : "";
   $("#cidades").textContent = lojas.map(l => l.nome).join(" e ") + " · BA";
 
   // Ações gerais
   const ic = h => `<span class="ic">${h}</span>`;
   $("#acoes").innerHTML =
-    `<a class="acao toque" href="admotos.vcf" data-id="salvar-contato" download>${ic(SVG.contato)}<span class="t"><b>Salvar contato</b><small>Os dois números na agenda</small></span>${SETA}</a>` +
+    `<a class="acao toque" href="admotos.vcf" data-id="salvar-contato" download>${ic(SVG.contato)}<span class="t"><b>Salvar contato</b><small>Todos os contatos na agenda</small></span>${SETA}</a>` +
     outros.map(k => link(k, "acao toque", `${ic(ICO[k.tipo] || ICO.site)}<span class="t"><b>${esc(k.titulo)}</b><small>${esc(k.sub || "")}</small></span>${SETA}`)).join("") +
     `<button class="acao toque" type="button" data-id="compartilhar">${ic(SVG.compartilhar)}<span class="t"><b>Compartilhar</b><small>Envie esta página</small></span>${SETA}</button>`;
 
