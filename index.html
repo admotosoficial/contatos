@@ -443,8 +443,11 @@ body.folha-aberta.anima .barra { animation: none; }
   $("#opcoes").innerHTML =
     `<p class="grupo-folha">Lojas Físicas</p>` +
     lojas.map(l => { const z = l.links.find(k => k.tipo === "zap"); return z ? opcao(z, l.nome, z.sub) : ""; }).join("") +
-    (canaisZap.length ? `<p class="grupo-folha">Atendimento</p>` +
-      canaisZap.map(c => opcao(c, nomeCanal(c), extra(c).concat(c.sub).filter(Boolean).join(" · "))).join("") : "");
+    // Atacado (Televendas + Loja online) num grupo; os demais (Garantia, Financeiro) em "Outros".
+    [["Atacado (Matriz)", canaisZap.filter(c => c.grupo === "Atacado")], ["Outros", canaisZap.filter(c => c.grupo !== "Atacado")]]
+      .filter(([, cs]) => cs.length)
+      .map(([titulo, cs]) => `<p class="grupo-folha">${esc(titulo)}</p>` +
+        cs.map(c => opcao(c, nomeCanal(c), extra(c).concat(c.sub).filter(Boolean).join(" · "))).join("")).join("");
 
   const folha = $("#escolha"), corpo = document.body;
   const reduz = matchMedia("(prefers-reduced-motion: reduce)");
