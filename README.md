@@ -1,6 +1,6 @@
 # AD Motos · página de links (bio do Instagram)
 
-Site estático publicado de graça pelo GitHub Pages: https://helyanaraujo.github.io/admotos-links/
+Site estático publicado de graça pelo GitHub Pages: https://links.admotos.com.br/
 
 - `index.html` — a página da bio.
 - `painel.html` — painel de visitas e cliques (pede senha).
