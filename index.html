@@ -14,6 +14,7 @@
 <link rel="apple-touch-icon" href="icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://hhjcwygwxmhkblokeraf.supabase.co" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
 /* Vitrine clara · estilo Apple: papel quase branco, manchete enorme, cartões grandes com sombras em camadas,
@@ -181,6 +182,7 @@ dialog.pergunta::backdrop { background: rgba(8, 12, 30, .42); -webkit-backdrop-f
 .pergunta .bt.cheio { grid-column: 1 / -1; }
 .pergunta .bts.pilha { grid-template-columns: 1fr; }
 .pergunta .bt:active { filter: brightness(.95); }
+.pergunta .bt.abrindo { opacity: .8; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { dialog.pergunta[open] { animation: none; } }
 dialog.folha { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; overscroll-behavior: contain; border: 0;
   padding: 10px max(20px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 18px) max(20px, env(safe-area-inset-left, 0px));
@@ -368,9 +370,9 @@ body.folha-aberta.anima .barra { animation: none; }
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<script src="config.js?v=20261124e"></script>
-<script src="links.js?v=20261124e"></script>
-<script src="icones.js?v=20261124e"></script>
+<script src="config.js?v=20261125a"></script>
+<script src="links.js?v=20261125a"></script>
+<script src="icones.js?v=20261125a"></script>
 <script>
 (function () {
   const $ = s => document.querySelector(s);
@@ -511,7 +513,7 @@ body.folha-aberta.anima .barra { animation: none; }
       <p id="pl-texto">Nosso site de atacado é exclusivo para lojas de motopeças.</p>
       <p class="q">Você tem loja de motopeças?</p>
       <div class="bts pilha">
-        <a class="bt sim confirmado" href="${esc(lojaOnline ? lojaOnline.url : "#")}" data-id="loja-online">Sim, tenho loja</a>
+        <a class="bt sim confirmado" href="${esc(lojaOnline ? lojaOnline.url : "#")}" data-id="loja-online" data-espera="150">Sim, tenho loja</a>
         <button class="bt nao" type="button" data-id="loja-online-nao" id="pl-nao">Não, sou cliente</button>
       </div>`;
   }
@@ -525,8 +527,14 @@ body.folha-aberta.anima .barra { animation: none; }
       </div>`;
     const t = $("#pl-titulo"); if (t) t.focus({ preventScroll: true });
   }
+  let preconectado = false;
+  function preconectar(url) { // começa a conexão com o site da loja enquanto o cliente lê o aviso
+    if (preconectado || !url) return; preconectado = true;
+    try { const l = document.createElement("link"); l.rel = "preconnect"; l.href = new URL(url).origin; document.head.appendChild(l); } catch (e) {}
+  }
   function abrirPergunta() {
     perguntaInicial();
+    preconectar(lojaOnline && lojaOnline.url);
     if (pergunta.showModal) pergunta.showModal(); else pergunta.setAttribute("open", "");
     const t = $("#pl-titulo"); if (t) t.focus({ preventScroll: true });
   }
@@ -540,6 +548,8 @@ body.folha-aberta.anima .barra { animation: none; }
     abrirPergunta();
   }, true);
   pergunta.addEventListener("click", e => {
+    const sim = e.target.closest("a.sim.confirmado");
+    if (sim) { sim.textContent = "Abrindo a loja…"; sim.classList.add("abrindo"); return; }
     if (e.target.closest("#pl-nao")) { perguntaNao(); return; }
     if (e.target.closest("#pl-fechar")) { fecharPergunta(); return; }
     if (e.target.closest("#pl-lojas")) {
@@ -633,6 +643,6 @@ body.folha-aberta.anima .barra { animation: none; }
   setTimeout(() => corpo.classList.remove("anima"), 3600);
 })();
 </script>
-<script src="rastreio.js?v=20261124e"></script>
+<script src="rastreio.js?v=20261125a"></script>
 </body>
 </html>

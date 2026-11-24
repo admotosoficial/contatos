@@ -36,6 +36,7 @@ document.addEventListener("click", ev => {
   ev.preventDefault();
   let foi = false;
   const ir = () => { if (foi) return; foi = true; location.href = el.href; };
-  Promise.race([envio, new Promise(r => setTimeout(r, 600))]).then(ir, ir);
+  const espera = Number(el.dataset.espera) || 600; // data-espera="150" para links que precisam abrir mais rápido
+  Promise.race([envio, new Promise(r => setTimeout(r, espera))]).then(ir, ir);
 });
 })();
