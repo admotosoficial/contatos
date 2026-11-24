@@ -171,6 +171,7 @@ dialog.folha.fechando::backdrop { animation: fade .28s ease reverse forwards; }
 .opcao .bola { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--verde); color: #fff;
   box-shadow: 0 6px 14px -6px rgba(22, 152, 76, .7); }
 .opcao .bola svg { width: 24px; height: 24px; }
+.opcao .bola.site { background: var(--azul); }
 .opcao .t { display: grid; gap: 2px; min-width: 0; }
 .opcao .t b { font: 700 18px/1.15 var(--disp); letter-spacing: -.02em; }
 .opcao .t small { font: 500 14px/1.25 var(--txt); color: var(--suave); font-variant-numeric: tabular-nums; }
@@ -328,7 +329,7 @@ body.folha-aberta.anima .barra { animation: none; }
 <dialog class="folha" id="escolha" aria-labelledby="escolha-titulo">
   <div class="alca" aria-hidden="true"></div>
   <h2 id="escolha-titulo">Com quem quer falar?</h2>
-  <p class="sub">A conversa abre direto no WhatsApp.</p>
+  <p class="sub">Fale pelo WhatsApp ou compre na loja online do atacado.</p>
   <div class="opcoes" id="opcoes"></div>
   <button class="cancelar toque" type="button" id="fechar">Cancelar</button>
 </dialog>
@@ -428,13 +429,15 @@ body.folha-aberta.anima .barra { animation: none; }
 
   // Barra e folha de escolha
   $("#abrir").innerHTML = `${ICO.zap}<span>Falar no WhatsApp</span>`;
-  const opcao = (k, nome, sub) => link(k, "opcao toque", `<span class="bola">${ICO.zap}</span><span class="t"><b>${esc(nome)}</b><small>${esc(sub)}</small></span>${SETA}`);
-  const canaisZap = canais.filter(c => c.tipo === "zap");
+  const opcao = (k, nome, sub) => link(k, "opcao toque", `<span class="bola${k.tipo === "site" ? " site" : ""}">${k.tipo === "site" ? ICO.site : ICO.zap}</span><span class="t"><b>${esc(nome)}</b><small>${esc(sub)}</small></span>${SETA}`);
+  // Na folha entram todos os canais (WhatsApp e a loja online). O grupo vai entre parênteses: "Loja online (Atacado)".
+  const canaisZap = canais;
+  const nomeCanal = c => c.grupo && c.grupo !== c.curto ? `${c.curto} (${c.grupo})` : c.curto;
   $("#opcoes").innerHTML =
     `<p class="grupo-folha">Lojas</p>` +
     lojas.map(l => { const z = l.links.find(k => k.tipo === "zap"); return z ? opcao(z, l.nome, z.sub) : ""; }).join("") +
     (canaisZap.length ? `<p class="grupo-folha">Atendimento</p>` +
-      canaisZap.map(c => opcao(c, c.curto, [c.grupo !== c.curto ? c.grupo : ""].concat(extra(c), c.sub).filter(Boolean).join(" · "))).join("") : "");
+      canaisZap.map(c => opcao(c, nomeCanal(c), extra(c).concat(c.sub).filter(Boolean).join(" · "))).join("") : "");
 
   const folha = $("#escolha"), corpo = document.body;
   const reduz = matchMedia("(prefers-reduced-motion: reduce)");
