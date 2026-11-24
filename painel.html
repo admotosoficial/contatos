@@ -153,8 +153,8 @@ details summary { cursor: pointer; color: var(--suave); font-size: 14px; margin-
   <p style="text-align:center;margin:0"><button class="sair" id="sair" type="button">Sair deste aparelho</button></p>
 </main>
 
-<script src="config.js?v=20261125a"></script>
-<script src="links.js?v=20261125a"></script>
+<script src="config.js?v=20261125b"></script>
+<script src="links.js?v=20261125b"></script>
 <script>
 const CFG = window.LINKS_CONFIG || {};
 const LIGADO = !!(CFG.supabaseUrl && CFG.supabaseKey);
@@ -286,8 +286,20 @@ function mostrar(d, desde, ate) {
       <span class="trilho"><i style="width:${(100 * b.cliques / maxb).toFixed(1)}%"></i></span></div>`; }).join("")
     : `<p class="vazio">Nenhum clique no período.</p>`;
 
-  const nomeOrigem = { instagram: "Instagram", facebook: "Facebook", direto: "Link direto / outros" };
-  tabela($("t-origem"), ["Origem", "Visitas"], (d.por_origem || []).map(o => [nomeOrigem[o.origem] || o.origem, o.visitas]));
+  // Junta e traduz as origens: "ig" = Instagram, m./www.facebook.com = Facebook, endereços github.io = testes do próprio site.
+  const nomeOrigem = o => {
+    const s = String(o || "").toLowerCase();
+    if (!s || s === "direto") return "Link direto / outros";
+    if (/^(ig|instagram)$|instagram\.com$/.test(s)) return "Instagram";
+    if (/^(fb|facebook)$|facebook\.com$|^fb\.me$/.test(s)) return "Facebook";
+    if (/whatsapp|^wa\.me$/.test(s)) return "WhatsApp";
+    if (/(^|\.)google\./.test(s)) return "Google";
+    if (/github\.io$/.test(s)) return "Testes / galeria de modelos";
+    return o;
+  };
+  const somaOrigem = {};
+  (d.por_origem || []).forEach(o => { const n = nomeOrigem(o.origem); somaOrigem[n] = (somaOrigem[n] || 0) + Number(o.visitas || 0); });
+  tabela($("t-origem"), ["Origem", "Visitas"], Object.entries(somaOrigem).sort((x, y) => y[1] - x[1]));
   tabela($("t-aparelho"), ["Aparelho", "Visitas"], (d.por_dispositivo || []).map(o => [o.dispositivo === "celular" ? "Celular" : o.dispositivo === "computador" ? "Computador" : o.dispositivo, o.visitas]));
 
   const ph = Object.fromEntries((d.por_hora || []).map(h => [h.hora, h.visitas]));

@@ -4,8 +4,12 @@ const CFG = window.LINKS_CONFIG || {};
 const params = new URLSearchParams(location.search);
 const ua = navigator.userAgent || "";
 let ref = "direto"; try { if (document.referrer) ref = new URL(document.referrer).hostname; } catch (e) {}
-const origem = (params.get("utm_source") || params.get("origem") ||
-  (/Instagram/i.test(ua) ? "instagram" : /FBAN|FBAV/i.test(ua) ? "facebook" : ref)).slice(0, 40);
+let origem = (params.get("origem") || params.get("utm_source") ||
+  (/Instagram/i.test(ua) ? "instagram" : /FBAN|FBAV/i.test(ua) ? "facebook" : ref)).toLowerCase();
+// nomes iguais para a mesma origem ("ig" é como o Instagram marca o link da bio)
+if (/^(ig|instagram)$|instagram\.com$/.test(origem)) origem = "instagram";
+else if (/^(fb|facebook)$|facebook\.com$/.test(origem)) origem = "facebook";
+origem = origem.slice(0, 40);
 const dispositivo = /Mobi|Android|iPhone|iPad/i.test(ua) ? "celular" : "computador";
 let visitante = "";
 try {
