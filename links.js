@@ -11,7 +11,7 @@ window.LOJAS = [
       { id: "zap-capim", tipo: "zap", titulo: "Chamar no WhatsApp", sub: "(74) 9 9929-6249",
         url: "https://wa.me/5574999296249?text=" + MSG },
       { id: "mapa-capim", tipo: "mapa", titulo: "Como chegar", sub: "",
-        url: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Hesla Motos, Av. Leonicio Ferreira dos Santos, Capim Grosso - BA") },
+        url: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("AD Motos Capim Grosso") },
     ]
   },
   {
