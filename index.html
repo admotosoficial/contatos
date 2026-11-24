@@ -42,6 +42,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 3px solid var(--azul-2); outline-offset: 3px; border-radius: 14px; }
+#escolha-titulo:focus, #escolha-titulo:focus-visible { outline: none; } /* a janela abre com o foco no título, sem nenhuma opção marcada */
 svg { flex: none; }
 
 .pg { max-width: 1120px; margin: 0 auto; padding: 0 var(--gxr) 0 var(--gx); }
@@ -334,7 +335,7 @@ body.folha-aberta.anima .barra { animation: none; }
 
 <dialog class="folha" id="escolha" aria-labelledby="escolha-titulo">
   <div class="alca" aria-hidden="true"></div>
-  <h2 id="escolha-titulo">Com quem quer falar?</h2>
+  <h2 id="escolha-titulo" tabindex="-1" autofocus>Com quem quer falar?</h2>
   <p class="sub">Fale pelo WhatsApp ou compre na loja online do atacado.</p>
   <div class="opcoes" id="opcoes"></div>
   <button class="cancelar toque" type="button" id="fechar">Cancelar</button>
@@ -450,6 +451,7 @@ body.folha-aberta.anima .barra { animation: none; }
   function abrir() {
     if (folha.open) return;
     if (folha.showModal) folha.showModal(); else folha.setAttribute("open", "");
+    const tit = document.getElementById("escolha-titulo"); if (tit) tit.focus({ preventScroll: true });
     corpo.classList.add("folha-aberta");
   }
   function fechar() {
