@@ -380,7 +380,7 @@ body.folha-aberta.anima .barra { animation: none; }
 
   // Acesso rápido: 4 atalhos iguais (âncoras, sem data-id)
   const subGrupo = g => { const cs = doGrupo(g.nome); return cs.length > 1 ? listaCurta(cs.map(c => c.tipo === "site" ? "site" : c.curto)) : (cs[0] && cs[0].tipo === "zap" ? "WhatsApp" : ""); };
-  const atalhos = [{ nome: "Lojas Físicas", alvo: "lojas-sec", icone: SVG.loja, sub: `Varejo · ${lojas.length} cidades` }]
+  const atalhos = [{ nome: "Lojas Físicas", alvo: "lojas-sec", icone: SVG.loja, sub: "Filiais" }]
     .concat(GRUPOS.filter(g => doGrupo(g.nome).length).map(g => ({ ...g, sub: subGrupo(g) })));
   $("#rapido").innerHTML = atalhos.map(a => `<a class="atalho toque" href="#${a.alvo}"><span class="ic">${a.icone}</span><span class="t"><b>${esc(a.nome)}${a.extra ? ` <span class="ext">${esc(a.extra)}</span>` : ""}</b><small>${esc(a.sub)}</small></span><span class="desce" aria-hidden="true">${SVG.desce}</span></a>`).join("");
 
@@ -423,7 +423,7 @@ body.folha-aberta.anima .barra { animation: none; }
     </article>`;
   }).join("");
 
-  $("#qtd-lojas").textContent = "Varejo · " + (lojas.length === 3 ? "três cidades" : lojas.length === 2 ? "duas cidades" : lojas.length + " cidades");
+  $("#qtd-lojas").textContent = "Filiais";
   $("#cidades").textContent = listaCurta(lojas.map(l => l.nome)) + " · BA";
 
   // Ações gerais
