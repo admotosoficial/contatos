@@ -313,9 +313,9 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<script src="config.js?v=20261123b"></script>
-<script src="links.js?v=20261123b"></script>
-<script src="icones.js?v=20261123b"></script>
+<script src="config.js?v=20261124a"></script>
+<script src="links.js?v=20261124a"></script>
+<script src="icones.js?v=20261124a"></script>
 <script>
 (function () {
   var LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
@@ -382,7 +382,7 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
   }
   var x = mini("a", 'href="admotos.vcf" data-id="salvar-contato" download', IC.contato, "Salvar contato", "Na agenda do celular");
   OUTROS.forEach(function (o) {
-    x += mini("a", 'href="' + E(o.url) + '" data-id="' + E(o.id) + '"' + A(o.url), IC[o.tipo] || IC.site,
+    x += mini("a", 'href="' + E(o.url) + '" data-id="' + E(o.id) + '"' + A(o.url), IC[o.tipo] || (o.tipo === "zap" && window.ICO ? ICO.zap : IC.site),
       E(o.curto || o.titulo), o.sub ? E(o.sub).replace("@", "@<wbr>") : "");
   });
   x += mini("button", 'type="button" data-id="compartilhar"', IC.partilhar, "Compartilhar", "Enviar esta página");
@@ -440,6 +440,6 @@ footer{margin:34px 0 0;padding:0 16px 30px;text-align:center;color:rgba(255,255,
   var tr; addEventListener("resize", function () { clearTimeout(tr); tr = setTimeout(alinhar, 80); });
 })();
 </script>
-<script src="rastreio.js?v=20261123b"></script>
+<script src="rastreio.js?v=20261124a"></script>
 </body>
 </html>
