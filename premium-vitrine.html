@@ -470,7 +470,7 @@ body.folha-aberta.anima .barra { animation: none; }
     [["Atacado (Matriz)", canaisZap.filter(c => c.grupo === "Atacado")], ["Outros", canaisZap.filter(c => c.grupo !== "Atacado")]]
       .filter(([, cs]) => cs.length)
       .map(([titulo, cs]) => `<p class="grupo-folha">${esc(titulo)}</p>` +
-        cs.map(c => opcao(c, nomeCanal(c), extra(c).concat(c.sub).filter(Boolean).join(" · "))).join("")).join("");
+        cs.map(c => opcao(c, nomeCanal(c), c.sub || "")).join("")).join("");
 
   const folha = $("#escolha"), corpo = document.body;
   const reduz = matchMedia("(prefers-reduced-motion: reduce)");
