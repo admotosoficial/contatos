@@ -1,4 +1,11 @@
 <!doctype html>
+<!--
+  Identidade visual "Painel TFT": a página é o painel de instrumentos de uma moto moderna.
+  Motivo: conta-giros em arco (SVG) com a marca no centro, luzes indicadoras (setas, farol, farol alto) e teclas de painel.
+  Cores: fundo quase preto azulado; azul da marca aceso como luz do TFT, vermelho na faixa vermelha, ponteiro e marcadores.
+  Tipografia: Saira (larguras variáveis), condensada e com números tabulares, como display digital.
+  Detalhe memorável: na abertura o ponteiro "acelera" até 12 mil e volta à lenta; cada grupo de atendimento é um "modo" do painel.
+-->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -38,6 +45,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 html { background: var(--fundo); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   min-height: 100vh; min-height: 100dvh;
   background: var(--fundo); color: var(--texto);
@@ -127,13 +135,49 @@ body {
 .chamada span { display: block; margin-top: 4px; color: var(--suave); font-size: 15px; }
 
 .rotulo {
-  display: flex; align-items: center; gap: 12px; margin: 22px 2px 12px;
+  display: flex; align-items: center; gap: 12px; margin: 18px 2px 10px;
   font-size: 11.5px; font-weight: 600; letter-spacing: .26em; color: var(--suave); text-transform: uppercase;
 }
 .rotulo::before, .rotulo::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, var(--linha)); }
 .rotulo::after { background: linear-gradient(90deg, var(--linha), transparent); }
 
-/* ---------- cada loja = um modo do painel ---------- */
+/* ---------- acesso rápido = seletor de modo ---------- */
+.rapido { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.atalho {
+  min-height: 70px; padding: 10px 16px 10px 10px; gap: 10px; color: var(--texto);
+  background: linear-gradient(180deg, rgba(22, 36, 76, .66), rgba(8, 12, 26, .8));
+  border: 1px solid var(--linha); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 14px 30px -20px rgba(0, 0, 0, .9);
+}
+.atalho:hover { border-color: rgba(140, 170, 255, .42); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 24px -8px rgba(47, 107, 255, .7); }
+.atalho .ic {
+  flex: none; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: #A9C1FF;
+  background: linear-gradient(180deg, rgba(47, 107, 255, .26), rgba(47, 107, 255, .1)); border: 1px solid rgba(90, 140, 255, .45);
+  box-shadow: 0 0 18px -6px rgba(47, 107, 255, .8);
+}
+.atalho .ic svg { width: 23px; height: 23px; }
+.atalho .txt { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.atalho strong { font-size: 19px; font-weight: 700; font-stretch: 80%; letter-spacing: .04em; text-transform: uppercase; line-height: 1.05; }
+.atalho .dica { font-size: 12.5px; font-stretch: 92%; color: var(--suave); line-height: 1.2; }
+.atalho::after { /* lâmpada do modo: acende quando a seção está na tela */
+  content: ""; position: absolute; top: 9px; right: 9px; width: 6px; height: 6px; border-radius: 50%;
+  background: #27304A; transition: background-color .2s, box-shadow .2s;
+}
+.atalho.ativo { border-color: rgba(120, 160, 255, .5); }
+.atalho.ativo::after { background: var(--verde-luz); box-shadow: 0 0 8px var(--verde-luz); }
+
+/* ---------- títulos de seção (um por modo) ---------- */
+.secao { scroll-margin-top: 12px; }
+.secao-tit { display: flex; align-items: center; gap: 10px; margin: 30px 2px 12px; }
+.secao-tit .idx {
+  flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+  font-size: 15px; font-weight: 700; font-stretch: 78%; color: #fff;
+  background: rgba(233, 37, 37, .16); border: 1px solid rgba(233, 37, 37, .55); box-shadow: 0 0 14px -3px rgba(233, 37, 37, .75);
+}
+.secao-tit h2 { margin: 0; font-size: 23px; line-height: 1; font-weight: 700; font-stretch: 78%; letter-spacing: .07em; text-transform: uppercase; }
+.secao-tit::after { content: ""; order: 4; flex: 1; height: 1px; background: linear-gradient(90deg, var(--linha), transparent); }
+.secao-tit small { order: 5; font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--suave); }
+
+/* ---------- cada loja/canal = um bloco do painel ---------- */
 .modos { display: grid; gap: 14px; }
 .modo {
   position: relative; padding: 16px; border-radius: 20px;
@@ -156,11 +200,12 @@ body {
   background: rgba(233, 37, 37, .12); border: 1px solid rgba(233, 37, 37, .35);
 }
 .selo i { width: 6px; height: 6px; border-radius: 50%; background: var(--vermelho-vivo); box-shadow: 0 0 8px var(--vermelho-vivo); }
-.modo h2 {
+.modo h3 {
   margin: -2px 0 0; font-size: 31px; line-height: 1; font-weight: 700; font-stretch: 74%; letter-spacing: .01em; text-transform: uppercase;
 }
 .endereco { margin: -4px 0 0; display: flex; align-items: center; gap: 7px; color: var(--suave); font-size: 14.5px; }
 .endereco svg { flex: none; color: var(--vermelho-vivo); }
+.desc { margin: -4px 0 0; color: #C3CDEA; font-size: 15.5px; line-height: 1.35; }
 
 /* botões = teclas do painel */
 .tecla {
@@ -170,24 +215,34 @@ body {
 }
 .tecla:active { transform: translateY(1px) scale(.985); }
 .tecla:focus-visible, .giro:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.zap {
+.principal {
   min-height: 66px; padding: 10px 14px 10px 10px; color: #fff;
   background: linear-gradient(180deg, #0D44DA 0%, #0234B4 50%, var(--azul) 100%);
   border: 1px solid rgba(150, 180, 255, .55);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .35), 0 12px 30px -10px rgba(47, 107, 255, .75);
 }
-.zap:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 0 0 1px rgba(0, 0, 0, .35), 0 14px 38px -8px rgba(47, 107, 255, .95); }
-.zap .bolinha {
+.principal:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 0 0 1px rgba(0, 0, 0, .35), 0 14px 38px -8px rgba(47, 107, 255, .95); }
+.principal .bolinha {
   flex: none; width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
   background: var(--verde-zap); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 0 16px rgba(31, 175, 90, .45);
 }
-.zap .bolinha svg { width: 27px; height: 27px; }
-.zap .txt { flex: 1; min-width: 0; display: grid; gap: 1px; }
-.zap .txt strong { font-size: 17.5px; font-weight: 600; line-height: 1.15; }
-.zap .txt span { font-size: 16px; font-weight: 500; font-stretch: 88%; letter-spacing: .03em; color: #D3E0FF; line-height: 1.2; }
+.principal .bolinha svg { width: 27px; height: 27px; }
+.site {
+  background: linear-gradient(180deg, #EE3434 0%, #D11E1E 55%, #A9151A 100%);
+  border-color: rgba(255, 175, 175, .55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .35), 0 12px 30px -10px rgba(233, 37, 37, .7);
+}
+.site:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 0 0 1px rgba(0, 0, 0, .35), 0 14px 38px -8px rgba(233, 37, 37, .9); }
+.site .bolinha { background: #fff; color: var(--azul); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1), 0 0 16px rgba(255, 255, 255, .25); }
+.site .bolinha svg { width: 26px; height: 26px; }
+.site .txt span { color: #FFE1E1; }
+.principal .txt { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.principal .txt strong { font-size: 17.5px; font-weight: 600; line-height: 1.15; }
+.principal .txt span { font-size: 16px; font-weight: 500; font-stretch: 88%; letter-spacing: .03em; color: #D3E0FF; line-height: 1.2; }
 .seta { flex: none; opacity: .9; }
 
 .par { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.par.um { grid-template-columns: minmax(0, 1fr); }
 .sec {
   min-height: 52px; padding: 8px 12px; justify-content: center; gap: 9px;
   font-size: 15px; font-weight: 500; color: var(--texto);
@@ -242,7 +297,7 @@ body {
 
 @media (min-width: 720px) {
   .pagina { padding-top: 34px; }
-  .modo h2 { font-size: 33px; }
+  .modo h3 { font-size: 33px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -300,13 +355,17 @@ body {
 
   <p class="chamada entra" style="animation-delay:.08s">
     <strong>Peças e acessórios para a sua moto</strong>
-    <span>Escolha a loja e fale com a gente no WhatsApp</span>
+    <span>Escolha o atendimento e fale com a gente</span>
   </p>
 
-  <div class="rotulo" aria-hidden="true">Lojas</div>
-  <div class="modos" id="modos"></div>
+  <nav class="entra" style="animation-delay:.12s" aria-label="Acesso rápido">
+    <div class="rotulo" aria-hidden="true">Acesso rápido</div>
+    <div class="rapido" id="rapido"></div>
+  </nav>
 
-  <div class="rotulo" aria-hidden="true">Funções</div>
+  <div id="secoes"></div>
+
+  <div class="rotulo" style="margin-top:32px" aria-hidden="true">Mais opções</div>
   <div class="funcoes" id="funcoes"></div>
 
   <p class="rodape" id="rodape"><b>AD MOTOS</b></p>
@@ -314,9 +373,9 @@ body {
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"><i aria-hidden="true"></i><span id="aviso-txt"></span></div>
 
-<script src="config.js?v=20261124a"></script>
-<script src="links.js?v=20261124a"></script>
-<script src="icones.js?v=20261124a"></script>
+<script src="config.js?v=20261124c"></script>
+<script src="links.js?v=20261124c"></script>
+<script src="icones.js?v=20261124c"></script>
 <script>
 (function () {
   var reduzir = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -326,41 +385,105 @@ body {
   var IC = {
     copiar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2.5"/><path d="M16 8V5.5A2.5 2.5 0 0 0 13.5 3h-7A2.5 2.5 0 0 0 4 5.5v8A2.5 2.5 0 0 0 6.5 16H8"/></svg>',
     contato: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M2.5 20.5c.8-3.8 3.8-6 7.5-6 1.6 0 3 .4 4.2 1.1M18.5 14v7M15 17.5h7"/></svg>',
-    compartilhar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 11H6.5A2.5 2.5 0 0 0 4 13.5v5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5v-5a2.5 2.5 0 0 0-2.5-2.5H16"/></svg>'
+    compartilhar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 11H6.5A2.5 2.5 0 0 0 4 13.5v5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5v-5a2.5 2.5 0 0 0-2.5-2.5H16"/></svg>',
+    loja: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5 5 4h14l1.5 5.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.6 0 2.8 2.8 0 0 0 5.8 0 2.8 2.8 0 0 0 5.6 0"/><path d="M5 12.5V20h14v-7.5M10 20v-4.5h4V20"/></svg>',
+    atacado: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20.5 7.5v9L12 21.2 3.5 16.5v-9Z"/><path d="m3.5 7.5 8.5 4.7 8.5-4.7M12 12.2v9M7.8 5.2l8.5 4.7"/></svg>',
+    garantia: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 4.5 5.8v5.7c0 4.6 3.2 8.3 7.5 9.7 4.3-1.4 7.5-5.1 7.5-9.7V5.8Z"/><path d="m8.6 12 2.4 2.4 4.4-4.8"/></svg>',
+    financeiro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 2.8h13v18.4l-2.6-1.6-2.6 1.6-2.3-1.6-2.3 1.6-2.6-1.6-.6.4Z"/><path d="M14.6 8.3c-.4-.8-1.3-1.3-2.5-1.3-1.4 0-2.4.7-2.4 1.7 0 2.4 5 1.2 5 3.7 0 1-1.1 1.8-2.6 1.8-1.2 0-2.2-.5-2.6-1.4M12.1 5.6V7M12.1 14.2v1.4"/></svg>'
   };
+  var slug = function (t) { return String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  var atraso = function (i) { return (0.16 + Math.min(i, 5) * 0.05).toFixed(2); };
 
-  /* ---------------- lojas (modos) a partir de LOJAS ---------------- */
-  var lojas = window.LOJAS || [];
-  var html = "";
-  lojas.forEach(function (loja, i) {
-    var zap = loja.links.filter(function (l) { return l.tipo === "zap"; })[0];
-    var mapa = loja.links.filter(function (l) { return l.tipo === "mapa"; })[0];
-    var chave = zap ? zap.id.replace(/^zap-/, "") : String(i + 1);
-    var n = String(i + 1).padStart(2, "0");
-    html += '<section class="modo entra" style="animation-delay:' + (0.14 + i * 0.08) + 's" aria-labelledby="loja-' + i + '">' +
-      '<div class="modo-topo"><span class="modo-num"><small>MODO</small><b class="num">' + n + '</b></span>' +
-      (loja.detalhe ? '<span class="selo"><i aria-hidden="true"></i>' + esc(loja.detalhe) + '</span>' : '') + '</div>' +
-      '<h2 id="loja-' + i + '">' + esc(loja.nome) + '</h2>' +
-      (loja.endereco ? '<p class="endereco">' + ICO.pino + '<span>' + esc(loja.endereco) + '</span></p>' : '');
-    if (zap) {
-      html += '<a class="tecla zap" data-id="' + esc(zap.id) + '" href="' + esc(zap.url) + '"' + alvo(zap.url) +
-        ' aria-label="' + esc(zap.titulo + " da loja " + loja.nome + (zap.sub ? ", " + zap.sub : "")) + '">' +
-        '<span class="bolinha">' + ICO.zap + '</span>' +
-        '<span class="txt"><strong>' + esc(zap.titulo) + '</strong>' + (zap.sub ? '<span class="num">' + esc(zap.sub) + '</span>' : '') + '</span>' +
-        SETA + '</a>';
+  function botaoCopiar(id, numero, nome) {
+    return '<button type="button" class="tecla sec copiar" data-id="copiar-' + esc(id.replace(/^zap-/, "")) + '" data-numero="' + esc(numero) + '"' +
+      ' aria-label="Copiar número de ' + esc(nome) + '">' + IC.copiar + '<span>Copiar número</span></button>';
+  }
+  function botaoPrincipal(l, nome) {
+    if (l.tipo === "site") {
+      return '<a class="tecla principal site" data-id="' + esc(l.id) + '" href="' + esc(l.url) + '"' + alvo(l.url) +
+        ' aria-label="Abrir a loja online: ' + esc(l.sub || l.url) + '">' +
+        '<span class="bolinha">' + ICO.site + '</span>' +
+        '<span class="txt"><strong>Abrir a loja online</strong>' + (l.sub ? '<span>' + esc(l.sub) + '</span>' : '') + '</span>' + SETA + '</a>';
     }
-    html += '<div class="par">';
-    if (mapa) {
-      html += '<a class="tecla sec mapa" data-id="' + esc(mapa.id) + '" href="' + esc(mapa.url) + '"' + alvo(mapa.url) +
-        ' aria-label="' + esc(mapa.titulo + " até a loja " + loja.nome) + '">' + ICO.mapa + '<span>' + esc(mapa.titulo) + '</span></a>';
-    }
-    if (zap && zap.sub) {
-      html += '<button type="button" class="tecla sec copiar" data-id="copiar-' + esc(chave) + '" data-numero="' + esc(zap.sub) + '"' +
-        ' aria-label="Copiar número da loja ' + esc(loja.nome) + '">' + IC.copiar + '<span>Copiar número</span></button>';
+    return '<a class="tecla principal zap" data-id="' + esc(l.id) + '" href="' + esc(l.url) + '"' + alvo(l.url) +
+      ' aria-label="' + esc("Chamar no WhatsApp: " + nome + (l.sub ? ", " + l.sub : "")) + '">' +
+      '<span class="bolinha">' + ICO.zap + '</span>' +
+      '<span class="txt"><strong>Chamar no WhatsApp</strong>' + (l.sub ? '<span class="num">' + esc(l.sub) + '</span>' : '') + '</span>' + SETA + '</a>';
+  }
+  function cabecalho(rotulo, n, selo) {
+    return '<div class="modo-topo"><span class="modo-num"><small>' + rotulo + '</small><b class="num">' + String(n).padStart(2, "0") + '</b></span>' +
+      (selo ? '<span class="selo"><i aria-hidden="true"></i>' + esc(selo) + '</span>' : '') + '</div>';
+  }
+  function tituloSecao(idx, id, nome, extra) {
+    return '<div class="secao-tit"><span class="idx num" aria-hidden="true">' + idx + '</span><h2 id="t-' + id + '">' + esc(nome) + '</h2>' +
+      (extra ? '<small>' + esc(extra) + '</small>' : '') + '</div>';
+  }
+
+  /* ---------------- grupos: Lojas + grupos de CANAIS ---------------- */
+  var lojas = window.LOJAS || [], canais = window.CANAIS || [];
+  var grupos = [{ id: "lojas", nome: "Lojas", ic: IC.loja, dica: "Varejo · " + lojas.length + (lojas.length === 1 ? " loja" : " lojas"), extra: "Varejo" }];
+  canais.forEach(function (c) {
+    var g = grupos.filter(function (x) { return x.nome === c.grupo; })[0];
+    if (!g) { g = { id: slug(c.grupo), nome: c.grupo, ic: IC[slug(c.grupo)] || ICO.site, itens: [] }; grupos.push(g); }
+    g.itens.push(c);
+  });
+  grupos.forEach(function (g) {
+    if (!g.itens) return;
+    var tipos = [];
+    g.itens.forEach(function (c) { var t = c.tipo === "site" ? "site" : "WhatsApp"; if (tipos.indexOf(t) < 0) tipos.push(t); });
+    g.dica = tipos.join(" e ");
+  });
+
+  // acesso rápido
+  $("rapido").innerHTML = grupos.map(function (g) {
+    return '<a class="tecla atalho" href="#' + g.id + '" data-alvo="' + g.id + '"><span class="ic">' + g.ic + '</span>' +
+      '<span class="txt"><strong>' + esc(g.nome) + '</strong><span class="dica">' + esc(g.dica) + '</span></span></a>';
+  }).join("");
+
+  // seções
+  var html = "", nCanal = 0;
+  grupos.forEach(function (g, gi) {
+    html += '<section class="secao" id="' + g.id + '" aria-labelledby="t-' + g.id + '">' + tituloSecao(gi + 1, g.id, g.nome, g.extra) + '<div class="modos">';
+    if (!g.itens) {
+      lojas.forEach(function (loja, i) {
+        var zap = loja.links.filter(function (l) { return l.tipo === "zap"; })[0];
+        var mapa = loja.links.filter(function (l) { return l.tipo === "mapa"; })[0];
+        html += '<article class="modo entra" style="animation-delay:' + atraso(i) + 's" aria-labelledby="loja-' + i + '">' +
+          cabecalho("LOJA", i + 1, loja.detalhe) +
+          '<h3 id="loja-' + i + '">' + esc(loja.nome) + '</h3>' +
+          (loja.endereco ? '<p class="endereco">' + ICO.pino + '<span>' + esc(loja.endereco) + '</span></p>' : '') +
+          (zap ? botaoPrincipal(zap, "loja " + loja.nome) : '') + '<div class="par">' +
+          (mapa ? '<a class="tecla sec mapa" data-id="' + esc(mapa.id) + '" href="' + esc(mapa.url) + '"' + alvo(mapa.url) +
+            ' aria-label="' + esc(mapa.titulo + " até a loja " + loja.nome) + '">' + ICO.mapa + '<span>' + esc(mapa.titulo) + '</span></a>' : '') +
+          (zap && zap.sub ? botaoCopiar(zap.id, zap.sub, "loja " + loja.nome) : '') + '</div></article>';
+      });
+    } else {
+      g.itens.forEach(function (c) {
+        nCanal++;
+        var partes = String(c.titulo || "").split(" · "), selo = partes.length > 1 ? partes[partes.length - 1] : "";
+        html += '<article class="modo entra" aria-labelledby="canal-' + esc(c.id) + '">' +
+          cabecalho("CANAL", nCanal, selo) +
+          '<h3 id="canal-' + esc(c.id) + '">' + esc(c.curto || partes[0]) + '</h3>' +
+          (c.desc ? '<p class="desc">' + esc(c.desc) + '</p>' : '') +
+          botaoPrincipal(c, c.curto || c.titulo) +
+          (c.tipo === "zap" && c.sub ? '<div class="par um">' + botaoCopiar(c.id, c.sub, c.curto || c.titulo) + '</div>' : '') +
+          '</article>';
+      });
     }
     html += '</div></section>';
   });
-  $("modos").innerHTML = html;
+  $("secoes").innerHTML = html;
+
+  // lâmpada do modo que está na tela: o último grupo cujo título já passou de 30% da altura
+  var atalhos = [].slice.call(document.querySelectorAll(".atalho")), pedido = false;
+  function lampada() {
+    pedido = false;
+    var ativo = "";
+    grupos.forEach(function (g) { if ($(g.id).getBoundingClientRect().top <= innerHeight * 0.3) ativo = g.id; });
+    atalhos.forEach(function (a) { a.classList.toggle("ativo", a.dataset.alvo === ativo); });
+  }
+  addEventListener("scroll", function () { if (!pedido) { pedido = true; requestAnimationFrame(lampada); } }, { passive: true });
+  lampada();
 
   /* ---------------- teclas de função ---------------- */
   var fn = '<a class="tecla fn entra" style="animation-delay:.3s" href="admotos.vcf" data-id="salvar-contato" download><span class="ic">' + IC.contato + '</span><span>Salvar contato</span></a>' +
@@ -513,7 +636,7 @@ body {
     mostrar(0); partida();
     $("giro").addEventListener("click", partida);
     document.addEventListener("pointerdown", function (ev) {
-      if (ev.target.closest(".zap")) blip(5.5);
+      if (ev.target.closest(".principal")) blip(5.5);
     });
     // seta pisca ao apontar para "Como chegar"
     var pisca = function (ev) {
@@ -526,6 +649,6 @@ body {
   }
 })();
 </script>
-<script src="rastreio.js?v=20261124a"></script>
+<script src="rastreio.js?v=20261124c"></script>
 </body>
 </html>

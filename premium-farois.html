@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para a sua moto em Capim Grosso, Senhor do Bonfim e Várzea da Roça (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para a sua moto em Capim Grosso, Senhor do Bonfim e Várzea da Roça (BA). Lojas, atacado, garantia e financeiro pelo WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AD Motos">
 <meta property="og:description" content="Peças e acessórios para a sua moto. Fale com a gente pelo WhatsApp.">
@@ -74,15 +74,15 @@ img { display: block; }
 /* ===== Página ===== */
 .pagina {
   position: relative; z-index: 1; max-width: 448px; margin: 0 auto;
-  padding: calc(env(safe-area-inset-top, 0px) + 40px) max(16px, env(safe-area-inset-right, 0px))
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) max(16px, env(safe-area-inset-right, 0px))
            calc(env(safe-area-inset-bottom, 0px) + 28px) max(16px, env(safe-area-inset-left, 0px));
   display: grid; gap: 14px;
 }
 
 /* ===== Identidade ===== */
-.topo { display: grid; justify-items: center; text-align: center; padding-bottom: 14px; }
+.topo { display: grid; justify-items: center; text-align: center; padding-bottom: 8px; }
 .app {
-  position: relative; width: 92px; height: 92px; border-radius: 27px; background: #fff;
+  position: relative; width: 80px; height: 80px; border-radius: 24px; background: #fff;
   display: grid; place-items: center; overflow: hidden;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, .6),
@@ -90,20 +90,20 @@ img { display: block; }
     0 18px 40px -10px rgba(0, 8, 40, .9),
     0 0 70px rgba(90, 140, 255, .45);
 }
-.app img { width: 64px; height: 64px; }
+.app img { width: 56px; height: 56px; }
 .app::after { /* reflexo de farol que passa pelo ícone */
   content: ""; position: absolute; inset: -40%;
   background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .0) 44%, rgba(255, 255, 255, .85) 50%, rgba(255, 255, 255, 0) 56%, transparent 60%);
   transform: translateX(-80%); pointer-events: none;
 }
-.letreiro { width: 214px; height: auto; margin-top: 26px; filter: drop-shadow(0 4px 18px rgba(0, 10, 50, .8)); }
+.letreiro { width: 200px; height: auto; margin-top: 20px; filter: drop-shadow(0 4px 18px rgba(0, 10, 50, .8)); }
 .frase {
-  margin: 16px 0 0; font-size: 19px; line-height: 1.25; font-weight: 500; color: var(--texto);
+  margin: 12px 0 0; font-size: 18px; line-height: 1.25; font-weight: 500; color: var(--texto);
   letter-spacing: -.005em; text-wrap: balance; text-shadow: 0 2px 14px rgba(2, 8, 30, .9);
 }
 .cidades {
-  margin: 12px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 10px;
-  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .14em; text-transform: uppercase; color: var(--suave);
+  margin: 10px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 9px;
+  font-size: 11px; font-weight: 600; font-stretch: 85%; letter-spacing: .09em; text-transform: uppercase; color: var(--suave);
   text-shadow: 0 2px 10px rgba(2, 8, 30, .9);
 }
 .cidades i { width: 4px; height: 4px; border-radius: 50%; background: var(--vermelho); box-shadow: 0 0 8px 2px rgba(233, 37, 37, .7); }
@@ -111,7 +111,7 @@ img { display: block; }
 /* ===== Botão principal ===== */
 .cta {
   position: relative; isolation: isolate; overflow: hidden;
-  display: flex; align-items: center; gap: 14px; min-height: 80px; padding: 12px 18px 12px 14px;
+  display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 11px 18px 11px 12px;
   border-radius: 24px; color: #061A4F;
   background: linear-gradient(180deg, #FFFFFF 0%, #EAF0FF 100%);
   box-shadow:
@@ -167,7 +167,6 @@ img { display: block; }
 .rotulo::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(150, 175, 240, .35), transparent); }
 
 /* ===== Lojas ===== */
-#lista-lojas { display: grid; gap: 14px; }
 .loja { padding: 20px 16px 16px; display: grid; gap: 10px; }
 .loja-cab { padding: 0 4px 6px; }
 .selo {
@@ -176,7 +175,7 @@ img { display: block; }
 }
 .selo i { width: 7px; height: 7px; border-radius: 50%; background: var(--vermelho); box-shadow: 0 0 10px 2px rgba(233, 37, 37, .75); }
 .loja h3 {
-  margin: 6px 0 0; font-size: 30px; line-height: 1; font-weight: 800; font-stretch: 72%;
+  margin: 6px 0 0; font-size: 29px; line-height: 1; font-weight: 800; font-stretch: 72%;
   letter-spacing: .005em; text-transform: uppercase; color: #fff;
 }
 .end { margin: 8px 0 0; display: flex; align-items: center; gap: 7px; color: var(--suave); font-size: 14.5px; }
@@ -218,6 +217,33 @@ img { display: block; }
 .copiar.feito .ok { display: block; }
 .copiar.feito .cp { display: none; }
 
+
+/* ===== Acesso rápido ===== */
+.rapido { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.atalho {
+  display: grid; justify-items: center; align-content: center; gap: 8px; min-height: 88px; padding: 12px 4px 11px;
+  border-radius: 20px; text-align: center; transition: transform .16s var(--mola);
+}
+.atalho:active { transform: scale(.95); }
+.atalho .disco { width: 40px; height: 40px; border-radius: 13px; }
+.atalho .r { font-size: 13.5px; font-weight: 650; font-stretch: 90%; line-height: 1.1; letter-spacing: .005em; }
+.disco.luz {
+  color: #fff; background: linear-gradient(160deg, rgba(130, 170, 255, .42), rgba(30, 70, 190, .28));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 6px 18px -8px rgba(110, 160, 255, .9);
+}
+
+/* ===== Seções (Lojas, Atacado, Garantia, Financeiro) ===== */
+.secao { display: grid; gap: 14px; scroll-margin-top: 14px; }
+.secao-cab { display: flex; align-items: center; gap: 12px; margin: 20px 2px 0; }
+.secao-cab .disco { width: 42px; height: 42px; border-radius: 13px; }
+.secao-cab h2 { margin: 0; font-size: 25px; line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: .015em; text-transform: uppercase; color: #fff; }
+.secao-cab p { margin: 4px 0 0; font-size: 11px; font-weight: 600; font-stretch: 110%; letter-spacing: .16em; text-transform: uppercase; color: var(--apagado); }
+.secao-cab::after { content: ""; flex: 1; height: 1px; margin-left: 4px; background: linear-gradient(90deg, rgba(150, 175, 240, .35), transparent); }
+.lista { display: grid; gap: 14px; }
+.desc { margin: 8px 0 0; color: var(--suave); font-size: 15px; line-height: 1.35; }
+.disco.marca { color: #fff; background: linear-gradient(160deg, #2F63E0, var(--azul)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 6px 16px -6px rgba(40, 90, 230, .9); }
+.folha .grupo { margin: 8px 4px 0; font-size: 11px; font-weight: 700; font-stretch: 112%; letter-spacing: .18em; text-transform: uppercase; color: var(--apagado); }
+
 /* ===== Ações ===== */
 .acoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .acao {
@@ -242,14 +268,14 @@ img { display: block; }
   border-radius: 30px 30px 0 0; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 18px);
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   background: linear-gradient(180deg, rgba(20, 38, 100, .92), rgba(6, 14, 44, .96));
-  display: grid; gap: 10px;
+  display: grid; gap: 8px; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;
 }
 .folha-corpo.vidro::before { background: linear-gradient(180deg, rgba(170, 200, 255, .55), rgba(255, 255, 255, .06) 40%, transparent); }
 .alca { justify-self: center; width: 42px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, .28); margin-bottom: 8px; }
 .folha h2 { margin: 0 4px; font-size: 25px; line-height: 1.1; font-weight: 800; font-stretch: 80%; text-transform: uppercase; letter-spacing: .01em; }
 .folha p { margin: 0 4px 6px; color: var(--suave); font-size: 15px; }
-.opcao { min-height: 76px; border-radius: 20px; }
-.opcao .t strong { font-size: 18px; }
+.opcao { min-height: 64px; border-radius: 18px; }
+.opcao .t strong { font-size: 17px; }
 .fechar {
   margin-top: 4px; min-height: 54px; border-radius: 18px; border: 1px solid var(--linha); cursor: pointer;
   background: rgba(255, 255, 255, .04); font-weight: 600; font-size: 16px; color: var(--suave);
@@ -276,6 +302,7 @@ img { display: block; }
 
 /* ===== Movimento (só quando a pessoa aceita animação) ===== */
 @media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
   .entra { animation: subir .8s var(--mola) both; animation-delay: calc(var(--i, 0) * 80ms + 80ms); }
   .app { animation: pousar 1s var(--mola) both; }
   .app::after { animation: reflexo 1.3s ease-in-out .85s both; }
@@ -323,21 +350,20 @@ img { display: block; }
 
   <a class="cta entra" style="--i:4" href="#lojas" data-id="abrir-escolha" role="button" aria-haspopup="dialog" aria-controls="escolha" id="abrir">
     <span class="cta-ico" id="cta-ico"></span>
-    <span class="cta-txt"><strong>Falar no WhatsApp</strong><small>Escolha a loja e chame a gente</small></span>
+    <span class="cta-txt"><strong>Falar no WhatsApp</strong><small>Escolha a loja ou o atendimento</small></span>
     <span id="cta-seta"></span>
   </a>
 
-  <section id="lojas" aria-labelledby="t-lojas" style="display:grid;gap:14px">
-    <h2 class="rotulo entra" style="--i:5" id="t-lojas">Nossas lojas</h2>
-    <div id="lista-lojas"></div>
-  </section>
+  <nav class="rapido entra" style="--i:5" id="rapido" aria-label="Acesso rápido"></nav>
+
+  <div id="secoes" style="display:grid;gap:14px"></div>
 
   <section aria-labelledby="t-mais" style="display:grid;gap:14px">
-    <h2 class="rotulo entra" style="--i:8" id="t-mais">Mais opções</h2>
+    <h2 class="rotulo entra" style="--i:6" id="t-mais">Mais opções</h2>
     <div class="acoes" id="acoes"></div>
   </section>
 
-  <footer class="rodape entra" style="--i:10">
+  <footer class="rodape entra" style="--i:7">
     <img src="letreiro-branco.svg" alt="" width="92" height="19">
     <span id="ano"></span>
   </footer>
@@ -346,21 +372,21 @@ img { display: block; }
 <dialog class="folha" id="escolha" aria-labelledby="t-escolha">
   <div class="folha-corpo vidro">
     <span class="alca" aria-hidden="true"></span>
-    <h2 id="t-escolha">Com qual loja quer falar?</h2>
+    <h2 id="t-escolha">Com quem quer falar?</h2>
     <p>O WhatsApp abre com a mensagem pronta.</p>
-    <div id="opcoes" style="display:grid;gap:10px"></div>
+    <div id="opcoes" style="display:grid;gap:8px"></div>
     <button class="fechar" type="button" id="fechar">Cancelar</button>
   </div>
 </dialog>
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<script src="config.js?v=20261124a"></script>
-<script src="links.js?v=20261124a"></script>
-<script src="icones.js?v=20261124a"></script>
+<script src="config.js?v=20261124c"></script>
+<script src="links.js?v=20261124c"></script>
+<script src="icones.js?v=20261124c"></script>
 <script>
 (function () {
-  const LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
+  const LOJAS = window.LOJAS || [], CANAIS = window.CANAIS || [], OUTROS = window.OUTROS || [];
   const $ = id => document.getElementById(id);
   const reduz = matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -369,6 +395,15 @@ img { display: block; }
   const CONTATO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 20c.8-3.6 3.4-5.6 6.5-5.6 1.4 0 2.6.4 3.6 1.1"/><path d="M18 14v6M15 17h6"/></svg>';
   const PARTILHA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M8 11H6.5A2.5 2.5 0 0 0 4 13.5v4A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5v-4A2.5 2.5 0 0 0 17.5 11H16"/></svg>';
   const CURTO = { email: "E-mail", site: "Site", insta: "Instagram", zap: "WhatsApp", mapa: "Mapa" };
+  const tr = d => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
+  const GICO = {
+    Lojas: tr('<path d="M4 10v9.5h16V10"/><path d="M3 5.5 4.6 3h14.8L21 5.5v1.8a2.6 2.6 0 0 1-4.5 1.7 2.6 2.6 0 0 1-4.5 0 2.6 2.6 0 0 1-4.5 0A2.6 2.6 0 0 1 3 7.3Z"/><path d="M9.5 19.5V15h5v4.5"/>'),
+    Atacado: tr('<path d="M3.5 12.5h8v7.5h-8zM12.5 12.5h8v7.5h-8zM8 4.5h8V12H8z"/><path d="M6.5 12.5v2.4M15.5 12.5v2.4M11 4.5v2.4"/>'),
+    Garantia: tr('<path d="M12 3 4.5 6v5.6c0 4.4 3.1 8 7.5 9.4 4.4-1.4 7.5-5 7.5-9.4V6Z"/><path d="m8.8 12.2 2.3 2.3 4.3-4.6"/>'),
+    Financeiro: tr('<path d="M6 3h12v18l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4L6 21Z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/>'),
+  };
+  const slug = t => String(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const GRUPOS = [...new Set(CANAIS.map(c => c.grupo))];
 
   /* ----- Montagem a partir de links.js ----- */
   $("cidades").innerHTML = LOJAS.map(l => `<span>${esc(l.nome)}</span>`).join('<i aria-hidden="true"></i>');
@@ -384,31 +419,72 @@ img { display: block; }
       <span class="t"><strong>${esc(k.titulo)}</strong>${sub ? `<small>${esc(sub)}</small>` : ""}</span>${SETA}</a>`;
   }
 
-  $("lista-lojas").innerHTML = LOJAS.map((l, n) => {
-    const linhas = l.links.map(k => {
-      if (k.tipo === "zap" && k.sub) {
-        const idc = k.id.replace(/^zap-/, "copiar-");
-        return `<div class="linha">${item(k)}
-          <button class="copiar" type="button" data-id="${esc(idc)}" data-numero="${esc(k.sub)}"
-            aria-label="Copiar número de ${esc(l.nome)}: ${esc(k.sub)}">${COPIA}${CHECK}</button></div>`;
-      }
-      return item(k);
-    }).join("");
-    return `<article class="loja vidro entra" style="--i:${6 + n}" aria-labelledby="loja-${n}">
+  // Linha de WhatsApp (botão grande + copiar número) ou botão de site no mesmo tamanho
+  function linhaZap(k, quem) {
+    const z = Object.assign({}, k, { titulo: "Chamar no WhatsApp" });
+    const idc = "copiar-" + k.id.replace(/^zap-/, "");
+    return `<div class="linha">${item(z)}
+      <button class="copiar" type="button" data-id="${esc(idc)}" data-numero="${esc(k.sub)}"
+        aria-label="Copiar número de ${esc(quem)}: ${esc(k.sub)}">${COPIA}${CHECK}</button></div>`;
+  }
+  function botaoSite(k) {
+    return `<a class="item" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}>
+      <span class="disco marca">${ICO.site}</span>
+      <span class="t"><strong>Abrir a loja online</strong>${k.sub ? `<small>${esc(k.sub)}</small>` : ""}</span>${SETA}</a>`;
+  }
+  function cab(id, nome, sub) {
+    return `<header class="secao-cab"><span class="disco luz">${GICO[nome] || ICO.site}</span>
+      <div><h2 id="t-${id}">${esc(nome)}</h2>${sub ? `<p>${esc(sub)}</p>` : ""}</div></header>`;
+  }
+
+  let ordem = 0;
+  const cartaoLoja = l => {
+    const linhas = l.links.map(k => k.tipo === "zap" && k.sub ? linhaZap(k, l.nome) : item(k)).join("");
+    const n = ordem++;
+    return `<article class="loja vidro" aria-labelledby="c-${n}">
       <div class="loja-cab">
         ${l.detalhe ? `<span class="selo"><i aria-hidden="true"></i>${esc(l.detalhe)}</span>` : ""}
-        <h3 id="loja-${n}">${esc(l.nome)}</h3>
+        <h3 id="c-${n}">${esc(l.nome)}</h3>
         ${l.endereco ? `<p class="end">${ICO.pino}<span>${esc(l.endereco)}</span></p>` : ""}
       </div>${linhas}</article>`;
-  }).join("");
+  };
+  const cartaoCanal = c => {
+    const nome = c.curto || c.titulo;
+    const partes = String(c.titulo || "").split("·").map(x => x.trim());
+    const selo = partes.length > 1 ? partes[partes.length - 1] : "";
+    const n = ordem++;
+    return `<article class="loja vidro" aria-labelledby="c-${n}">
+      <div class="loja-cab">
+        ${selo ? `<span class="selo"><i aria-hidden="true"></i>${esc(selo)}</span>` : ""}
+        <h3 id="c-${n}">${esc(nome)}</h3>
+        ${c.desc ? `<p class="desc">${esc(c.desc)}</p>` : ""}
+      </div>${c.tipo === "zap" && c.sub ? linhaZap(c, nome) : c.tipo === "site" ? botaoSite(c) : item(c)}</article>`;
+  };
 
-  $("opcoes").innerHTML = LOJAS.map(l => {
-    const k = l.links.find(x => x.tipo === "zap");
-    if (!k) return "";
-    return `<a class="item opcao" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}>
+  const secoes = [];
+  if (LOJAS.length) secoes.push({ id: "lojas", nome: "Lojas", sub: `Varejo · ${LOJAS.length} ${LOJAS.length > 1 ? "lojas" : "loja"}`, html: LOJAS.map(cartaoLoja).join("") });
+  GRUPOS.forEach(g => {
+    const cs = CANAIS.filter(c => c.grupo === g);
+    const nomes = cs.map(c => c.curto || c.titulo);
+    const sub = nomes.length > 1 ? nomes.join(" · ") : (cs[0].tipo === "zap" ? "WhatsApp" : "");
+    secoes.push({ id: slug(g), nome: g, sub, html: cs.map(cartaoCanal).join("") });
+  });
+  $("secoes").innerHTML = secoes.map((x, i) =>
+    `<section class="secao entra" style="--i:${6 + Math.min(i, 3)}" id="${x.id}" aria-labelledby="t-${x.id}">${cab(x.id, x.nome, x.sub)}<div class="lista">${x.html}</div></section>`).join("");
+
+  // Acesso rápido: só rola até a seção (sem data-id)
+  $("rapido").innerHTML = secoes.map(x =>
+    `<a class="atalho vidro" href="#${x.id}"><span class="disco luz">${GICO[x.nome] || ICO.site}</span><span class="r">${esc(x.nome)}</span></a>`).join("");
+  if (secoes.length !== 4) $("rapido").style.gridTemplateColumns = `repeat(${Math.min(secoes.length, 4)}, minmax(0,1fr))`;
+
+  // Folha de escolha: todos os WhatsApp (lojas + atendimento)
+  const opcao = (k, nome, sub) => `<a class="item opcao" href="${esc(k.url)}" data-id="${esc(k.id)}"${alvo(k.url)}>
       <span class="disco verde">${ICO.zap}</span>
-      <span class="t"><strong>${esc(l.nome)}</strong><small>${esc([l.detalhe, k.sub].filter(Boolean).join(" · "))}</small></span>${SETA}</a>`;
-  }).join("");
+      <span class="t"><strong>${esc(nome)}</strong>${sub ? `<small>${esc(sub)}</small>` : ""}</span>${SETA}</a>`;
+  const zapLojas = LOJAS.map(l => { const k = l.links.find(x => x.tipo === "zap"); return k ? opcao(k, l.nome, k.sub) : ""; }).join("");
+  const zapCanais = CANAIS.filter(c => c.tipo === "zap").map(c => opcao(c, c.titulo || c.curto, c.desc)).join("");
+  $("opcoes").innerHTML = (zapLojas ? `<p class="grupo">Lojas · varejo</p>${zapLojas}` : "") +
+                          (zapCanais ? `<p class="grupo">Atendimento</p>${zapCanais}` : "");
 
   $("acoes").innerHTML =
     `<a class="acao vidro" href="admotos.vcf" data-id="salvar-contato" download><span class="disco">${CONTATO}</span><span class="r">Salvar contato</span></a>
@@ -488,7 +564,7 @@ img { display: block; }
   /* ===== Estrada em perspectiva (canvas) ===== */
   const cv = $("estrada"), ctx = cv.getContext("2d");
   if (!ctx) return;
-  let W = 0, H = 0, hx = 0, hy = 0, yTxt = 0, F = 1, R = 1, rodando = false, visivel = true, t0 = 0, ultimo = 0, off = 0;
+  let W = 0, H = 0, hx = 0, hy = 0, yTxt = 0, yCta = 0, F = 1, R = 1, rodando = false, visivel = true, t0 = 0, ultimo = 0, off = 0;
   const ZMAX = 70, ZMIN = .55;
   let carros = [], proxCarro = 0;
 
@@ -500,6 +576,7 @@ img { display: block; }
     const a = $("app").getBoundingClientRect(), c = cv.getBoundingClientRect();
     hx = a.left + a.width / 2 - c.left; hy = a.top + a.height / 2 - c.top;
     yTxt = $("cidades").getBoundingClientRect().bottom - c.top;
+    yCta = $("abrir").getBoundingClientRect().bottom - c.top;
     F = Math.max(80, H * 1.05 - hy);                // z = 1 cai logo abaixo da borda
     R = Math.min(W, 760) * .62 / F;                  // meia largura da pista
   }
@@ -543,7 +620,8 @@ img { display: block; }
       if (z1 <= ZMIN) continue;
       const y0 = py(z0), y1 = py(z1), w0 = Math.min(2.4, F * w / z0), w1 = Math.min(2.4, F * w / z1);
       // atrás do letreiro e da frase a faixa quase some; ela "acende" abaixo do texto
-      const zona = Math.min(1, Math.max(.22, (y0 - yTxt) / 120));
+      // e volta a apagar abaixo do botão principal, para não riscar os atalhos e os cartões
+      const zona = Math.min(1, Math.max(.22, (y0 - yTxt) / 120)) * Math.min(1, Math.max(.1, 1 - (y1 - yCta) / 70));
       const a = Math.min(1, (1 - z1 / ZMAX) * 1.6) * .42 * zona;
       if (a < .01) continue;
       ctx.fillStyle = `rgba(235,240,255,${a.toFixed(3)})`;
@@ -625,6 +703,6 @@ img { display: block; }
   (reduz.addEventListener ? reduz.addEventListener.bind(reduz, "change") : reduz.addListener.bind(reduz))(() => { parar(); iniciar(); });
 })();
 </script>
-<script src="rastreio.js?v=20261124a"></script>
+<script src="rastreio.js?v=20261124c"></script>
 </body>
 </html>

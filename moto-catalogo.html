@@ -5,8 +5,8 @@
   engrenagem em traço fino, com linhas de centro, linhas de chamada e balões numerados; grade milimetrada azul no fundo.
   Cores: papel claro, azul da marca #002C8F em todos os traços; vermelho #E92525 só em marcações (Detalhe A, nº das fichas);
   verde só no botão do WhatsApp. Tipografia: Archivo (condensada nos títulos, normal no texto) + IBM Plex Mono nos rótulos.
-  Ícones próprios em traço técnico de 1,6 px. Detalhe memorável: cada loja é uma "ficha técnica" numerada (01, 02) e os
-  demais botões seguem a numeração do catálogo (03, 04, 05), como itens de uma lista de peças.
+  Ícones próprios em traço técnico de 1,6 px. Detalhe memorável: a página é organizada como um catálogo — um "índice" de
+  acesso rápido (01 Lojas, 02 Atacado, 03 Garantia, 04 Financeiro) e cada loja/canal é uma "ficha técnica" numerada.
 -->
 <html lang="pt-BR">
 <head>
@@ -115,11 +115,34 @@ img { display: block; }
   display: grid; place-items: center; font: 600 10px/1 var(--m); color: var(--azul);
 }
 
+/* ---------- Índice (acesso rápido) ---------- */
+.indice { margin-top: 18px; }
+.indice-cab { display: flex; align-items: center; gap: 10px; margin: 0 0 9px; }
+.indice-cab::after { content: ""; flex: 1; height: 1px; background: var(--azul-linha); }
+.indice-cab .rotulo { color: var(--azul); }
+.atalhos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.atalho {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  min-height: 84px; padding: 16px 4px 10px; background: #fff; border: 1px solid var(--azul-linha); border-radius: var(--raio);
+  color: var(--azul); text-decoration: none; text-align: center;
+  box-shadow: 0 1px 2px rgba(11, 27, 63, .04), 0 8px 18px -14px rgba(11, 27, 63, .25);
+}
+.atalho:hover { border-color: var(--azul); background: var(--azul-claro); }
+.atalho:active { background: #E2E9F8; }
+.atalho .ax { position: absolute; top: 6px; left: 7px; font: 600 9.5px/1 var(--m); letter-spacing: .04em; color: var(--texto-3); }
+.atalho svg { width: 26px; height: 26px; }
+.atalho .an { font-weight: 650; font-size: 14.5px; line-height: 1.1; color: var(--texto); }
+
 /* ---------- Seções ---------- */
-.secao { margin-top: 24px; }
-.secao-cab { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
-.secao-cab h2 { margin: 0; font: 600 11.5px/1.2 var(--m); letter-spacing: .1em; text-transform: uppercase; color: var(--azul); }
-.secao-cab::after { content: ""; flex: 1; height: 1px; background: var(--azul-linha); }
+.secao { margin-top: 30px; scroll-margin-top: 14px; }
+.secao-cab { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; min-width: 0; }
+.secao-cab .sx {
+  flex: none; font: 600 10.5px/1 var(--m); color: #fff; background: var(--azul); border-radius: 3px; padding: 5px 6px 4px;
+}
+.secao-cab h2 { margin: 0; font-weight: 750; font-size: 24px; line-height: 1; font-stretch: 80%; color: var(--texto); }
+.secao-cab .sd { font: 600 10.5px/1.2 var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-3); white-space: nowrap; }
+.secao-cab::after { content: ""; flex: 1; min-width: 12px; height: 1px; background: var(--azul-linha); }
+.secao-menor .secao-cab h2 { font-size: 20px; }
 
 /* ---------- Fichas técnicas das lojas ---------- */
 .fichas { display: grid; gap: 14px; }
@@ -150,6 +173,7 @@ img { display: block; }
 }
 .end { margin: 7px 0 14px; display: flex; align-items: flex-start; gap: 7px; font-size: 15.5px; line-height: 1.35; color: var(--texto-2); }
 .end svg { flex: none; width: 16px; height: 16px; margin-top: 2px; color: var(--azul); }
+.desc { margin: 6px 0 14px; font-size: 15.5px; line-height: 1.35; color: var(--texto-2); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .zap {
@@ -165,8 +189,12 @@ img { display: block; }
 .zap strong { font-weight: 700; font-size: 18.5px; line-height: 1.15; letter-spacing: .005em; }
 .zap small { font: 500 13px/1.3 var(--m); opacity: .92; margin-top: 2px; }
 .zap .seta { flex: none; width: 20px; height: 20px; }
+.zap.site { background: var(--azul); }
+.zap.site:hover, .zap.site:active { background: #00226F; }
+.zap.site .zico svg { width: 21px; height: 21px; }
 
 .acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.acoes.um { grid-template-columns: 1fr; }
 .sec {
   display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 10px;
   border: 1px solid var(--azul-linha); border-radius: var(--raio); background: #fff;
@@ -209,6 +237,8 @@ img { display: block; }
   display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
 }
 .rodape img { width: 26px; height: auto; }
+.rodape .rotulo { text-wrap: balance; line-height: 1.5; }
+.nw { white-space: nowrap; }
 .rodape .marca { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; color: var(--texto-2); }
 
 /* ---------- Foco e aviso ---------- */
@@ -236,6 +266,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
   .desenho.anima .bl { animation: surge .32s cubic-bezier(.3, 1.3, .5, 1) var(--d) both; }
   .desenho.anima .det { transform-box: fill-box; transform-origin: 62% 62%; animation: marca .5s cubic-bezier(.22, .7, .18, 1) 1.25s both; }
 }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 @keyframes encaixe { from { transform: translate(var(--dx), var(--dy)); opacity: .35; } to { transform: none; opacity: 1; } }
 @keyframes traco { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes surge { from { transform: scale(.55); opacity: 0; } to { transform: none; opacity: 1; } }
@@ -247,7 +278,8 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
     max-width: 1140px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     column-gap: 56px; align-items: start; padding-top: 48px; padding-bottom: 48px;
   }
-  .lado-a { position: sticky; top: 40px; }
+  .indice { margin-top: 24px; }
+  .atalho { min-height: 92px; }
   .cab { align-items: flex-start; text-align: left; }
   .cab .logo { width: 260px; }
   .cab h1 { font-size: 19px; }
@@ -255,9 +287,10 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
   .prancha-cab { margin: 0 -22px; padding: 10px 22px; }
   .desenho { margin: 14px 0 8px; }
   .legenda li { font-size: 12.5px; }
-  .lado-b > .secao:first-child { margin-top: 0; }
+  #secoes > .secao:first-child { margin-top: 0; }
   .rodape { grid-column: 1 / -1; }
 }
+@media (min-width: 1000px) and (min-height: 860px) { .lado-a { position: sticky; top: 32px; } }
 </style>
 </head>
 <body>
@@ -267,6 +300,11 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
       <img class="logo" src="logo.svg" alt="AD Motos" width="212" height="66">
       <h1>Peças e acessórios para motos</h1>
     </header>
+
+    <nav class="indice" aria-label="Acesso rápido">
+      <div class="indice-cab"><span class="rotulo">Índice · acesso rápido</span></div>
+      <ul class="atalhos" id="atalhos"></ul>
+    </nav>
 
     <figure class="prancha" aria-label="Ilustração técnica: vista explodida de peças de motor de moto">
       <figcaption class="prancha-cab">
@@ -386,12 +424,9 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
   </div>
 
   <main class="lado-b">
-    <section class="secao" aria-labelledby="lojas-cab">
-      <div class="secao-cab"><h2 id="lojas-cab">Fale com a loja</h2></div>
-      <div class="fichas" id="fichas"></div>
-    </section>
+    <div id="secoes"></div>
 
-    <section class="secao" aria-labelledby="outros-cab">
+    <section class="secao secao-menor" aria-labelledby="outros-cab">
       <div class="secao-cab"><h2 id="outros-cab">Outros contatos</h2></div>
       <ul class="lista" id="outros"></ul>
     </section>
@@ -399,15 +434,15 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
 
   <footer class="rodape">
     <span class="marca"><img src="favicon.svg" alt="" width="26" height="25">AD Motos</span>
-    <span class="rotulo">Capim Grosso · Senhor do Bonfim · Várzea da Roça — BA</span>
+    <span class="rotulo"><span class="nw">Capim Grosso</span> · <span class="nw">Senhor do Bonfim</span> · <span class="nw">Várzea da Roça — BA</span></span>
   </footer>
 </div>
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<script src="config.js?v=20261124a"></script>
-<script src="links.js?v=20261124a"></script>
-<script src="icones.js?v=20261124a"></script>
+<script src="config.js?v=20261124c"></script>
+<script src="links.js?v=20261124c"></script>
+<script src="icones.js?v=20261124c"></script>
 <script>
 (function () {
   // Liga a animação do desenho só se o navegador aceita movimento
@@ -427,45 +462,95 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
     contato: S('<rect x="3.5" y="5" width="17" height="14" rx="1.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.7 1.8-2.5 3.2-2.5s2.6.8 3.2 2.5M14.5 10h3.5M14.5 13.5h3.5"/>'),
     email: S('<rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="m4 7 8 6 8-6"/>'),
     compartilhar: S('<circle cx="17.5" cy="5.5" r="2.3"/><circle cx="6.5" cy="12" r="2.3"/><circle cx="17.5" cy="18.5" r="2.3"/><path d="m8.5 10.8 7-4.1M8.5 13.2l7 4.1"/>'),
+    site: S('<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5M12 3.5C9.6 5.9 8.5 8.7 8.5 12s1.1 6.1 3.5 8.5"/>', ' stroke-width="1.8"'),
+    lojas: S('<path d="M3.5 9.5 5 4.5h14l1.5 5"/><path d="M3.5 9.5c0 1.4 1.1 2.5 2.4 2.5s2.4-1.1 2.4-2.5c0 1.4 1.1 2.5 2.4 2.5h.6c1.3 0 2.4-1.1 2.4-2.5 0 1.4 1.1 2.5 2.4 2.5s2.4-1.1 2.4-2.5"/><path d="M5 12v7.5h14V12M10 19.5v-4.5h4v4.5"/>'),
+    atacado: S('<path d="M3.5 12.5h8v7h-8zM12.5 12.5h8v7h-8zM8 5.5h8v7H8z"/><path d="M6.5 12.5v2M15.5 12.5v2M11 5.5v2"/>'),
+    garantia: S('<path d="M12 3.5 5 6v5.5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9V6Z"/><path d="m8.8 12.2 2.3 2.3 4.2-4.6"/>'),
+    financeiro: S('<path d="M6 3.5h12v17l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3Z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/>'),
     ok: S('<path d="m5 12.5 4.5 4.5L19 7.5"/>', ' stroke-width="2.2"'),
     alerta: S('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5.5M12 16.3v.2"/>', ' stroke-width="2"'),
     seta: S('<path d="m9 6 6 6-6 6"/>', ' class="seta" stroke-width="2"'),
   };
 
-  // ---------- Fichas das lojas (a partir de LOJAS) ----------
-  const fichas = (window.LOJAS || []).map((loja, i) => {
+  // ---------- Seções: Lojas + grupos de CANAIS, todas com fichas do mesmo peso ----------
+  let nFicha = 0;
+  const num = () => String(++nFicha).padStart(2, "0");
+  const botaoCopiar = (id, numero, nome) =>
+    '<button type="button" class="sec" data-id="' + esc(id) + '" data-numero="' + esc(numero) + '"' +
+    ' aria-label="' + esc("Copiar número de " + nome + ": " + numero) + '"><span class="sic">' + IC.copiar + '</span><span class="lbl">Copiar número</span></button>';
+  const botaoGrande = (l, nome, titulo) => {
+    const site = l.tipo === "site";
+    return '<a class="zap' + (site ? " site" : "") + '" href="' + esc(l.url) + '" data-id="' + esc(l.id) + '"' + alvo(l.url) +
+      ' aria-label="' + esc(titulo + " · " + nome + (l.sub ? " · " + l.sub : "")) + '">' +
+      '<span class="zico">' + (site ? IC.site : ICO.zap) + '</span>' +
+      '<span class="ztxt"><strong>' + esc(titulo) + '</strong>' + (l.sub ? '<small>' + esc(l.sub) + '</small>' : '') + '</span>' +
+      IC.seta + '</a>';
+  };
+  const topo = (rot, tag) => {
+    const n = num();
+    return '<div class="ficha-topo"><span class="ficha-num"><b aria-hidden="true">' + n + '</b>' +
+      '<span class="rotulo">' + esc(rot) + '</span></span>' +
+      (tag ? '<span class="tipo' + (/matriz/i.test(tag) ? " matriz" : "") + '">' + esc(tag) + '</span>' : '') + '</div>';
+  };
+
+  const fichaLoja = (loja, i) => {
     const zap = loja.links.find(l => l.tipo === "zap");
     const mapa = loja.links.find(l => l.tipo === "mapa");
-    const n = String(i + 1).padStart(2, "0");
-    const matriz = /matriz/i.test(loja.detalhe || "");
-    let h = '<article class="ficha" aria-labelledby="loja-' + i + '">' +
-      '<div class="ficha-topo"><span class="ficha-num"><b aria-hidden="true">' + n + '</b>' +
-      '<span class="rotulo">Loja ' + n + '</span></span>' +
-      '<span class="tipo' + (matriz ? " matriz" : "") + '">' + esc(loja.detalhe || "") + '</span></div>' +
+    let h = '<article class="ficha" aria-labelledby="loja-' + i + '">' + topo("Loja", loja.detalhe || "") +
       '<div class="ficha-corpo"><h3 id="loja-' + i + '">' + esc(loja.nome) + '</h3>' +
       '<p class="end"><span class="sr">Endereço: </span>' + IC.pino + '<span>' + esc(loja.endereco) + '</span></p>';
-    if (zap) {
-      h += '<a class="zap" href="' + esc(zap.url) + '" data-id="' + esc(zap.id) + '"' + alvo(zap.url) +
-        ' aria-label="' + esc(zap.titulo + " · " + loja.nome + (zap.sub ? " · " + zap.sub : "")) + '">' +
-        '<span class="zico">' + ICO.zap + '</span>' +
-        '<span class="ztxt"><strong>' + esc(zap.titulo) + '</strong>' + (zap.sub ? '<small>' + esc(zap.sub) + '</small>' : '') + '</span>' +
-        IC.seta + '</a>';
-    }
-    h += '<div class="acoes">';
-    if (mapa) {
-      h += '<a class="sec" href="' + esc(mapa.url) + '" data-id="' + esc(mapa.id) + '"' + alvo(mapa.url) +
-        ' aria-label="' + esc(mapa.titulo + " até a loja de " + loja.nome) + '"><span class="sic">' + IC.mapa + '</span><span>' + esc(mapa.titulo) + '</span></a>';
-    }
-    if (zap && zap.sub) {
-      h += '<button type="button" class="sec" data-id="' + esc(zap.id.replace(/^zap-/, "copiar-")) + '" data-numero="' + esc(zap.sub) + '"' +
-        ' aria-label="' + esc("Copiar número de " + loja.nome + ": " + zap.sub) + '"><span class="sic">' + IC.copiar + '</span><span class="lbl">Copiar número</span></button>';
-    }
-    return h + '</div></div></article>';
+    if (zap) h += botaoGrande(zap, loja.nome, zap.titulo);
+    const extras = [];
+    if (mapa) extras.push('<a class="sec" href="' + esc(mapa.url) + '" data-id="' + esc(mapa.id) + '"' + alvo(mapa.url) +
+      ' aria-label="' + esc(mapa.titulo + " até a loja de " + loja.nome) + '"><span class="sic">' + IC.mapa + '</span><span>' + esc(mapa.titulo) + '</span></a>');
+    if (zap && zap.sub) extras.push(botaoCopiar(zap.id.replace(/^zap-/, "copiar-"), zap.sub, loja.nome));
+    if (extras.length) h += '<div class="acoes' + (extras.length === 1 ? " um" : "") + '">' + extras.join("") + '</div>';
+    return h + '</div></article>';
+  };
+
+  const fichaCanal = (c, i) => {
+    const partes = String(c.titulo || "").split("·").map(t => t.trim());
+    let tag = partes.length > 1 ? partes[partes.length - 1] : "";
+    if (tag.toLowerCase() === String(c.grupo || "").toLowerCase()) tag = ""; // não repete o nome da seção
+    const nome = c.curto || partes[0];
+    const site = c.tipo === "site";
+    let h = '<article class="ficha" aria-labelledby="canal-' + i + '">' + topo(site ? "Site" : "WhatsApp", tag) +
+      '<div class="ficha-corpo"><h3 id="canal-' + i + '">' + esc(nome) + '</h3>' +
+      (c.desc ? '<p class="desc">' + esc(c.desc) + '</p>' : '') +
+      botaoGrande(c, nome, site ? "Abrir a loja online" : "Chamar no WhatsApp");
+    if (!site && c.sub) h += '<div class="acoes um">' + botaoCopiar("copiar-" + c.id.replace(/^zap-/, ""), c.sub, nome) + '</div>';
+    return h + '</div></article>';
+  };
+
+  const lojas = window.LOJAS || [], canais = window.CANAIS || [];
+  const grupos = [];
+  canais.forEach(c => {
+    let g = grupos.find(x => x.nome === c.grupo);
+    if (!g) grupos.push(g = { nome: c.grupo, itens: [] });
+    g.itens.push(c);
   });
-  document.getElementById("fichas").innerHTML = fichas.join("");
+  const slug = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const secoes = [];
+  if (lojas.length) secoes.push({ id: "lojas", nome: "Lojas", sub: "Varejo", icone: IC.lojas, html: lojas.map(fichaLoja).join("") });
+  grupos.forEach(g => {
+    const curtos = g.itens.map(c => c.curto).filter(t => t && t !== g.nome);
+    secoes.push({ id: slug(g.nome), nome: g.nome, sub: curtos.join(" · "), icone: IC[slug(g.nome)] || IC.site,
+      html: g.itens.map((c, j) => fichaCanal(c, slug(g.nome) + j)).join("") });
+  });
+  document.getElementById("secoes").innerHTML = secoes.map((x, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    return '<section class="secao" id="' + x.id + '" aria-labelledby="' + x.id + '-cab">' +
+      '<div class="secao-cab"><span class="sx" aria-hidden="true">' + n + '</span><h2 id="' + x.id + '-cab">' + esc(x.nome) + '</h2>' +
+      (x.sub ? '<span class="sd">' + esc(x.sub) + '</span>' : '') + '</div>' +
+      '<div class="fichas">' + x.html + '</div></section>';
+  }).join("");
+  // Atalhos do índice (sem data-id: só rolam até a seção)
+  document.getElementById("atalhos").innerHTML = secoes.map((x, i) =>
+    '<li><a class="atalho" href="#' + x.id + '"><span class="ax" aria-hidden="true">' + String(i + 1).padStart(2, "0") + '</span>' +
+    x.icone + '<span class="an">' + esc(x.nome) + '</span></a></li>').join("");
 
   // ---------- Outros (continua a numeração do catálogo) ----------
-  let pos = (window.LOJAS || []).length;
+  let pos = nFicha;
   const item = o => {
     pos++;
     const tag = o.tag || "a";
@@ -532,6 +617,6 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--azul); outlin
   });
 })();
 </script>
-<script src="rastreio.js?v=20261124a"></script>
+<script src="rastreio.js?v=20261124c"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AD Motos</title>
-<meta name="description" content="Peças e acessórios para a sua moto em Capim Grosso, Senhor do Bonfim e Várzea da Roça (BA). Fale com a loja pelo WhatsApp.">
+<meta name="description" content="Peças e acessórios para a sua moto em Capim Grosso, Senhor do Bonfim e Várzea da Roça (BA). Lojas, atacado, garantia e financeiro pelo WhatsApp.">
 <meta name="theme-color" content="#061649">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AD Motos">
@@ -18,7 +18,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 /* Premium · Aurora: gradiente em malha animado (azul da marca, azul vivo, vermelho/coral),
-   avatar com anel de stories, vidro fosco, WhatsApp em destaque. */
+   avatar com anel de stories, vidro fosco, WhatsApp em destaque.
+   Rodada 4: acesso rápido (Lojas, Atacado, Garantia, Financeiro) na primeira tela e
+   uma seção por grupo, com o mesmo cartão de vidro e o mesmo botão grande das lojas. */
 :root {
   --azul: #002C8F; --azul-vivo: #2F6BFF; --azul-claro: #8FB4FF; --noite: #040E36;
   --vermelho: #E92525; --coral: #FF6A4D; --pessego: #FF9A6B;
@@ -32,6 +34,7 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; }
 html { background: var(--noite); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   min-height: 100vh; min-height: 100dvh; background: var(--noite); color: var(--branco);
   font: 16px/1.45 var(--f); -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative;
@@ -70,11 +73,11 @@ img { display: block; }
 
 /* ===== Página ===== */
 .pg { position: relative; z-index: 1; width: 100%; max-width: 460px; margin: 0 auto;
-  padding: calc(env(safe-area-inset-top, 0px) + 44px) max(18px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 28px) max(18px, env(safe-area-inset-left, 0px)); }
+  padding: calc(env(safe-area-inset-top, 0px) + 30px) max(18px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 28px) max(18px, env(safe-area-inset-left, 0px)); }
 
 /* Perfil */
 .perfil { text-align: center; display: grid; justify-items: center; }
-.avatar { position: relative; width: 124px; height: 124px; margin-bottom: 20px; }
+.avatar { position: relative; width: 108px; height: 108px; margin-bottom: 16px; }
 .avatar::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; filter: blur(22px); opacity: .7;
   background: conic-gradient(from 200deg, var(--pessego), var(--vermelho), #FF4B6E, var(--azul-vivo), var(--azul-claro), var(--pessego)); }
 .anel { position: absolute; inset: 0; border-radius: 50%;
@@ -85,9 +88,9 @@ img { display: block; }
   box-shadow: 0 10px 30px -6px rgba(0,8,40,.55), inset 0 -6px 14px rgba(0,44,143,.08); }
 .foto img { width: 64%; height: auto; transform: translate(-2%, 2%); }
 .nome { margin: 0; line-height: 0; }
-.nome img { width: 176px; height: auto; filter: drop-shadow(0 2px 10px rgba(0,10,50,.35)); }
-.frase { margin: 14px 0 0; font-size: 16px; font-weight: 500; color: var(--texto-2); letter-spacing: -.005em; }
-.lugares { margin: 12px 0 0; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--texto-3);
+.nome img { width: 168px; height: auto; filter: drop-shadow(0 2px 10px rgba(0,10,50,.35)); }
+.frase { margin: 12px 0 0; font-size: 16px; font-weight: 500; color: var(--texto-2); letter-spacing: -.005em; }
+.lugares { margin: 8px 0 0; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--texto-3);
   letter-spacing: .01em; }
 .lugares svg { width: 14px; height: 14px; flex: none; color: var(--pessego); }
 
@@ -95,6 +98,34 @@ img { display: block; }
 .rotulo { display: flex; align-items: center; gap: 12px; margin: 34px 4px 14px; font-size: 12px; font-weight: 700; letter-spacing: .16em;
   text-transform: uppercase; color: var(--texto-3); }
 .rotulo::before, .rotulo::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.28), rgba(255,255,255,0)); }
+
+/* ===== Acesso rápido ===== */
+.rapido { margin: 22px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn.atalho { flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0; padding: 14px 10px 13px; min-height: 0; border-radius: 22px; }
+.atalho .chip { margin-bottom: 8px; }
+.atalho b { font-size: 17px; font-weight: 800; letter-spacing: -.015em; line-height: 1.15; }
+.atalho small { margin-top: 2px; font-size: 12.5px; font-weight: 600; color: var(--texto-3); line-height: 1.3; }
+.atalho .desce { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); color: var(--texto-2); }
+.atalho .desce svg { width: 14px; height: 14px; }
+/* ícone em pastilha de gradiente (atalhos e títulos de seção) */
+.chip { flex: none; width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 8px 18px -8px var(--chip-sombra, rgba(0,0,0,.6)); }
+.chip svg { width: 22px; height: 22px; }
+.t-lojas { background: linear-gradient(135deg, var(--pessego), var(--vermelho)); --chip-sombra: rgba(233,37,37,.9); }
+.t-atacado { background: linear-gradient(135deg, var(--azul-claro), var(--azul-vivo) 55%, var(--azul)); --chip-sombra: rgba(47,107,255,.9); }
+.t-garantia { background: linear-gradient(135deg, #9EC1FF, #5B6CFF 60%, #3A3FD6); --chip-sombra: rgba(91,108,255,.9); }
+.t-financeiro { background: linear-gradient(135deg, #FFB37A, var(--coral) 55%, #D8323F); --chip-sombra: rgba(255,106,77,.9); }
+
+/* ===== Seções por grupo ===== */
+.grupo { scroll-margin-top: 14px; }
+.grupo-titulo { display: flex; align-items: center; gap: 12px; margin: 36px 2px 14px; }
+.grupo-titulo h2 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.grupo-titulo p { margin: 2px 0 0; font-size: 13px; font-weight: 600; color: var(--texto-3); }
+.grupo-titulo::after { content: ""; flex: 1; align-self: center; height: 1px; margin-left: 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(255,255,255,0)); }
+.loja h3.lema { font-size: 17.5px; font-weight: 750; letter-spacing: -.01em; line-height: 1.3; }
+.desc { margin: 4px 0 0; font-size: 14px; font-weight: 500; color: var(--texto-2); }
 
 /* ===== Vidro ===== */
 .vidro { position: relative; background: var(--vidro);
@@ -105,11 +136,12 @@ img { display: block; }
 .vidro::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,0) 38%); }
 
-.lojas { display: grid; gap: 16px; }
+.lojas { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.loja { min-width: 0; }
 .loja { padding: 18px 16px 16px; }
 .loja-topo { padding: 0 4px 14px; }
 .loja-linha { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.loja h2 { margin: 0; font-size: 21px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
+.loja h3 { margin: 0; font-size: 21px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
 .end { margin: 5px 0 0; display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--texto-2); font-weight: 500; }
 .end svg { flex: none; color: var(--pessego); }
 .selo { flex: none; padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
@@ -137,6 +169,12 @@ img { display: block; }
 .zap b { font-size: 17.5px; font-weight: 800; letter-spacing: -.01em; line-height: 1.2; }
 .zap small { font-size: 14px; font-weight: 600; opacity: .92; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
 .zap .seta { margin-left: auto; flex: none; opacity: .95; }
+/* Site: mesmo tamanho do WhatsApp, cor da marca */
+.zap.site { background: linear-gradient(135deg, #3F7BFF 0%, #1A4FD8 45%, var(--azul) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,10,60,.3), 0 14px 30px -12px rgba(47,107,255,.9); }
+.zap.site .bolha svg { width: 26px; height: 26px; }
+.zap.site small { font-size: 13.5px; overflow-wrap: anywhere; }
+.zap .txt { padding-right: 6px; }
 /* faixa de brilho que passa de vez em quando */
 .zap::after { content: ""; position: absolute; top: -20%; bottom: -20%; left: -40%; width: 30%; z-index: -1; pointer-events: none;
   background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.42), rgba(255,255,255,0)); transform: translateX(-120%) skewX(-18deg); }
@@ -146,6 +184,7 @@ img { display: block; }
   background: rgba(255,255,255,.1); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(255,255,255,.1); }
 .sec .ico { width: 21px; height: 21px; flex: none; }
 .copiar { flex: none; width: 54px; padding: 0; justify-content: center; }
+.copiar.largo { flex: 1; width: auto; padding: 0 16px; }
 .copiar svg { width: 21px; height: 21px; }
 
 /* Fileira de ícones redondos */
@@ -187,9 +226,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
   @keyframes surge { from { transform: scale(.82); } }
   .entra { animation: sobe .7s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * 70ms); }
   @keyframes sobe { from { opacity: 0; transform: translateY(16px); } }
-  .zap::after { animation: varre 7s ease-in-out 1.1s infinite; }
+  .zap::after { animation: varre 7s ease-in-out infinite; animation-delay: var(--d, 1.1s); }
   @keyframes varre { 0% { transform: translateX(-120%) skewX(-18deg); } 16%, 100% { transform: translateX(520%) skewX(-18deg); } }
-  .lojas .loja:nth-child(2) .zap::after { animation-delay: 1.5s; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mancha { animation: none !important; }
@@ -205,6 +243,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
 }
 @media (max-width: 350px) {
   .zap b { font-size: 16px; } .redondos { gap: 14px; } .sec { font-size: 14.5px; padding: 0 12px; }
+  .atalho b { font-size: 15.5px; } .atalho { padding: 12px; }
 }
 </style>
 </head>
@@ -224,8 +263,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
     <p class="lugares entra" id="lugares" style="--i:3"></p>
   </header>
 
-  <h2 class="rotulo entra" style="--i:4">Fale com a gente</h2>
-  <section class="lojas" id="lojas" aria-label="Lojas"></section>
+  <nav class="rapido" id="rapido" aria-label="Acesso rápido"></nav>
+
+  <div id="grupos"></div>
 
   <h2 class="rotulo entra" style="--i:7">Mais opções</h2>
   <ul class="redondos entra" id="redondos" style="--i:8"></ul>
@@ -239,12 +279,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<script src="config.js?v=20261124a"></script>
-<script src="links.js?v=20261124a"></script>
-<script src="icones.js?v=20261124a"></script>
+<script src="config.js?v=20261124c"></script>
+<script src="links.js?v=20261124c"></script>
+<script src="icones.js?v=20261124c"></script>
 <script>
 (function () {
-  const LOJAS = window.LOJAS || [], OUTROS = window.OUTROS || [];
+  const LOJAS = window.LOJAS || [], CANAIS = window.CANAIS || [], OUTROS = window.OUTROS || [];
   const ICONES = {
     copiar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>',
     contato: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 19.5c.8-3.4 3.4-5.3 6.5-5.3 1.4 0 2.6.4 3.7 1"/><path d="M18 14v6M15 17h6"/></svg>',
@@ -252,40 +292,100 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
     ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>'
   };
   const CURTO = { email: "E-mail", site: "Site", insta: "Instagram", mapa: "Mapa", zap: "WhatsApp" };
-  const slug = s => String(s).replace(/^[a-z]+-/, "");
 
   // Linha das cidades no perfil
   document.getElementById("lugares").innerHTML = ICO.pino + "<span>" + LOJAS.map(l => esc(l.nome)).join(" · ") + "</span>";
 
-  // Cartões das lojas
-  document.getElementById("lojas").innerHTML = LOJAS.map((loja, i) => {
+  // Ícones dos grupos (traço igual ao de icones.js)
+  const svg = d => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
+  const IG = {
+    lojas: svg('<path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12.5V20h13v-7.5"/><path d="M10 20v-4.5h4V20"/>'),
+    atacado: svg('<path d="M12 3 4 7v10l8 4 8-4V7Z"/><path d="m4 7 8 4 8-4M12 11v10"/><path d="m8 5 8 4"/>'),
+    garantia: svg('<path d="M12 3 5 6v5.5c0 4.3 2.9 8 7 9.5 4.1-1.5 7-5.2 7-9.5V6Z"/><path d="m8.8 12.2 2.3 2.3 4.3-4.6"/>'),
+    financeiro: svg('<path d="M6 3h12v18l-2.5-1.6L13 21l-2.5-1.6L8 21l-2-1.3Z" /><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"/>'),
+    desce: svg('<path d="M12 5v14M6 13l6 6 6-6"/>'),
+    zap: ICO.zap,
+    site: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>'
+  };
+  const chave = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const idCopia = id => "copiar-" + String(id).replace(/^zap-/, "");
+  const semQuebra = t => esc(t).replace(/ - /g, " - ");
+
+  // Grupos: Lojas (varejo) + os grupos de CANAIS, na ordem em que aparecem em links.js
+  const grupos = [{ chave: "lojas", nome: "Lojas", sub: "Varejo · " + LOJAS.length + (LOJAS.length === 1 ? " cidade" : " cidades") }];
+  CANAIS.forEach(c => {
+    const k = chave(c.grupo);
+    let g = grupos.find(x => x.chave === k);
+    if (!g) grupos.push(g = { chave: k, nome: c.grupo, canais: [] });
+    g.canais.push(c);
+  });
+  grupos.forEach(g => {
+    if (g.canais) g.sub = g.canais.length > 1 ? g.canais.map(c => c.curto || c.titulo).join(" · ") : (g.canais[0].tipo === "zap" ? "WhatsApp" : "Site");
+  });
+  const corDe = g => IG[g.chave] ? "t-" + g.chave : "t-atacado";
+  const iconeDe = g => IG[g.chave] || IG.atacado;
+
+  // Acesso rápido (âncoras, sem data-id)
+  document.getElementById("rapido").innerHTML = grupos.map((g, i) =>
+    '<a class="btn atalho vidro entra" style="--i:' + (4 + i * .5) + '" href="#' + g.chave + '" aria-label="' + esc("Ir para " + g.nome + ": " + g.sub) + '">' +
+    '<span class="luz"></span><span class="chip ' + corDe(g) + '">' + iconeDe(g) + '</span>' +
+    '<b>' + esc(g.nome) + '</b><small>' + esc(g.sub) + '</small><span class="desce">' + IG.desce + '</span></a>').join("");
+
+  // Botão grande (WhatsApp verde ou site azul) — o mesmo nas lojas e nos canais
+  let nBotao = 0;
+  function botaoGrande(l, rotulo) {
+    const site = l.tipo === "site";
+    const titulo = site ? "Abrir a loja online" : (l.tipo === "zap" ? "Chamar no WhatsApp" : l.titulo);
+    return '<a class="btn zap' + (site ? ' site' : '') + '" style="--d:' + (1.1 + (nBotao++) * .35).toFixed(2) + 's" data-id="' + esc(l.id) + '" href="' + esc(l.url) + '"' + alvo(l.url) +
+      ' aria-label="' + esc(titulo + " · " + rotulo + (l.sub ? ", " + l.sub : "")) + '">' +
+      '<span class="luz"></span><span class="bolha">' + (site ? IG.site : ICO.zap) + '</span>' +
+      '<span class="txt"><b>' + esc(titulo) + '</b>' + (l.sub ? '<small>' + esc(l.sub) + '</small>' : '') + '</span>' + SETA + '</a>';
+  }
+  function botaoCopiar(l, rotulo, largo) {
+    return '<button type="button" class="btn sec copiar' + (largo ? ' largo' : '') + '" data-id="' + esc(idCopia(l.id)) + '" data-copiar="' + esc(l.sub) + '"' +
+      ' data-aviso="Número copiado" aria-label="' + esc("Copiar número · " + rotulo + ": " + l.sub) + '"' + (largo ? '' : ' title="Copiar número"') + '>' +
+      '<span class="luz"></span>' + ICONES.copiar + (largo ? '<span>Copiar número</span>' : '') + '</button>';
+  }
+
+  let nEntra = 5;
+  const cartaoLoja = loja => {
     const zap = loja.links.filter(l => l.tipo === "zap");
     const resto = loja.links.filter(l => l.tipo !== "zap");
     const filial = /filial/i.test(loja.detalhe || "");
-    let html = '<article class="loja vidro entra" style="--i:' + (5 + i) + '">' +
-      '<div class="loja-topo"><div class="loja-linha"><h2>' + esc(loja.nome) + '</h2>' +
+    let html = '<article class="loja vidro entra" style="--i:' + (nEntra++) + '">' +
+      '<div class="loja-topo"><div class="loja-linha"><h3>' + esc(loja.nome) + '</h3>' +
       (loja.detalhe ? '<span class="selo' + (filial ? ' filial' : '') + '">' + esc(loja.detalhe) + '</span>' : '') + '</div>' +
-      (loja.endereco ? '<p class="end">' + ICO.pino + '<span>' + esc(loja.endereco).replace(/ - /g, '\u00a0-\u00a0') + '</span></p>' : '') + '</div>';
-    zap.forEach(l => {
-      html += '<a class="btn zap" data-id="' + esc(l.id) + '" href="' + esc(l.url) + '"' + alvo(l.url) +
-        ' aria-label="' + esc(l.titulo + " da loja de " + loja.nome + (l.sub ? ", " + l.sub : "")) + '">' +
-        '<span class="luz"></span><span class="bolha">' + ICO.zap + '</span>' +
-        '<span class="txt"><b>' + esc(l.titulo) + '</b>' + (l.sub ? '<small>' + esc(l.sub) + '</small>' : '') + '</span>' + SETA + '</a>';
-    });
+      (loja.endereco ? '<p class="end">' + ICO.pino + '<span>' + semQuebra(loja.endereco) + '</span></p>' : '') + '</div>';
+    zap.forEach(l => { html += botaoGrande(l, "Loja de " + loja.nome); });
     html += '<div class="acoes">';
     resto.forEach(l => {
       html += '<a class="btn sec" data-id="' + esc(l.id) + '" href="' + esc(l.url) + '"' + alvo(l.url) +
         ' aria-label="' + esc(l.titulo + " até a loja de " + loja.nome) + '"><span class="luz"></span>' +
         (ICO[l.tipo] || ICO.site) + '<span>' + esc(l.titulo) + '</span></a>';
     });
-    zap.forEach(l => {
-      if (!l.sub) return;
-      html += '<button type="button" class="btn sec copiar" data-id="copiar-' + esc(slug(l.id)) + '" data-copiar="' + esc(l.sub) + '"' +
-        ' data-aviso="Número copiado" aria-label="' + esc("Copiar número da loja de " + loja.nome + ": " + l.sub) + '" title="Copiar número">' +
-        '<span class="luz"></span>' + ICONES.copiar + '</button>';
-    });
+    zap.forEach(l => { if (l.sub) html += botaoCopiar(l, "Loja de " + loja.nome, false); });
     return html + '</div></article>';
-  }).join("");
+  };
+  const cartaoCanal = (c, g) => {
+    const partes = String(c.titulo).split(" · ");
+    const nome = partes[0], selo = partes.slice(1).filter(p => chave(p) !== g.chave).join(" · ");
+    // canal único com o mesmo nome do grupo: o título da seção já diz o nome, o cartão destaca para que serve
+    const repete = g.canais.length === 1 && chave(nome) === g.chave && c.desc;
+    let html = '<article class="loja vidro entra" style="--i:' + Math.min(nEntra++, 9) + '">' +
+      '<div class="loja-topo"><div class="loja-linha"><h3' + (repete ? ' class="lema"' : '') + '>' + esc(repete ? c.desc : nome) + '</h3>' +
+      (selo ? '<span class="selo">' + esc(selo) + '</span>' : '') + '</div>' +
+      (c.desc && !repete ? '<p class="desc">' + esc(c.desc) + '</p>' : '') + '</div>' +
+      botaoGrande(c, c.titulo);
+    if (c.tipo === "zap" && c.sub) html += '<div class="acoes">' + botaoCopiar(c, c.titulo, true) + '</div>';
+    return html + '</article>';
+  };
+
+  document.getElementById("grupos").innerHTML = grupos.map(g =>
+    '<section class="grupo" id="' + g.chave + '" aria-labelledby="t-' + g.chave + '">' +
+    '<div class="grupo-titulo"><span class="chip ' + corDe(g) + '">' + iconeDe(g) + '</span>' +
+    '<div><h2 id="t-' + g.chave + '">' + esc(g.nome) + '</h2><p>' + esc(g.sub) + '</p></div></div>' +
+    '<div class="lojas">' + (g.canais ? g.canais.map(c => cartaoCanal(c, g)).join("") : LOJAS.map(cartaoLoja).join("")) + '</div></section>'
+  ).join("");
 
   // Fileira de ícones redondos: salvar contato, compartilhar e os de OUTROS
   let redondos =
@@ -300,7 +400,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
   const email = OUTROS.find(o => o.tipo === "email" && o.sub);
   const emailTxt = document.getElementById("email-txt");
   if (email) emailTxt.textContent = email.sub; else emailTxt.remove();
-  document.getElementById("rodape-txt").textContent = "AD Motos · " + LOJAS.map(l => l.nome).join(" e ") + " - BA";
+  const cidades = LOJAS.map(l => l.nome);
+  document.getElementById("rodape-txt").textContent = "AD Motos · " + (cidades.length > 1 ? cidades.slice(0, -1).join(", ") + " e " + cidades[cidades.length - 1] : cidades.join("")) + "\u00a0-\u00a0BA";
 
   // Aviso
   const aviso = document.getElementById("aviso");
@@ -349,6 +450,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid #FFD2C4; outline-offs
   document.addEventListener("animationend", ev => { if (ev.animationName === "toque") ev.target.closest(".btn")?.classList.remove("tocado"); });
 })();
 </script>
-<script src="rastreio.js?v=20261124a"></script>
+<script src="rastreio.js?v=20261124c"></script>
 </body>
 </html>

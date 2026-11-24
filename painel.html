@@ -153,13 +153,14 @@ details summary { cursor: pointer; color: var(--suave); font-size: 14px; margin-
   <p style="text-align:center;margin:0"><button class="sair" id="sair" type="button">Sair deste aparelho</button></p>
 </main>
 
-<script src="config.js?v=20261124a"></script>
-<script src="links.js?v=20261124a"></script>
+<script src="config.js?v=20261124c"></script>
+<script src="links.js?v=20261124c"></script>
 <script>
 const CFG = window.LINKS_CONFIG || {};
 const LIGADO = !!(CFG.supabaseUrl && CFG.supabaseKey);
 const NOMES = {};
 (window.LOJAS || []).forEach(l => l.links.forEach(k => { NOMES[k.id] = { titulo: k.tipo === "zap" ? "WhatsApp" : k.titulo, loja: l.nome }; }));
+(window.CANAIS || []).forEach(k => { NOMES[k.id] = { titulo: k.titulo, loja: "" }; });
 (window.OUTROS || []).forEach(k => { NOMES[k.id] = { titulo: k.titulo, loja: "" }; });
 Object.assign(NOMES, {
   "salvar-contato": { titulo: "Salvar contato", loja: "" },
@@ -169,6 +170,8 @@ Object.assign(NOMES, {
   "copiar-bonfim": { titulo: "Copiou o número", loja: "Senhor do Bonfim" },
   "copiar-capim": { titulo: "Copiou o número", loja: "Capim Grosso" },
   "copiar-financeiro": { titulo: "Copiou o número", loja: "Financeiro" },
+  "copiar-televendas": { titulo: "Copiou o número", loja: "Televendas" },
+  "copiar-garantia": { titulo: "Copiou o número", loja: "Garantia" },
 });
 const fmt = n => Number(n || 0).toLocaleString("pt-BR");
 const $ = id => document.getElementById(id);

@@ -2,7 +2,8 @@
 <!--
   IDENTIDADE VISUAL · "Transmissão"
   Motivo: coroa, pinhão e corrente de rolos desenhados em traço técnico fino. A corrente desce pela página,
-  passa por guias encaixadas nos cartões das duas lojas e fecha no pinhão do rodapé: as lojas estão ligadas.
+  passa por guias encaixadas em todos os cartões (lojas, atacado, garantia, financeiro) e fecha no pinhão do rodapé:
+  todo o atendimento está ligado. Acesso rápido aos 4 grupos logo abaixo da coroa.
   Cores: fundo claro cinza-azulado, azul da marca na transmissão e nos títulos, vermelho só nos pinos da corrente
   e nos parafusos, verde apenas no botão do WhatsApp. Tipografia: Barlow Condensed (títulos e rótulos) + Barlow (texto).
   Ícones próprios em traço médio, cantos arredondados. Detalhe memorável: o símbolo da AD Motos é o miolo da coroa.
@@ -40,7 +41,7 @@
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; }
-html { background: var(--fundo); }
+html { background: var(--fundo); scroll-behavior: smooth; }
 body {
   min-height: 100vh; min-height: 100dvh; color: var(--texto); overflow-x: hidden;
   font: 400 16px/1.45 var(--f); -webkit-font-smoothing: antialiased;
@@ -97,8 +98,32 @@ a { text-decoration: none; }
 }
 .miolo img { width: 26px; height: 26px; }
 
+/* ---------- Acesso rápido ---------- */
+.atalhos { position: relative; z-index: 2; padding: 0 8px 10px; }
+.atalhos h2, .outros h2 {
+  margin: 0; padding: 16px 10px 10px; font: 600 12.5px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-3);
+}
+.grade-atalhos { display: grid; grid-template-columns: repeat(4, 1fr); }
+.atalho {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 6px 2px 8px; border-radius: 12px; text-align: center;
+  font: 600 14.5px/1.15 var(--f); color: var(--texto); transition: background-color .15s;
+}
+.atalho + .atalho::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 16px; width: 1px; background: var(--linha); }
+.atalho .ic { width: 48px; height: 48px; border-radius: 13px; background: var(--azul-tinta); color: var(--azul); display: grid; place-items: center; transition: background-color .15s, color .15s; }
+.atalho .ic svg { width: 25px; height: 25px; }
+.atalho:hover .ic { background: var(--azul); color: #fff; }
+.atalho:active .ic { transform: scale(.96); }
+
+/* ---------- Seções ---------- */
+.secoes { display: grid; gap: 40px; margin-top: 40px; position: relative; z-index: 2; }
+.secao { position: relative; scroll-margin-top: 16px; }
+.secao-cab { display: flex; align-items: baseline; gap: 8px; margin: 0 0 14px 2px; }
+.secao-num { font: 700 13px/1 var(--fc); letter-spacing: .06em; color: var(--vermelho); }
+.secao-cab h2 { margin: 0; font: 700 24px/1 var(--fc); letter-spacing: 0; color: var(--texto); }
+.pilha { display: grid; gap: 40px; }
+
 /* ---------- Cartões ---------- */
-.lojas { display: grid; gap: 48px; position: relative; z-index: 2; }
 .cartao {
   position: relative; background: var(--cartao); border-radius: var(--raio);
   box-shadow: 0 0 0 1px var(--linha), var(--sombra);
@@ -113,6 +138,7 @@ a { text-decoration: none; }
 .loja-nome { margin: 12px 0 0; font: 700 31px/1 var(--fc); letter-spacing: .002em; color: var(--texto); }
 .endereco { margin: 7px 0 0; display: flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--texto-2); }
 .endereco svg { width: 16px; height: 16px; flex: none; color: var(--azul-medio); }
+.desc { margin: 7px 0 0; font-size: 15px; color: var(--texto-2); }
 
 .zap {
   margin-top: 16px; display: flex; align-items: center; gap: 14px; min-height: 66px; padding: 10px 16px 10px 12px;
@@ -122,6 +148,8 @@ a { text-decoration: none; }
 }
 .zap:hover { background: var(--verde-2); }
 .zap:active { transform: scale(.985); }
+.zap.site { background: var(--azul); box-shadow: 0 1px 0 rgba(255,255,255,.14) inset, 0 8px 18px -10px rgba(0, 44, 143, .8); }
+.zap.site:hover { background: var(--azul-escuro); }
 .zap .ic { width: 44px; height: 44px; border-radius: 11px; background: rgba(255,255,255,.16); display: grid; place-items: center; flex: none; }
 .zap .ic svg { width: 25px; height: 25px; }
 .zap .txt { flex: 1; min-width: 0; display: grid; gap: 1px; }
@@ -130,6 +158,7 @@ a { text-decoration: none; }
 .zap .seta { width: 20px; height: 20px; flex: none; opacity: .9; }
 
 .sec { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sec.um { grid-template-columns: 1fr; }
 .btn2 {
   display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 10px;
   border-radius: 12px; background: #fff; color: var(--azul);
@@ -142,10 +171,8 @@ a { text-decoration: none; }
 .btn2.ok { color: var(--verde-2); box-shadow: 0 0 0 1px #A9DDBF inset; background: #EEF8F2; }
 
 /* ---------- Outros ---------- */
-.outros { margin-top: 48px; position: relative; z-index: 2; padding: 6px 0; }
-.outros h2 {
-  margin: 0; padding: 14px 18px 8px; font: 600 12.5px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-3);
-}
+.outros { margin-top: 40px; position: relative; z-index: 2; padding: 0 0 6px; }
+.outros h2 { padding: 18px 18px 6px; }
 .lista { list-style: none; margin: 0; padding: 0; }
 .lista li + li .acao { border-top: 1px solid var(--linha); }
 .lista li { padding: 0 18px; }
@@ -164,7 +191,7 @@ a { text-decoration: none; }
 .acao.ok .sub { color: var(--verde-2); }
 
 /* ---------- Rodapé ---------- */
-.pinhao-espaco { position: relative; height: 96px; margin-top: 30px; }
+.pinhao-espaco { position: relative; height: 110px; margin-top: 30px; }
 .rodape { position: relative; z-index: 2; margin: 10px 0 0; text-align: center; font-size: 13px; color: var(--texto-3); }
 .rodape b { font: 600 13px/1 var(--fc); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-2); }
 
@@ -185,6 +212,7 @@ a { text-decoration: none; }
   .pagina { padding-top: 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 </style>
@@ -196,7 +224,7 @@ a { text-decoration: none; }
   <header class="topo">
     <h1><img src="logo.svg" alt="AD Motos" width="214" height="66"></h1>
     <p class="frase">Peças e acessórios para a sua moto</p>
-    <p class="apoio">Escolha a loja e fale com a gente no WhatsApp.</p>
+    <p class="apoio">Escolha o atendimento e fale com a gente.</p>
     <div class="coroa-espaco">
       <span class="ancora" id="ancora-coroa"></span>
       <span class="miolo"><img src="favicon.svg" alt="" width="30" height="30"></span>
@@ -204,9 +232,13 @@ a { text-decoration: none; }
   </header>
 
   <main>
-    <div class="lojas" id="lojas"></div>
+    <nav class="cartao atalhos" aria-labelledby="atalhos-cab">
+      <h2 id="atalhos-cab">Acesso rápido</h2>
+      <div class="grade-atalhos" id="atalhos"></div>
+    </nav>
+    <div class="secoes" id="secoes"></div>
     <section class="cartao outros" aria-labelledby="outros-cab">
-      <h2 id="outros-cab">Mais opções</h2>
+      <h2 id="outros-cab">Mais contatos</h2>
       <ul class="lista" id="outros"></ul>
     </section>
   </main>
@@ -218,9 +250,9 @@ a { text-decoration: none; }
 </div>
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<script src="config.js?v=20261124a"></script>
-<script src="links.js?v=20261124a"></script>
-<script src="icones.js?v=20261124a"></script>
+<script src="config.js?v=20261124c"></script>
+<script src="links.js?v=20261124c"></script>
+<script src="icones.js?v=20261124c"></script>
 <script>
 (function () {
   // ---------- Ícones próprios (traço médio) ----------
@@ -235,41 +267,69 @@ a { text-decoration: none; }
     email: S('<rect x="3" y="5.5" width="18" height="13" rx="2.8"/><path d="m4 7.6 8 5.6 8-5.6"/>'),
     compartilhar: S('<path d="M12 3.8v11M7.8 8 12 3.8 16.2 8M5 12.8v4.6A2.6 2.6 0 0 0 7.6 20h8.8a2.6 2.6 0 0 0 2.6-2.6v-4.6"/>'),
     pino: S('<path d="M12 20.6s-6.2-5.4-6.2-10.4a6.2 6.2 0 0 1 12.4 0c0 5-6.2 10.4-6.2 10.4Z"/><circle cx="12" cy="10.2" r="2.2"/>'),
+    lojas: S('<path d="M4.5 10.5V19a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-8.5"/><path d="M3.6 8.6 5.4 4h13.2l1.8 4.6a2.5 2.5 0 0 1-4.2 2 2.6 2.6 0 0 1-4.2 0 2.6 2.6 0 0 1-4.2 0 2.5 2.5 0 0 1-4.2-2Z"/><path d="M10 20v-4.6h4V20"/>'),
+    atacado: S('<rect x="3.5" y="12.5" width="8" height="7.5" rx="1.3"/><rect x="12.5" y="12.5" width="8" height="7.5" rx="1.3"/><rect x="8" y="4" width="8" height="8.5" rx="1.3"/><path d="M7.5 12.5v2.4M16.5 12.5v2.4M12 4v2.4"/>'),
+    garantia: S('<path d="M12 3.5 5 6.2v5.2c0 4.2 2.9 7.6 7 9.1 4.1-1.5 7-4.9 7-9.1V6.2Z"/><path d="m8.9 12 2.2 2.2 4.1-4.2"/>'),
+    financeiro: S('<path d="M6 3.5h12v17l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3Z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/>'),
     seta: S('<path d="m9.5 6 6 6-6 6"/>', ' class="seta"'),
     ok: S('<path d="m5 12.6 4.4 4.4L19 7.4"/>'),
     alerta: S('<circle cx="12" cy="12" r="8.6"/><path d="M12 7.8v5M12 16.2h.01"/>'),
   };
 
-  // ---------- Monta as lojas a partir de links.js ----------
-  const html = (window.LOJAS || []).map((loja, i) => {
+  // ---------- Monta lojas e canais a partir de links.js ----------
+  const slug = t => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const nome2 = (n, i) => '<div class="cab"><span class="selo">' + esc(n.selo) + '</span>' + (n.indice ? '<span class="indice">' + esc(n.indice) + '</span>' : '') + '</div>' +
+    '<h3 class="loja-nome" id="' + n.id + '">' + esc(n.nome) + '</h3>';
+  function principal(l, nome) {
+    const site = l.tipo === "site";
+    return '<a class="zap principal' + (site ? ' site' : '') + '" href="' + esc(l.url) + '" data-id="' + esc(l.id) + '" data-tipo="' + esc(l.tipo) + '"' + alvo(l.url) +
+      ' aria-label="' + esc((site ? "Abrir a loja online" : "Chamar no WhatsApp") + ", " + nome + ", " + l.sub) + '">' +
+      '<span class="ic">' + (site ? IC.site : IC.zap) + '</span><span class="txt"><strong>' + (site ? "Abrir a loja online" : "Chamar no WhatsApp") +
+      '</strong><span class="num">' + esc(l.sub) + '</span></span>' + IC.seta + '</a>';
+  }
+  const botaoCopiar = (l, nome) => '<button type="button" class="btn2 copiar" data-id="copiar-' + esc(l.id.replace(/^zap-/, "")) + '" data-numero="' + esc(l.sub) + '"' +
+    ' aria-label="' + esc("Copiar número de " + nome + ", " + l.sub) + '">' + IC.copiar + '<span>Copiar número</span></button>';
+
+  const lojasHtml = (window.LOJAS || []).map((loja, i) => {
     const zap = loja.links.find(l => l.tipo === "zap");
     const mapa = loja.links.find(l => l.tipo === "mapa");
-    const chave = zap ? zap.id.replace(/^zap-/, "") : String(i);
-    const nid = "loja-" + chave;
+    const nid = "loja-" + (zap ? zap.id.replace(/^zap-/, "") : i);
     let h = '<article class="cartao loja" aria-labelledby="' + nid + '">' +
-      '<div class="cab"><span class="selo">' + esc(loja.detalhe) + '</span><span class="indice">LOJA ' + String(i + 1).padStart(2, "0") + '</span></div>' +
-      '<h2 class="loja-nome" id="' + nid + '">' + esc(loja.nome) + '</h2>' +
+      nome2({ selo: loja.detalhe, indice: "LOJA " + String(i + 1).padStart(2, "0"), id: nid, nome: loja.nome }) +
       '<p class="endereco">' + IC.pino + '<span>' + esc(loja.endereco) + '</span></p>';
-    if (zap) h += '<a class="zap" href="' + esc(zap.url) + '" data-id="' + esc(zap.id) + '" data-tipo="zap"' + alvo(zap.url) +
-      ' aria-label="' + esc(zap.titulo + ", " + loja.nome + ", " + zap.sub) + '">' +
-      '<span class="ic">' + IC.zap + '</span><span class="txt"><strong>' + esc(zap.titulo) + '</strong><span class="num">' + esc(zap.sub) + '</span></span>' + IC.seta + '</a>';
+    if (zap) h += principal(zap, loja.nome);
     h += '<div class="sec">';
     if (mapa) h += '<a class="btn2" href="' + esc(mapa.url) + '" data-id="' + esc(mapa.id) + '" data-tipo="mapa"' + alvo(mapa.url) +
       ' aria-label="' + esc(mapa.titulo + " até a loja de " + loja.nome) + '">' + IC.rota + '<span>' + esc(mapa.titulo) + '</span></a>';
-    if (zap) h += '<button type="button" class="btn2 copiar" data-id="copiar-' + esc(chave) + '" data-numero="' + esc(zap.sub) + '"' +
-      ' aria-label="' + esc("Copiar número de " + loja.nome + ", " + zap.sub) + '">' + IC.copiar + '<span>Copiar número</span></button>';
+    if (zap) h += botaoCopiar(zap, loja.nome);
     return h + '</div></article>';
   }).join("");
-  document.getElementById("lojas").innerHTML = html;
+
+  const grupos = [{ id: "lojas", nome: "Lojas", html: lojasHtml }];
+  (window.CANAIS || []).forEach(c => {
+    let g = grupos.find(x => x.nome === c.grupo);
+    if (!g) { g = { id: slug(c.grupo), nome: c.grupo, html: "" }; grupos.push(g); }
+    const partes = String(c.titulo).split(" · ");
+    const nome = partes[0], nid = "canal-" + slug(c.id);
+    g.html += '<article class="cartao canal" aria-labelledby="' + nid + '">' +
+      nome2({ selo: c.tipo === "site" ? "Site" : "WhatsApp", indice: (partes[1] || "").toUpperCase(), id: nid, nome }) +
+      '<p class="desc">' + esc(c.desc) + '</p>' + principal(c, nome) +
+      (c.tipo === "zap" ? '<div class="sec um">' + botaoCopiar(c, nome) + '</div>' : '') + '</article>';
+  });
+  document.getElementById("secoes").innerHTML = grupos.map((g, i) =>
+    '<section class="secao" id="' + g.id + '" aria-labelledby="t-' + g.id + '"><div class="secao-cab"><span class="secao-num">' +
+    String(i + 1).padStart(2, "0") + '</span><h2 id="t-' + g.id + '">' + esc(g.nome) + '</h2></div><div class="pilha">' + g.html + '</div></section>').join("");
+  document.getElementById("atalhos").innerHTML = grupos.map(g =>
+    '<a class="atalho" href="#' + g.id + '"><span class="ic">' + (IC[g.id] || IC.lojas) + '</span><span>' + esc(g.nome) + '</span></a>').join("");
 
   const linha = (tag, attrs, icone, titulo, sub) =>
     '<li><' + tag + ' class="acao" ' + attrs + '><span class="ic">' + icone + '</span><span class="txt"><strong>' + esc(titulo) +
     '</strong><span class="sub">' + esc(sub) + '</span></span>' + IC.seta + '</' + tag + '></li>';
   let outros = linha("a", 'href="admotos.vcf" data-id="salvar-contato" download', IC.contato, "Salvar contato", "Todos os contatos na sua agenda");
+  outros += linha("button", 'type="button" data-id="compartilhar"', IC.compartilhar, "Compartilhar", "Envie esta página para alguém");
   (window.OUTROS || []).forEach(o => {
     outros += linha("a", 'href="' + esc(o.url) + '" data-id="' + esc(o.id) + '"' + alvo(o.url), IC[o.tipo] || IC.email, o.titulo, o.sub);
   });
-  outros += linha("button", 'type="button" data-id="compartilhar"', IC.compartilhar, "Compartilhar", "Envie esta página para alguém");
   document.getElementById("outros").innerHTML = outros;
 
   // ---------- Aviso e cópia ----------
@@ -324,7 +384,7 @@ a { text-decoration: none; }
   const pagina = document.getElementById("pagina");
   const fundo = document.getElementById("transmissao");
   const frente = document.getElementById("guias");
-  const P0 = 13.5, Z1 = 31, Z2 = 15;          // passo da corrente e nº de dentes
+  const P0 = 13.5, Z1 = 31, Z2 = 20;          // passo da corrente e nº de dentes
   const AZUL = "#002C8F", TRACO = "#002C8F", VERM = "#E92525";
 
   function rel(el) {
@@ -498,7 +558,7 @@ a { text-decoration: none; }
   if (reduz.addEventListener) reduz.addEventListener("change", () => reduz.matches ? parar() : iniciar());
   // Toque no WhatsApp: a corrente dá uma acelerada curta
   document.addEventListener("click", ev => {
-    if (!reduz.matches && ev.target.closest(".zap")) { impulso = 150; iniciar(); }
+    if (!reduz.matches && ev.target.closest(".principal")) { impulso = 150; iniciar(); }
   }, true);
 
   desenhar();
@@ -509,6 +569,6 @@ a { text-decoration: none; }
   else window.addEventListener("resize", desenhar);
 })();
 </script>
-<script src="rastreio.js?v=20261124a"></script>
+<script src="rastreio.js?v=20261124c"></script>
 </body>
 </html>
