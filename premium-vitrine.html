@@ -104,6 +104,7 @@ h1 .ponto { color: var(--vermelho); display: inline-block; -webkit-text-fill-col
   background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(29, 79, 209, .07), transparent 60%); }
 .radar { position: absolute; right: -44px; top: -44px; width: 160px; height: 160px; z-index: -1; color: var(--azul); pointer-events: none; }
 .radar circle { fill: none; stroke: currentColor; }
+.radar { display: none !important; } /* círculos azuis dos cartões removidos a pedido */
 .radar .r1 { opacity: .10; } .radar .r2 { opacity: .07; } .radar .r3 { opacity: .045; }
 .radar .nucleo { fill: currentColor; stroke: none; opacity: .9; }
 .radar .halo { fill: currentColor; stroke: none; opacity: 0; transform-origin: 105px 105px; }
