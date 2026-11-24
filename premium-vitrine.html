@@ -161,6 +161,25 @@ h1 .ponto { color: var(--vermelho); display: inline-block; -webkit-text-fill-col
 body.folha-aberta .barra { transform: translate(-50%, 140%); opacity: 0; }
 
 /* ---------- folha (bottom sheet) ---------- */
+/* ---------- pergunta antes da loja online (atacado) ---------- */
+dialog.pergunta { width: min(360px, calc(100% - 40px)); margin: auto; border: 0; padding: 26px 22px 20px; border-radius: 26px;
+  background: var(--cartao); color: var(--tinta); box-shadow: var(--sombra-alta); text-align: center; }
+dialog.pergunta[open] { animation: surgirP .32s var(--suave-ease); }
+dialog.pergunta::backdrop { background: rgba(8, 12, 30, .42); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+@keyframes surgirP { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: none; } }
+.pergunta .ic-p { width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 16px; display: grid; place-items: center; background: var(--azul-claro); color: var(--azul); }
+.pergunta .ic-p svg { width: 26px; height: 26px; }
+.pergunta h2 { margin: 0 0 6px; font: 700 20px/1.2 var(--disp); letter-spacing: -.02em; text-wrap: balance; }
+.pergunta p { margin: 0 0 18px; font: 400 15px/1.4 var(--txt); color: var(--suave); }
+.pergunta .q { font: 600 17px/1.3 var(--txt); color: var(--tinta); margin-bottom: 18px; }
+.pergunta .bts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pergunta .bt { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 14px; border: 0;
+  font: 600 16px/1.2 var(--txt); text-decoration: none; cursor: pointer; }
+.pergunta .bt.sim { background: var(--azul); color: #fff; }
+.pergunta .bt.nao { background: var(--papel); color: var(--azul); }
+.pergunta .bt.cheio { grid-column: 1 / -1; }
+.pergunta .bt:active { filter: brightness(.95); }
+@media (prefers-reduced-motion: reduce) { dialog.pergunta[open] { animation: none; } }
 dialog.folha { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; overscroll-behavior: contain; border: 0;
   padding: 10px max(20px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 18px) max(20px, env(safe-area-inset-left, 0px));
   border-radius: 30px 30px 0 0; background: var(--cartao); color: var(--tinta); box-shadow: 0 -20px 60px -10px rgba(10, 22, 70, .3); }
@@ -341,6 +360,10 @@ body.folha-aberta.anima .barra { animation: none; }
   <button class="cancelar toque" type="button" id="fechar">Cancelar</button>
 </dialog>
 
+<dialog class="pergunta" id="pergunta-loja" aria-labelledby="pl-titulo" aria-describedby="pl-texto">
+  <div id="pl-corpo"></div>
+</dialog>
+
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
 <script src="config.js?v=20261124e"></script>
@@ -475,6 +498,58 @@ body.folha-aberta.anima .barra { animation: none; }
   });
   $("#opcoes").addEventListener("click", e => { if (e.target.closest("a")) setTimeout(fechar, 350); });
   folha.addEventListener("close", () => corpo.classList.remove("folha-aberta"));
+
+  // Pergunta antes de abrir a loja online (é só para lojistas de motopeças)
+  const lojaOnline = canais.find(c => c.id === "loja-online");
+  const pergunta = $("#pergunta-loja"), plCorpo = $("#pl-corpo");
+  const ICO_LOJA = SVG.loja || ICO.site;
+  function perguntaInicial() {
+    plCorpo.innerHTML = `<div class="ic-p" aria-hidden="true">${ICO_LOJA}</div>
+      <h2 id="pl-titulo" tabindex="-1">Esse site é para lojistas de motopeças.</h2>
+      <p class="q" id="pl-texto">Você tem loja?</p>
+      <div class="bts">
+        <button class="bt nao" type="button" data-id="loja-online-nao" id="pl-nao">Não</button>
+        <a class="bt sim confirmado" href="${esc(lojaOnline ? lojaOnline.url : "#")}" data-id="loja-online">Sim</a>
+      </div>`;
+  }
+  function perguntaNao() {
+    plCorpo.innerHTML = `<div class="ic-p" aria-hidden="true">${ICO_LOJA}</div>
+      <h2 id="pl-titulo" tabindex="-1">Sem problema!</h2>
+      <p id="pl-texto">Para comprar como cliente, fale com uma das nossas lojas físicas.</p>
+      <div class="bts">
+        <button class="bt sim cheio" type="button" id="pl-lojas">Ver lojas físicas</button>
+        <button class="bt nao cheio" type="button" id="pl-fechar">Fechar</button>
+      </div>`;
+    const t = $("#pl-titulo"); if (t) t.focus({ preventScroll: true });
+  }
+  function abrirPergunta() {
+    perguntaInicial();
+    if (pergunta.showModal) pergunta.showModal(); else pergunta.setAttribute("open", "");
+    const t = $("#pl-titulo"); if (t) t.focus({ preventScroll: true });
+  }
+  const fecharPergunta = () => { pergunta.close ? pergunta.close() : pergunta.removeAttribute("open"); };
+  // Captura o toque em qualquer "Loja online" antes do rastreio (que abriria o site direto)
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[data-id="loja-online"]');
+    if (!a || a.classList.contains("confirmado")) return;
+    e.preventDefault(); e.stopPropagation();
+    if (folha.open) fechar();
+    abrirPergunta();
+  }, true);
+  pergunta.addEventListener("click", e => {
+    if (e.target.closest("#pl-nao")) { perguntaNao(); return; }
+    if (e.target.closest("#pl-fechar")) { fecharPergunta(); return; }
+    if (e.target.closest("#pl-lojas")) {
+      fecharPergunta();
+      const sec = document.getElementById("lojas-sec");
+      if (sec) sec.scrollIntoView({ behavior: reduz.matches ? "auto" : "smooth", block: "start" });
+      return;
+    }
+    if (e.target === pergunta) { // toque fora do cartão
+      const r = pergunta.getBoundingClientRect();
+      if (e.clientY < r.top || e.clientY > r.bottom || e.clientX < r.left || e.clientX > r.right) fecharPergunta();
+    }
+  });
 
   // Arrastar para baixo fecha a janela (como nos aplicativos). Só começa se a lista estiver no topo.
   let y0 = 0, t0 = 0, dy = 0, arrastando = false, podeArrastar = false;
