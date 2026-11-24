@@ -72,6 +72,12 @@ h1 .ponto { color: var(--vermelho); display: inline-block; -webkit-text-fill-col
 .secao h2 { margin: 0; font: 700 22px/1.2 var(--disp); letter-spacing: -.02em; }
 .secao span { font: 500 14px/1.3 var(--txt); color: var(--suave); text-align: right; }
 .secao.grande { margin-top: 40px; }
+/* complemento do nome, ex.: "Atacado (Matriz)" */
+.ext { font-size: .62em; font-weight: 600; letter-spacing: -.01em; color: var(--suave); white-space: nowrap; }
+.secao h2 .ext { font: 600 .55em/1 var(--disp); text-align: left; }
+.secao:has(h2 .ext) { flex-wrap: wrap; row-gap: 2px; }
+.secao h2:has(.ext) { white-space: nowrap; }
+.secao:has(h2 .ext) > span:not(.ext) { text-align: left; }
 .secao.grande h2 { font-size: 30px; letter-spacing: -.035em; }
 
 /* ---------- acesso rápido ---------- */
@@ -292,12 +298,12 @@ body.folha-aberta.anima .barra { animation: none; }
     <nav class="rapido" id="rapido" aria-label="Acesso rápido"></nav>
 
     <section class="alvo" id="lojas-sec" aria-labelledby="t-lojas">
-      <div class="secao grande"><h2 id="t-lojas">Lojas</h2><span id="qtd-lojas"></span></div>
+      <div class="secao grande"><h2 id="t-lojas">Lojas Físicas</h2><span id="qtd-lojas"></span></div>
       <div class="lojas" id="lojas"></div>
     </section>
 
     <section class="alvo" id="atacado" aria-labelledby="t-atacado">
-      <div class="secao grande"><h2 id="t-atacado">Atacado</h2><span id="sub-atacado"></span></div>
+      <div class="secao grande"><h2 id="t-atacado">Atacado <span class="ext">(Matriz)</span></h2><span id="sub-atacado"></span></div>
       <div class="canais" id="canais-atacado"></div>
     </section>
 
@@ -363,7 +369,7 @@ body.folha-aberta.anima .barra { animation: none; }
 
   const lojas = window.LOJAS || [], canais = window.CANAIS || [], outros = window.OUTROS || [];
   const GRUPOS = [
-    { nome: "Atacado", alvo: "atacado", icone: SVG.atacado },
+    { nome: "Atacado", extra: "(Matriz)", alvo: "atacado", icone: SVG.atacado },
     { nome: "Garantia", alvo: "garantia", icone: SVG.garantia },
     { nome: "Financeiro", alvo: "financeiro", icone: SVG.financeiro },
   ];
@@ -374,9 +380,9 @@ body.folha-aberta.anima .barra { animation: none; }
 
   // Acesso rápido: 4 atalhos iguais (âncoras, sem data-id)
   const subGrupo = g => { const cs = doGrupo(g.nome); return cs.length > 1 ? listaCurta(cs.map(c => c.tipo === "site" ? "site" : c.curto)) : (cs[0] && cs[0].tipo === "zap" ? "WhatsApp" : ""); };
-  const atalhos = [{ nome: "Lojas", alvo: "lojas-sec", icone: SVG.loja, sub: `Varejo · ${lojas.length} cidades` }]
+  const atalhos = [{ nome: "Lojas Físicas", alvo: "lojas-sec", icone: SVG.loja, sub: `Varejo · ${lojas.length} cidades` }]
     .concat(GRUPOS.filter(g => doGrupo(g.nome).length).map(g => ({ ...g, sub: subGrupo(g) })));
-  $("#rapido").innerHTML = atalhos.map(a => `<a class="atalho toque" href="#${a.alvo}"><span class="ic">${a.icone}</span><span class="t"><b>${esc(a.nome)}</b><small>${esc(a.sub)}</small></span><span class="desce" aria-hidden="true">${SVG.desce}</span></a>`).join("");
+  $("#rapido").innerHTML = atalhos.map(a => `<a class="atalho toque" href="#${a.alvo}"><span class="ic">${a.icone}</span><span class="t"><b>${esc(a.nome)}${a.extra ? ` <span class="ext">${esc(a.extra)}</span>` : ""}</b><small>${esc(a.sub)}</small></span><span class="desce" aria-hidden="true">${SVG.desce}</span></a>`).join("");
 
   // Cartões dos canais (mesmo peso visual das lojas)
   GRUPOS.forEach(g => {
@@ -434,7 +440,7 @@ body.folha-aberta.anima .barra { animation: none; }
   const canaisZap = canais;
   const nomeCanal = c => c.grupo && c.grupo !== c.curto ? `${c.curto} (${c.grupo})` : c.curto;
   $("#opcoes").innerHTML =
-    `<p class="grupo-folha">Lojas</p>` +
+    `<p class="grupo-folha">Lojas Físicas</p>` +
     lojas.map(l => { const z = l.links.find(k => k.tipo === "zap"); return z ? opcao(z, l.nome, z.sub) : ""; }).join("") +
     (canaisZap.length ? `<p class="grupo-folha">Atendimento</p>` +
       canaisZap.map(c => opcao(c, nomeCanal(c), extra(c).concat(c.sub).filter(Boolean).join(" · "))).join("") : "");
