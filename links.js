@@ -26,8 +26,8 @@ window.LOJAS = [
   {
     nome: "Várzea da Roça", detalhe: "Filial", endereco: "Rod. BR 407 · Várzea da Roça - BA",
     links: [
-      { id: "zap-varzea", tipo: "zap", titulo: "Chamar no WhatsApp", sub: "(74) 9 8821-5750",
-        url: "https://wa.me/5574988215750?text=" + MSG },
+      { id: "zap-varzea", tipo: "zap", titulo: "Chamar no WhatsApp", sub: "(74) 9 8146-4661",
+        url: "https://wa.me/5574981464661?text=" + MSG },
       { id: "mapa-varzea", tipo: "mapa", titulo: "Como chegar", sub: "",
         url: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("AD Motos Varejo e Mecânica") },
     ]
